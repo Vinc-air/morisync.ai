@@ -1067,69 +1067,131 @@ body{
   background:conic-gradient(from 45deg, var(--alu-hi), var(--alu-lo), var(--alu-mid), var(--alu-edge), var(--alu-hi), var(--alu-mid), var(--alu-lo), var(--alu-hi));
   box-shadow:inset 0 3px 5px rgba(255,255,255,.7), inset 0 -5px 10px rgba(0,0,0,.22), 0 18px 50px -14px rgba(10,10,9,.26);
 }
-/* 呼吸环:默认绿正常 */
+/* 呼吸环 — 鲜亮 LED 效果，多层发光 */
 .lamp-ring{
-  position:absolute;inset:16px;border-radius:50%;background:transparent;
-  border:7px solid var(--green);
-  box-shadow: 0 0 18px var(--green-glow), inset 0 0 12px rgba(59,165,93,.4);
+  position:absolute;inset:14px;border-radius:50%;background:transparent;
+  border:8px solid #4CD964;
+  box-shadow:
+    0 0 0 1px rgba(76,217,100,.3),
+    0 0 10px 3px rgba(76,217,100,.85),
+    0 0 26px 8px rgba(76,217,100,.55),
+    0 0 52px 16px rgba(76,217,100,.28),
+    inset 0 0 14px rgba(76,217,100,.6);
   animation:lampBreath 4s ease-in-out infinite;
-  transition:border-color .9s var(--ease);
+  transition:border-color .7s var(--ease), box-shadow .7s var(--ease);
 }
+/* 太阳能板 — 深蓝黑底 + 真实电池格 */
 .lamp-disc .ld-solar{
-  position:absolute;inset:28px;border-radius:50%;
-  background:radial-gradient(circle at 40% 28%, #2e3336 0%, #16181a 40%, #090a0b 100%);
-  box-shadow:inset 0 6px 18px rgba(0,0,0,.7), inset 0 -2px 8px rgba(0,0,0,.4);
+  position:absolute;inset:26px;border-radius:50%;
+  background:linear-gradient(160deg, #131826 0%, #090c12 50%, #040508 100%);
+  box-shadow:inset 0 4px 16px rgba(0,0,0,.8), inset 0 -2px 6px rgba(0,0,0,.5);
   overflow:hidden;
 }
-/* 模拟真实太阳能电池板：竖列矩形单元格 */
+/* 3列竖向电池 + 细横向分隔线 */
 .lamp-disc .ld-solar::before{
   content:'';position:absolute;inset:0;
   background-image:
-    repeating-linear-gradient(90deg, transparent 0 30%, rgba(255,255,255,.07) 30% calc(30% + 1.5px),
-      transparent calc(30% + 1.5px) 63%, rgba(255,255,255,.07) 63% calc(63% + 1.5px),
-      transparent calc(63% + 1.5px) 100%),
-    repeating-linear-gradient(0deg, transparent 0 24%, rgba(255,255,255,.06) 24% calc(24% + 1px),
-      transparent calc(24% + 1px) 50%, rgba(255,255,255,.06) 50% calc(50% + 1px),
-      transparent calc(50% + 1px) 75%, rgba(255,255,255,.06) 75% calc(75% + 1px),
-      transparent calc(75% + 1px) 100%);
+    linear-gradient(90deg,
+      transparent 33.2%, rgba(200,220,255,.10) 33.2% calc(33.2% + 1px),
+      transparent calc(33.2% + 1px) 66.5%, rgba(200,220,255,.10) 66.5% calc(66.5% + 1px),
+      transparent calc(66.5% + 1px) 100%),
+    repeating-linear-gradient(0deg,
+      transparent 0, transparent 10px,
+      rgba(200,220,255,.06) 10px 11px);
 }
-/* 表面高光 */
+/* 斜向玻璃高光 */
 .lamp-disc .ld-solar::after{
   content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 35% 25%, rgba(255,255,255,.06) 0%, transparent 55%);
+  background:linear-gradient(130deg, rgba(255,255,255,.06) 0%, transparent 40%, rgba(255,255,255,.03) 100%);
 }
-.lamp-halo{position:absolute;inset:-28px;border-radius:50%;z-index:-1;background:radial-gradient(circle,var(--green-glow) 0%,transparent 62%);opacity:.28;filter:blur(20px);animation:haloBreath 4s ease-in-out infinite;}
+/* 外部光晕 */
+.lamp-halo{
+  position:absolute;inset:-32px;border-radius:50%;z-index:-1;
+  background:radial-gradient(circle, rgba(76,217,100,.55) 0%, transparent 65%);
+  opacity:.45;filter:blur(18px);
+  animation:haloBreath 4s ease-in-out infinite;
+}
 
+/* 呼吸动画 — 绿色 */
 @keyframes lampBreath{
-  0%,100%{ box-shadow:0 0 14px var(--green-glow),inset 0 0 10px rgba(59,165,93,.35); }
-  50%{ box-shadow:0 0 28px rgba(59,165,93,.5),inset 0 0 16px rgba(59,165,93,.5); }
+  0%,100%{
+    box-shadow:
+      0 0 0 1px rgba(76,217,100,.2),
+      0 0 7px 2px rgba(76,217,100,.7),
+      0 0 18px 5px rgba(76,217,100,.4),
+      0 0 38px 12px rgba(76,217,100,.18),
+      inset 0 0 10px rgba(76,217,100,.45);
+  }
+  50%{
+    box-shadow:
+      0 0 0 1px rgba(76,217,100,.4),
+      0 0 14px 5px rgba(76,217,100,1.0),
+      0 0 34px 12px rgba(76,217,100,.65),
+      0 0 64px 22px rgba(76,217,100,.32),
+      inset 0 0 20px rgba(76,217,100,.7);
+  }
 }
-@keyframes haloBreath{ 0%,100%{opacity:.22;transform:scale(.96);} 50%{opacity:.36;transform:scale(1.04);} }
+@keyframes haloBreath{
+  0%,100%{ opacity:.32; transform:scale(.94); }
+  50%{     opacity:.60; transform:scale(1.06); }
+}
 
-/* 告急态:红色 1.5s 急促 */
+/* —— 告急态: 鲜红 1.5s —— */
 .lamp-disc[data-state="feed"] .lamp-ring{
-  border-color:var(--red);
+  border-color:#FF3B30;
   animation-duration:1.5s;
-  box-shadow:0 0 18px rgba(226,75,74,.45),inset 0 0 12px rgba(226,75,74,.4);
+  animation-name:lampBreathRed;
+  box-shadow:
+    0 0 0 1px rgba(255,59,48,.3),
+    0 0 10px 3px rgba(255,59,48,.85),
+    0 0 26px 8px rgba(255,59,48,.55),
+    0 0 52px 16px rgba(255,59,48,.28),
+    inset 0 0 14px rgba(255,59,48,.6);
 }
-.lamp-disc[data-state="feed"] .lamp-halo{background:radial-gradient(circle,rgba(226,75,74,.35) 0%,transparent 62%);}
+.lamp-disc[data-state="feed"] .lamp-halo{
+  background:radial-gradient(circle, rgba(255,59,48,.55) 0%, transparent 65%);
+}
+@keyframes lampBreathRed{
+  0%,100%{
+    box-shadow: 0 0 0 1px rgba(255,59,48,.2), 0 0 7px 2px rgba(255,59,48,.7), 0 0 18px 5px rgba(255,59,48,.4), 0 0 38px 12px rgba(255,59,48,.18), inset 0 0 10px rgba(255,59,48,.45);
+  }
+  50%{
+    box-shadow: 0 0 0 1px rgba(255,59,48,.4), 0 0 14px 5px rgba(255,59,48,1.0), 0 0 34px 12px rgba(255,59,48,.65), 0 0 64px 22px rgba(255,59,48,.32), inset 0 0 20px rgba(255,59,48,.7);
+  }
+}
 
-/* 离线态:灰 无动画 */
+/* —— 离线态: 灰 静止 —— */
 .lamp-disc[data-state="offline"] .lamp-ring{
-  border-color:var(--gray-3);
+  border-color:#8E8E93;
   animation:none;
-  box-shadow:none;
+  box-shadow: 0 0 0 1px rgba(142,142,147,.15), 0 0 6px 2px rgba(142,142,147,.25), inset 0 0 4px rgba(142,142,147,.15);
 }
-.lamp-disc[data-state="offline"] .lamp-halo{opacity:0;}
+.lamp-disc[data-state="offline"] .lamp-halo{ opacity:0; }
 
-/* 提醒态:琥珀 中速 2.5s */
+/* —— 提醒态: 琥珀 2.5s —— */
 .lamp-disc[data-state="remind"] .lamp-ring{
-  border-color:var(--amber);
+  border-color:#FFB800;
   animation-duration:2.5s;
-  box-shadow:0 0 18px rgba(239,159,39,.45),inset 0 0 12px rgba(239,159,39,.4);
+  animation-name:lampBreathAmber;
+  box-shadow:
+    0 0 0 1px rgba(255,184,0,.3),
+    0 0 10px 3px rgba(255,184,0,.85),
+    0 0 26px 8px rgba(255,184,0,.55),
+    0 0 52px 16px rgba(255,184,0,.28),
+    inset 0 0 14px rgba(255,184,0,.6);
 }
-.lamp-disc[data-state="remind"] .lamp-halo{background:radial-gradient(circle,rgba(239,159,39,.32) 0%,transparent 62%);}
-.ls-swatch.remind{ background:var(--amber); box-shadow:0 0 10px rgba(239,159,39,.5); }
+.lamp-disc[data-state="remind"] .lamp-halo{
+  background:radial-gradient(circle, rgba(255,184,0,.50) 0%, transparent 65%);
+}
+@keyframes lampBreathAmber{
+  0%,100%{
+    box-shadow: 0 0 0 1px rgba(255,184,0,.2), 0 0 7px 2px rgba(255,184,0,.7), 0 0 18px 5px rgba(255,184,0,.4), 0 0 38px 12px rgba(255,184,0,.18), inset 0 0 10px rgba(255,184,0,.45);
+  }
+  50%{
+    box-shadow: 0 0 0 1px rgba(255,184,0,.4), 0 0 14px 5px rgba(255,184,0,1.0), 0 0 34px 12px rgba(255,184,0,.65), 0 0 64px 22px rgba(255,184,0,.32), inset 0 0 20px rgba(255,184,0,.7);
+  }
+}
+.ls-swatch.remind{ background:#FFB800; box-shadow:0 0 12px rgba(255,184,0,.65); }
 
 /* 状态卡列表 */
 .lamp-states{display:flex;flex-direction:column;gap:10px;}
@@ -1148,9 +1210,9 @@ body{
 .ls-swatch{
   width:16px;height:16px;border-radius:50%;flex-shrink:0;margin-top:3px;
 }
-.ls-swatch.thrive{ background:var(--green); box-shadow:0 0 10px var(--green-glow); }
-.ls-swatch.feed{   background:var(--red);   box-shadow:0 0 10px rgba(226,75,74,.45); }
-.ls-swatch.offline{ background:var(--gray-3); }
+.ls-swatch.thrive{  background:#4CD964; box-shadow:0 0 10px rgba(76,217,100,.65); }
+.ls-swatch.feed{    background:#FF3B30; box-shadow:0 0 10px rgba(255,59,48,.65); }
+.ls-swatch.offline{ background:#8E8E93; box-shadow:none; }
 .ls-body h4{
   font-size:15px;font-weight:600;color:var(--black);letter-spacing:-0.01em;
   display:flex;align-items:baseline;gap:10px;
