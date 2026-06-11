@@ -2348,9 +2348,9 @@ section h2,
   background: var(--white);
 }
 
-/* —— 8. Footer 顶部圆角（视觉收束）—— */
+/* —— 8. Footer 顶部圆角 — 移除，避免与深色 nurserysec 露底 —— */
 .footer {
-  border-radius: 24px 24px 0 0;
+  border-radius: 0;
   margin-top: 0;
 }
 
@@ -2439,7 +2439,7 @@ section h2,
 
 /* —— mobile —— */
 @media (max-width: 480px) {
-  .footer { border-radius: 16px 16px 0 0; }
+  .footer { border-radius: 0; }
   .tide { border-radius: 12px; }
   .showcase-sticky { border-radius: 16px; }
 }
