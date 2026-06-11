@@ -2475,304 +2475,249 @@ section h2,
 .vg { border-radius: 0 !important; }
 .vb { border-radius: 0 !important; }
 
-/* ===== Data Section — Dark Glass Morphism Redesign ===== */
+/* ===== Data Section — Light background, clean app mockup ===== */
 
-/* Section background: dark with green mesh blobs */
 .datasec {
-  background: #0B1510 !important;
-  border-bottom: none !important;
+  background: #F5F5F7 !important;
+  border-bottom: 1px solid var(--gray-3) !important;
   position: relative;
   overflow: visible;
 }
-.datasec::before {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse at 12% 90%, rgba(59,165,93,0.20) 0%, transparent 45%),
-    radial-gradient(ellipse at 88% 10%, rgba(40,100,55,0.25) 0%, transparent 45%),
-    radial-gradient(ellipse at 55% 55%, rgba(10,25,15,0.70) 0%, transparent 65%);
-  pointer-events: none; z-index: 0;
-}
+.datasec::before { display: none; }
 .datasec-inner { position: relative; z-index: 1; }
 
-/* Section copy text */
-.datasec .sec-num,
-.datasec .sec-num .total { color: rgba(255,255,255,0.30) !important; }
-.datasec .eyebrow {
-  color: rgba(255,255,255,0.70) !important;
-  background: rgba(255,255,255,0.09) !important;
-  border-color: rgba(255,255,255,0.13) !important;
-}
-.datasec-copy h2 { color: rgba(255,255,255,0.92) !important; }
-.datasec-lede { color: rgba(255,255,255,0.52) !important; }
-
-/* ===== gc-ring shared dark styles (for phone mockup) ===== */
+/* gc-ring inside dark screen */
 .gc-track { stroke: rgba(255,255,255,0.10) !important; }
-.gc-prog  { stroke: #4CD964 !important; filter: drop-shadow(0 0 5px rgba(76,217,100,0.75)); }
-.gc-pct   { color: rgba(255,255,255,0.92) !important; font-family: var(--font-mono); }
-.gc-pct small { color: rgba(255,255,255,0.38) !important; }
-.gc-statusdot { background: #4CD964 !important; box-shadow: 0 0 8px rgba(76,217,100,0.70) !important; }
+.gc-prog  { stroke: #3BA55D !important; filter: drop-shadow(0 0 4px rgba(59,165,93,0.60)); }
+.gc-pct   { color: rgba(255,255,255,0.95) !important; font-family: var(--font-mono); }
+.gc-pct small { color: rgba(255,255,255,0.40) !important; }
+.gc-statusdot { background: #3BA55D !important; }
 
-/* Float chip — dark glass */
-.float-chip {
-  background: rgba(12,24,16,0.84) !important;
-  border: 1px solid rgba(255,255,255,0.11) !important;
-  color: rgba(255,255,255,0.78) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06) !important;
-}
-
-/* ===== Phone Mockup ===== */
+/* ===== Phone App Mockup — flat, no frame, Aqara-style ===== */
 
 .datasec-visual {
   display: flex; align-items: center; justify-content: center;
-  overflow: visible !important;  /* allow phone shadow/tilt to bleed */
-  align-items: center;
+  overflow: visible !important;
 }
 
-/* Outer wrapper: 3D tilt */
 .phone-mockup {
-  perspective: 900px;
   display: flex; align-items: center; justify-content: center;
-  padding: 20px 0 20px 20px;
-  filter: drop-shadow(0 40px 80px rgba(0,0,0,0.65)) drop-shadow(0 0 60px rgba(59,165,93,0.18));
 }
 
-/* iPhone frame */
+/* No phone-frame — we use phone-screen directly as the "screenshot" */
 .phone-frame {
-  width: 260px;
-  background: linear-gradient(160deg, #2a2a2e 0%, #1a1a1c 40%, #111112 100%);
-  border-radius: 44px;
-  padding: 10px;
+  width: 264px;
+  border-radius: 40px;
+  overflow: hidden;
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.12),
-    inset 0 1px 0 rgba(255,255,255,0.18),
-    0 0 0 1px rgba(0,0,0,0.6),
-    0 2px 8px rgba(0,0,0,0.9),
-    0 20px 60px rgba(0,0,0,0.7);
-  transform: perspective(900px) rotateY(-10deg) rotateX(4deg);
-  transition: transform 0.6s var(--ease);
-}
-.phone-frame:hover {
-  transform: perspective(900px) rotateY(-4deg) rotateX(2deg);
+    0 2px 4px rgba(0,0,0,0.12),
+    0 12px 40px rgba(0,0,0,0.18),
+    0 40px 80px rgba(0,0,0,0.12),
+    0 0 0 1px rgba(0,0,0,0.06);
 }
 
-/* Screen */
+/* Screen: dark neutral — not green, matches Aqara reference */
 .phone-screen {
   position: relative;
-  border-radius: 36px;
-  overflow: hidden;
   width: 100%;
-  height: 520px;
-  background: #0B1510;
+  height: 540px;
+  background: #111214;
   display: flex; flex-direction: column;
+  overflow: hidden;
 }
 
-/* Blurred plant bg */
+/* Subtle top-right ambient glow (very faint) */
 .phone-bg {
-  position: absolute; inset: 0;
+  position: absolute; inset: 0; z-index: 0;
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(40,100,55,0.55) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 75%, rgba(20,65,35,0.45) 0%, transparent 50%),
-    radial-gradient(ellipse at 55% 50%, rgba(8,20,12,0.80) 0%, transparent 70%),
-    linear-gradient(175deg, #162A1A 0%, #0B1510 55%, #060E09 100%);
-  z-index: 0;
+    radial-gradient(ellipse at 80% 0%, rgba(59,165,93,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 100%, rgba(59,165,93,0.05) 0%, transparent 50%);
+  pointer-events: none;
 }
-/* Subtle botanical texture overlay */
-.phone-bg::after {
-  content: '';
-  position: absolute; inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 65%, rgba(59,165,93,0.12) 0%, transparent 35%),
-    radial-gradient(circle at 75% 35%, rgba(76,217,100,0.07) 0%, transparent 30%);
-}
+.phone-bg::after { display: none; }
 
-/* Everything inside screen is above bg */
 .phone-screen > *:not(.phone-bg) { position: relative; z-index: 1; }
 
 /* Status bar */
 .phone-statusbar {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 20px 0;
-  height: 44px;
+  padding: 14px 22px 0;
+  height: 46px;
 }
 .psb-time {
-  font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.92);
-  letter-spacing: -0.01em;
+  font-size: 14px; font-weight: 700;
+  color: rgba(255,255,255,0.95); letter-spacing: -0.02em;
 }
-.psb-right { display: flex; align-items: center; gap: 5px; }
+.psb-right { display: flex; align-items: center; gap: 6px; }
 
 /* Dynamic Island */
 .phone-island {
   position: absolute;
-  top: 10px; left: 50%; transform: translateX(-50%);
-  width: 80px; height: 26px;
+  top: 12px; left: 50%; transform: translateX(-50%);
+  width: 88px; height: 28px;
   background: #000;
   border-radius: 20px;
   z-index: 10;
-  box-shadow: inset 0 1px 2px rgba(255,255,255,0.04);
 }
 
-/* Solar chip */
-.phone-solar-chip {
+/* App top bar: brand + settings icon */
+.phone-appbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px 0;
+  margin-top: 4px;
+}
+.pab-brand {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: rgba(255,255,255,0.30);
+}
+.pab-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.09);
   display: flex; align-items: center; justify-content: center;
-  gap: 6px; margin: 10px auto 8px;
-  padding: 5px 13px; border-radius: 999px;
-  background: rgba(59,165,93,0.18);
-  border: 1px solid rgba(76,217,100,0.28);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  font-size: 10.5px; font-weight: 600; letter-spacing: 0.02em;
-  color: #4CD964; width: fit-content;
-  box-shadow: 0 0 14px rgba(76,217,100,0.15), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* Plant section: name + location + solar chip */
+.phone-plant-header {
+  padding: 10px 20px 0;
+}
+.pph-name {
+  font-size: 18px; font-weight: 800;
+  color: rgba(255,255,255,0.95);
+  letter-spacing: -0.03em; line-height: 1.1;
+}
+.pph-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 4px;
+}
+.pph-loc {
+  font-size: 11px; color: rgba(255,255,255,0.35);
+}
+.pph-solar {
+  display: flex; align-items: center; gap: 4px;
+  padding: 3px 9px; border-radius: 999px;
+  background: rgba(59,165,93,0.15);
+  border: 1px solid rgba(59,165,93,0.28);
+  font-size: 9.5px; font-weight: 600;
+  color: #3BA55D;
 }
 .psc-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: #4CD964;
-  box-shadow: 0 0 6px rgba(76,217,100,0.85);
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #3BA55D;
   animation: pscPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
 }
 @keyframes pscPulse {
   0%, 100% { opacity: 1; }
-  50%       { opacity: 0.45; }
+  50%       { opacity: 0.35; }
 }
 
-/* Main glass card */
-.phone-card {
-  margin: 0 10px;
-  padding: 16px 16px 14px;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 26px;
-  backdrop-filter: blur(28px) saturate(1.6);
-  -webkit-backdrop-filter: blur(28px) saturate(1.6);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.14),
-    inset 0 -1px 0 rgba(0,0,0,0.10),
-    0 8px 32px rgba(0,0,0,0.40);
-  flex: 1;
-  display: flex; flex-direction: column; gap: 13px;
+/* Divider */
+.phone-divider {
+  height: 1px; background: rgba(255,255,255,0.06);
+  margin: 12px 20px;
 }
 
-/* Card header */
-.pc-header {
-  display: flex; align-items: flex-start; justify-content: space-between;
-}
-.pc-plant-name {
-  font-size: 14px; font-weight: 700;
-  color: rgba(255,255,255,0.92); letter-spacing: -0.02em; line-height: 1.2;
-}
-.pc-location {
-  font-size: 10px; color: rgba(255,255,255,0.38);
-  margin-top: 2px;
-}
-.pc-sync {
-  display: flex; align-items: center; gap: 4px;
-  font-size: 9px; color: rgba(255,255,255,0.30);
-  flex-shrink: 0; margin-top: 2px;
-}
-
-/* Ring + labels row */
+/* Ring row */
 .pc-ring-row {
-  display: flex; align-items: center; gap: 16px;
+  display: flex; align-items: center; gap: 18px;
+  padding: 0 20px;
 }
-.pc-ring-row .gc-ring { width: 96px; height: 96px; flex-shrink: 0; }
-.pc-ring-labels { display: flex; flex-direction: column; gap: 8px; }
+.pc-ring-row .gc-ring { width: 100px; height: 100px; flex-shrink: 0; }
+.pc-ring-labels { display: flex; flex-direction: column; gap: 6px; }
 .pc-health-label {
-  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(255,255,255,0.36);
+  font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase;
+  color: rgba(255,255,255,0.28); line-height: 1;
+}
+.pc-ring-name {
+  font-size: 13px; font-weight: 700;
+  color: rgba(255,255,255,0.88); letter-spacing: -0.01em;
 }
 .pc-status-badge {
-  display: flex; align-items: center; gap: 5px;
-  padding: 4px 10px; border-radius: 999px;
-  background: rgba(76,217,100,0.14);
-  border: 1px solid rgba(76,217,100,0.26);
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 11px; border-radius: 999px;
+  background: rgba(59,165,93,0.12);
+  border: 1px solid rgba(59,165,93,0.22);
   font-size: 11px; font-weight: 600;
-  color: #4CD964;
-  width: fit-content;
-  box-shadow: 0 0 10px rgba(76,217,100,0.12);
+  color: #3BA55D;
+}
+.pc-sync-row {
+  font-size: 9px; color: rgba(255,255,255,0.22);
+  display: flex; align-items: center; gap: 4px;
 }
 
-/* 4 metric chips */
+/* 4 metric tiles */
 .pc-metrics {
-  display: flex; gap: 6px;
+  display: flex; gap: 7px;
+  padding: 12px 20px 0;
 }
 .pc-metric {
   flex: 1; min-width: 0;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 16px;
-  padding: 9px 7px 8px;
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
-  transition: background 0.2s;
+  background: #1C1D20;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 10px 7px 9px;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
 }
-.pc-m-icon { font-size: 15px; line-height: 1; }
+.pc-m-icon { font-size: 16px; line-height: 1; }
 .pc-m-val {
   font-family: var(--font-mono);
-  font-size: 14px; font-weight: 800;
-  color: rgba(255,255,255,0.90);
+  font-size: 15px; font-weight: 800;
+  color: rgba(255,255,255,0.92);
   letter-spacing: -0.02em; line-height: 1;
   white-space: nowrap;
 }
-.pc-m-val-sm { font-size: 12px; font-weight: 700; }
-.pc-m-unit { font-size: 8px; color: rgba(255,255,255,0.36); font-weight: 500; }
+.pc-m-val-sm { font-size: 13px; }
+.pc-m-unit { font-size: 8px; color: rgba(255,255,255,0.30); font-weight: 500; }
 .pc-m-label {
-  font-size: 7.5px; letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.32);
-  text-align: center; line-height: 1.3;
+  font-size: 7px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: rgba(255,255,255,0.28); text-align: center; line-height: 1.3;
 }
 
-/* CTA button */
+/* CTA */
 .pc-cta {
+  margin: 12px 20px 0;
   display: flex; align-items: center; justify-content: center;
-  padding: 11px 16px; border-radius: 999px;
-  background: linear-gradient(135deg, rgba(59,165,93,0.28) 0%, rgba(40,120,65,0.22) 100%);
-  border: 1px solid rgba(76,217,100,0.32);
-  color: #4CD964; font-size: 12px; font-weight: 600;
+  padding: 12px 16px; border-radius: 999px;
+  background: #1C1D20;
+  border: 1px solid rgba(59,165,93,0.30);
+  color: #3BA55D; font-size: 12px; font-weight: 600;
   cursor: pointer; letter-spacing: 0.01em;
-  box-shadow: 0 0 16px rgba(76,217,100,0.12), inset 0 1px 0 rgba(255,255,255,0.08);
   transition: background 0.2s;
 }
-.pc-cta:hover { background: rgba(59,165,93,0.38); }
 
-/* Bottom nav bar */
+/* Bottom nav */
 .phone-nav {
   display: flex; align-items: center; justify-content: space-around;
-  padding: 8px 8px 14px;
-  background: rgba(0,0,0,0.30);
-  backdrop-filter: blur(18px) saturate(1.5);
-  -webkit-backdrop-filter: blur(18px) saturate(1.5);
-  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 9px 6px 12px;
+  background: rgba(0,0,0,0.45);
+  border-top: 1px solid rgba(255,255,255,0.06);
   margin-top: auto;
 }
 .pn-item {
   display: flex; flex-direction: column; align-items: center; gap: 3px;
-  opacity: 0.42; flex: 1;
+  opacity: 0.35; flex: 1;
 }
-.pn-item span {
-  font-size: 8px; color: rgba(255,255,255,0.75); letter-spacing: 0.03em;
-}
+.pn-item span { font-size: 8px; color: rgba(255,255,255,0.7); letter-spacing: 0.02em; }
 .pn-item svg { display: block; }
 .pn-active { opacity: 1; }
 .pn-active span { color: white; }
-
 .pn-scan { opacity: 1; }
 .pn-scan-btn {
-  width: 38px; height: 38px; border-radius: 50%;
-  background: linear-gradient(145deg, #3BA55D, #2C8049);
+  width: 36px; height: 36px; border-radius: 50%;
+  background: #3BA55D;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 18px rgba(59,165,93,0.55);
-  margin-top: -10px;
+  box-shadow: 0 3px 12px rgba(59,165,93,0.45);
+  margin-top: -8px;
 }
-.pn-scan span { color: rgba(255,255,255,0.65) !important; }
+.pn-scan span { color: rgba(255,255,255,0.55) !important; }
 
-/* Responsive */
+/* phone-card is no longer a wrapper — contents flow directly */
+.phone-card { display: contents; }
+.pc-header  { display: none; }
+
 @media(max-width:900px){
   .phone-mockup { padding: 0; margin: 0 auto; }
-  .phone-frame { transform: none !important; }
 }
 
 /* —— 14. Perov vision 引用块 —— */
@@ -3465,16 +3410,12 @@ html[lang="en"] .nav-label {
       <p class="datasec-lede" data-i18n="data.lede">土壤湿度、光照强度、养分水平、环境温度，实时汇入档案。一眼便知，这株 Monstera 过得好不好。</p>
     </div>
     <div class="datasec-visual">
-      <!-- ===== iPhone Mockup ===== -->
+      <!-- ===== App Screen Mockup (no frame, Aqara-style) ===== -->
       <div class="phone-mockup reveal" id="statusCard">
-
-        <!-- Phone frame -->
         <div class="phone-frame">
-
-          <!-- Screen -->
           <div class="phone-screen">
 
-            <!-- Blurred plant background -->
+            <!-- Ambient bg -->
             <div class="phone-bg"></div>
 
             <!-- Status bar -->
@@ -3503,93 +3444,95 @@ html[lang="en"] .nav-label {
             <!-- Dynamic Island -->
             <div class="phone-island"></div>
 
-            <!-- Solar chip -->
-            <div class="phone-solar-chip">
-              <span class="psc-dot"></span>
-              <span data-i18n="data.solar">Solar Charging · Active</span>
+            <!-- App bar: brand + settings -->
+            <div class="phone-appbar">
+              <span class="pab-brand">MoriSync</span>
+              <div class="pab-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="rgba(255,255,255,0.55)" stroke-width="1.8"/><path d="M12 2V4M12 20V22M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M2 12H4M20 12H22M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="rgba(255,255,255,0.55)" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </div>
             </div>
 
-            <!-- Main glass card -->
-            <div class="phone-card">
-
-              <!-- Card header: plant name + sync -->
-              <div class="pc-header">
-                <div>
-                  <div class="pc-plant-name">Monstera Deliciosa</div>
-                  <div class="pc-location"><span data-i18n="data.gc.loc">客厅 · 窗边</span></div>
-                </div>
-                <div class="pc-sync">
-                  <span class="fcd green"></span>
-                  <span data-i18n="data.synced">2分钟前同步</span>
+            <!-- Plant header: name + location + solar chip -->
+            <div class="phone-plant-header">
+              <div class="pph-name">Monstera Deliciosa</div>
+              <div class="pph-meta">
+                <span class="pph-loc" data-i18n="data.gc.loc">客厅 · 窗边</span>
+                <div class="pph-solar">
+                  <span class="psc-dot"></span>
+                  <span data-i18n="data.solar">Solar · Active</span>
                 </div>
               </div>
+            </div>
 
-              <!-- Ring + status -->
-              <div class="pc-ring-row">
-                <div class="gc-ring" data-pct="92">
-                  <svg viewBox="0 0 110 110">
-                    <circle class="gc-track" cx="55" cy="55" r="46"/>
-                    <circle class="gc-prog" cx="55" cy="55" r="46"/>
-                  </svg>
-                  <div class="gc-pct">92<small>%</small></div>
-                </div>
-                <div class="pc-ring-labels">
-                  <div class="pc-health-label" data-i18n="data.health">健康指数</div>
-                  <div class="pc-status-badge"><span class="gc-statusdot"></span><span data-i18n="data.gc.status">茁壮</span></div>
-                </div>
+            <!-- Divider -->
+            <div class="phone-divider"></div>
+
+            <!-- Ring + status row -->
+            <div class="pc-ring-row">
+              <div class="gc-ring" data-pct="92">
+                <svg viewBox="0 0 110 110">
+                  <circle class="gc-track" cx="55" cy="55" r="46"/>
+                  <circle class="gc-prog" cx="55" cy="55" r="46"/>
+                </svg>
+                <div class="gc-pct">92<small>%</small></div>
               </div>
-
-              <!-- 4 metric chips in a row -->
-              <div class="pc-metrics">
-                <div class="pc-metric">
-                  <div class="pc-m-icon">💧</div>
-                  <div class="pc-m-val">64<span class="pc-m-unit">%</span></div>
-                  <div class="pc-m-label" data-i18n="data.m.moisture">土壤湿度</div>
-                </div>
-                <div class="pc-metric">
-                  <div class="pc-m-icon">☀️</div>
-                  <div class="pc-m-val">820<span class="pc-m-unit">lx</span></div>
-                  <div class="pc-m-label" data-i18n="data.m.light">光照强度</div>
-                </div>
-                <div class="pc-metric">
-                  <div class="pc-m-icon">🌱</div>
-                  <div class="pc-m-val pc-m-val-sm" data-i18n="data.m.fert.val">优良</div>
-                  <div class="pc-m-label" data-i18n="data.m.fert">土壤肥力</div>
-                </div>
-                <div class="pc-metric">
-                  <div class="pc-m-icon">🌡️</div>
-                  <div class="pc-m-val">23<span class="pc-m-unit">°C</span></div>
-                  <div class="pc-m-label" data-i18n="data.m.temp">环境温度</div>
-                </div>
+              <div class="pc-ring-labels">
+                <div class="pc-health-label" data-i18n="data.health">健康指数</div>
+                <div class="pc-ring-name">Monstera</div>
+                <div class="pc-status-badge"><span class="gc-statusdot"></span><span data-i18n="data.gc.status">茁壮</span></div>
+                <div class="pc-sync-row"><span class="fcd green"></span><span data-i18n="data.synced">2分钟前同步</span></div>
               </div>
+            </div>
 
-              <!-- CTA -->
-              <div class="pc-cta" data-i18n="data.gc.cta">查看护理建议 →</div>
+            <!-- 4 metric tiles -->
+            <div class="pc-metrics">
+              <div class="pc-metric">
+                <div class="pc-m-icon">💧</div>
+                <div class="pc-m-val">64<span class="pc-m-unit">%</span></div>
+                <div class="pc-m-label" data-i18n="data.m.moisture">土壤湿度</div>
+              </div>
+              <div class="pc-metric">
+                <div class="pc-m-icon">☀️</div>
+                <div class="pc-m-val">820<span class="pc-m-unit">lx</span></div>
+                <div class="pc-m-label" data-i18n="data.m.light">光照强度</div>
+              </div>
+              <div class="pc-metric">
+                <div class="pc-m-icon">🌱</div>
+                <div class="pc-m-val pc-m-val-sm" data-i18n="data.m.fert.val">优良</div>
+                <div class="pc-m-label" data-i18n="data.m.fert">土壤肥力</div>
+              </div>
+              <div class="pc-metric">
+                <div class="pc-m-icon">🌡️</div>
+                <div class="pc-m-val">23<span class="pc-m-unit">°C</span></div>
+                <div class="pc-m-label" data-i18n="data.m.temp">环境温度</div>
+              </div>
+            </div>
 
-            </div><!-- /phone-card -->
+            <!-- CTA -->
+            <div class="pc-cta" data-i18n="data.gc.cta">查看护理建议 →</div>
 
-            <!-- Bottom nav bar -->
+            <!-- Bottom nav -->
             <div class="phone-nav">
               <div class="pn-item pn-active">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3L21 9.5V20C21 20.55 20.55 21 20 21H15V15H9V21H4C3.45 21 3 20.55 3 20V9.5Z" fill="white"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3L21 9.5V20C21 20.55 20.55 21 20 21H15V15H9V21H4C3.45 21 3 20.55 3 20V9.5Z" fill="white"/></svg>
                 <span data-i18n="data.nav.home">首页</span>
               </div>
               <div class="pn-item">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M4 19C4 16.24 7.58 14 12 14C16.42 14 20 16.24 20 19" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M4 19C4 16.24 7.58 14 12 14C16.42 14 20 16.24 20 19" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/></svg>
                 <span data-i18n="data.nav.plants">我的植物</span>
               </div>
               <div class="pn-item pn-scan">
                 <div class="pn-scan-btn">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="5" height="5" rx="1" stroke="white" stroke-width="1.5"/><rect x="16" y="3" width="5" height="5" rx="1" stroke="white" stroke-width="1.5"/><rect x="3" y="16" width="5" height="5" rx="1" stroke="white" stroke-width="1.5"/><circle cx="18" cy="18" r="2" fill="white" opacity=".8"/><path d="M13 3H14M14 3H15M14 3V4M14 4V5" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M3 13V14M3 14V15M3 14H4M4 14H5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="5" height="5" rx="1" stroke="white" stroke-width="1.8"/><rect x="16" y="3" width="5" height="5" rx="1" stroke="white" stroke-width="1.8"/><rect x="3" y="16" width="5" height="5" rx="1" stroke="white" stroke-width="1.8"/><circle cx="18.5" cy="18.5" r="2" fill="white" opacity=".9"/></svg>
                 </div>
                 <span data-i18n="data.nav.scan">扫描</span>
               </div>
               <div class="pn-item">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12H5M5 12C5 8.13 8.13 5 12 5M5 12C5 15.87 8.13 19 12 19M19 12H21M21 12C21 15.87 17.87 19 14 19M21 12C21 8.13 17.87 5 14 5M12 3V5M12 19V21" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.134 17 3 13.866 3 10C3 6.134 6.134 3 10 3C13.866 3 17 6.134 17 10Z" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/></svg>
                 <span data-i18n="data.nav.insights">洞察</span>
               </div>
               <div class="pn-item">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M12 2V4M12 20V22M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M2 12H4M20 12H22M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M12 2V4M12 20V22M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M2 12H4M20 12H22M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/></svg>
                 <span data-i18n="data.nav.settings">设置</span>
               </div>
             </div>
