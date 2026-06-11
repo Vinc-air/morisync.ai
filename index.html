@@ -28,7 +28,7 @@
   --black:        #0A0A09;   /* VIS Deep Black · 主文字 / 强调 */
   --near-black:   #1A1A18;   /* 次级深墨 · 正文 */
   --white:        #FFFFFF;   /* Pure White · 全局底色 */
-  --stone:        #EEECEA;   /* VIS Stone · divider / card border / 次级底 */
+  --stone:        #E8E8ED;   /* VIS Stone · divider / card border / 次级底 — Apple neutral */
 
   /* —— 功能色 —— */
   --amber:        #EF9F27;   /* Amber · 警示 / Lite 电量 */
@@ -37,8 +37,8 @@
   /* —— 灰阶系列(VIS gray-1 ~ gray-4)—— */
   --gray-1:       #6B6B68;   /* 三级文字 / 描述文 */
   --gray-2:       #AEADA8;   /* 四级 / caption / eyebrow */
-  --gray-3:       #D8D7D2;   /* hairline / card border */
-  --gray-4:       #EEECEA;   /* hover 底 / 浅底(同 stone)*/
+  --gray-3:       #D2D2D7;   /* hairline / card border — Apple neutral */
+  --gray-4:       #E8E8ED;   /* hover 底 / 浅底(同 stone)— Apple neutral */
 
   /* —— 拉丝铝(仅限 Hardware 段实物图渲染使用)—— */
   --alu-hi:       #F2F3F2;
@@ -2135,12 +2135,12 @@ section h2,
   border-bottom: none;
 }
 
-/* 偶数 section 轻浅底色，制造节奏感 */
+/* 偶数 section 轻浅底色，制造节奏感 — Apple neutral gray */
 .painsec,
 .perovsec,
 .datasec,
 .nurserysec {
-  background: #F7F6F3;
+  background: #F5F5F7;
 }
 
 /* —— 2. eyebrow / kicker / sec-num → Pill 标签风格 —— */
@@ -2232,7 +2232,7 @@ section h2,
 .hw-naming {
   border-radius: 16px !important;
   border: 1px solid rgba(0,0,0,.07) !important;
-  background: #F7F6F3;
+  background: #F5F5F7;
 }
 
 /* Nursery wall */
@@ -2322,7 +2322,7 @@ section h2,
 /* showcase 大容器圆角保持，背景稍调 */
 .showcase-sticky {
   border-radius: 24px;
-  background: #F4F4F2;
+  background: #F5F5F7;
   border: 1px solid rgba(0,0,0,.06);
   box-shadow: 0 8px 48px rgba(0,0,0,.08);
 }
@@ -2456,6 +2456,21 @@ section h2,
   font-family: var(--font-sans);
 }
 .lang-toggle:hover { background: rgba(0,0,0,.05); color: var(--black); border-color: rgba(0,0,0,.2); }
+
+/* —— English 排版自适应：允许标题换行，防止文字溢出 —— */
+html[lang="en"] section h2,
+html[lang="en"] .s-title,
+html[lang="en"] .hero-title,
+html[lang="en"] .section-title {
+  white-space: normal !important;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.08;
+}
+html[lang="en"] .topbar-nav .nav-link,
+html[lang="en"] .nav-label {
+  white-space: nowrap;
+}
 </style>
 </head>
 <body>
@@ -3628,24 +3643,32 @@ const TRANSLATIONS = {
 
 function applyLang(lang) {
   const dict = TRANSLATIONS[lang];
+
+  /* 1. Apply all data-i18n elements */
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (dict[key] !== undefined) {
-      el.innerHTML = dict[key];
+    if (dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+
+  /* 2. Translate .s-anchor elements (use data-en / original textContent) */
+  document.querySelectorAll('.s-anchor[data-en]').forEach(el => {
+    if (lang === 'en') {
+      if (!el.dataset.zh) el.dataset.zh = el.textContent.trim();
+      el.textContent = el.dataset.en;
+    } else {
+      if (el.dataset.zh) el.textContent = el.dataset.zh;
     }
   });
 
-  /* Update TIDE_STATES text for the current animation state */
+  /* 3. Update TIDE_STATES live text */
   const tideStateTxt = document.querySelector('#tide .light-state .ls-state');
-  if (tideStateTxt) {
-    tideStateTxt.textContent = lang === 'en' ? 'All Good' : '一切安好';
-  }
+  if (tideStateTxt) tideStateTxt.textContent = lang === 'en' ? 'All Good' : '一切安好';
 
-  /* Update toggle button label */
+  /* 4. Toggle button label */
   const btn = document.getElementById('langToggle');
   if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中文';
 
-  /* Update html lang attribute */
+  /* 5. html lang attribute — drives CSS nowrap override */
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
 }
 
