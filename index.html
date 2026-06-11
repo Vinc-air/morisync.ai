@@ -2475,18 +2475,106 @@ section h2,
 .vg { border-radius: 0 !important; }
 .vb { border-radius: 0 !important; }
 
-/* —— 13. Data section glass-card 升级 —— */
-.glass-card {
-  border-radius: 24px !important;
-  border: 1px solid rgba(0,0,0,.07) !important;
-  box-shadow: 0 4px 28px rgba(0,0,0,.08) !important;
+/* ===== Data Section — Dark Glass Morphism Redesign ===== */
+
+/* Section background: dark with green mesh blobs */
+.datasec {
+  background: #0B1510 !important;
+  border-bottom: none !important;
+  position: relative;
+  overflow: visible;
 }
+.datasec::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 12% 90%, rgba(59,165,93,0.20) 0%, transparent 45%),
+    radial-gradient(ellipse at 88% 10%, rgba(40,100,55,0.25) 0%, transparent 45%),
+    radial-gradient(ellipse at 55% 55%, rgba(10,25,15,0.70) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+.datasec-inner { position: relative; z-index: 1; }
+
+/* Section copy text */
+.datasec .sec-num,
+.datasec .sec-num .total { color: rgba(255,255,255,0.30) !important; }
+.datasec .eyebrow {
+  color: rgba(255,255,255,0.70) !important;
+  background: rgba(255,255,255,0.09) !important;
+  border-color: rgba(255,255,255,0.13) !important;
+}
+.datasec-copy h2 { color: rgba(255,255,255,0.92) !important; }
+.datasec-lede { color: rgba(255,255,255,0.52) !important; }
+
+/* glass-card — dark frosted glass */
+.glass-card {
+  background: rgba(255,255,255,0.07) !important;
+  backdrop-filter: blur(28px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(1.4) !important;
+  border: 1px solid rgba(255,255,255,0.11) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,0.12) !important;
+}
+
+/* Ring chart */
+.gc-track { stroke: rgba(255,255,255,0.10) !important; }
+.gc-prog  { stroke: #4CD964 !important; filter: drop-shadow(0 0 4px rgba(76,217,100,0.7)); }
+.gc-pct   { color: rgba(255,255,255,0.92) !important; }
+.gc-pct small { color: rgba(255,255,255,0.40) !important; }
+
+/* Card text */
+.gc-name   { color: rgba(255,255,255,0.92) !important; }
+.gc-status { color: #4CD964 !important; font-weight: 600 !important; }
+.gc-statusdot {
+  background: #4CD964 !important;
+  box-shadow: 0 0 8px rgba(76,217,100,0.7) !important;
+}
+.gc-loc    { color: rgba(255,255,255,0.42) !important; }
+.gc-divider { background: rgba(255,255,255,0.09) !important; }
+
+/* Metric icon tiles */
+.gc-mi {
+  width: 32px !important; height: 32px !important;
+  border-radius: 10px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 15px !important; line-height: 1 !important;
+}
+.gc-mi-water { background: rgba(100,180,255,0.20) !important; }
+.gc-mi-water::after { content: '💧'; font-size: 13px; }
+.gc-mi-light { background: rgba(255,204,60,0.20) !important; }
+.gc-mi-light::after { content: '☀'; font-size: 13px; }
+.gc-mi-nut   { background: rgba(76,217,100,0.20) !important; }
+.gc-mi-nut::after { content: '🌿'; font-size: 12px; }
+.gc-mi-temp  { background: rgba(255,90,60,0.20) !important; }
+.gc-mi-temp::after { content: '🌡'; font-size: 13px; }
+
+/* Metric values */
+.gc-mv { color: rgba(255,255,255,0.88) !important; font-size: 18px !important; }
+.gc-mv small { color: rgba(255,255,255,0.38) !important; }
+.gc-mk { color: rgba(255,255,255,0.38) !important; }
+
+/* CTA button — pill */
 .gc-cta {
   border-radius: 999px !important;
-  margin-top: 18px;
+  margin-top: 18px !important;
+  background: rgba(59,165,93,0.18) !important;
+  border: 1px solid rgba(76,217,100,0.28) !important;
+  color: #4CD964 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  padding: 11px 20px !important;
 }
-.gc-mi {
-  border-radius: 10px !important;
+.gc-cta:hover { background: rgba(59,165,93,0.30) !important; }
+
+/* Float chips — dark glass */
+.float-chip {
+  background: rgba(15,28,18,0.82) !important;
+  border: 1px solid rgba(255,255,255,0.11) !important;
+  color: rgba(255,255,255,0.80) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.07) !important;
 }
 
 /* —— 14. Perov vision 引用块 —— */
