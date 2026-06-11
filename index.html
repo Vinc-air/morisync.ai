@@ -2576,6 +2576,103 @@ section h2,
   .nd-inner { padding: 14px 14px 18px; }
 }
 
+/* ===== App Step Cards Visual Redesign ===== */
+
+/* Featured card — gradient instead of flat green */
+.app-card.featured {
+  background: linear-gradient(148deg, #2B7040 0%, #1C4D2C 100%) !important;
+}
+
+/* .ac-visual container — lighter, cleaner */
+.ac-visual {
+  border-radius: 14px !important;
+  background: rgba(0,0,0,0.028) !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+}
+.app-card.featured .ac-visual {
+  background: rgba(255,255,255,0.07) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+}
+
+/* STEP 01 — pulse rings, no brackets */
+.scan-bracket { display: none; }
+.scan-line { display: none; }
+.scan-leaf {
+  width: 28px; height: 34px;
+  border-radius: 0 100% 0 100%;
+  background: linear-gradient(135deg, #3BA55D, #1E5A32);
+  opacity: 0.88;
+  z-index: 1;
+}
+.scan-pulse {
+  position: absolute;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: 1.5px solid var(--green);
+  opacity: 0;
+  animation: app-pulse-ring 2.8s ease-out infinite;
+}
+.scan-pulse.sp2 { animation-delay: 1.4s; }
+@keyframes app-pulse-ring {
+  0%   { transform: scale(0.55); opacity: 0.55; }
+  100% { transform: scale(2.0);  opacity: 0; }
+}
+
+/* STEP 02 — pill-shaped chips */
+.diag-chips { padding: 10px 10px !important; gap: 5px !important; }
+.diag-chip {
+  border-radius: 999px !important;
+  padding: 6px 13px !important;
+  font-size: 11.5px !important;
+  background: var(--white) !important;
+  border: 1px solid rgba(0,0,0,0.07) !important;
+  color: var(--near-black) !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04) !important;
+}
+.app-card.featured .diag-chip {
+  background: rgba(255,255,255,0.13) !important;
+  border: 1px solid rgba(255,255,255,0.16) !important;
+  color: rgba(255,255,255,0.90) !important;
+  box-shadow: none !important;
+}
+.app-card.featured .dc-dot.ok   { background: #5CD97A !important; }
+.app-card.featured .dc-dot.warn { background: #FFBB33 !important; }
+.app-card.featured .dc-tag      { color: rgba(255,255,255,0.46) !important; }
+
+/* STEP 03 — equal-size rings, no varying sizes */
+.grow-track { padding: 0 24px !important; gap: 0 !important; }
+.grow-connector {
+  top: 36%;
+  background: repeating-linear-gradient(
+    90deg, rgba(0,0,0,0.10) 0 3px, transparent 3px 8px) !important;
+}
+.grow-stage .gs-dot {
+  width: 16px !important; height: 16px !important;
+  background: transparent !important;
+  border: 2px solid rgba(0,0,0,0.13) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.grow-stage.now .gs-dot {
+  background: rgba(59,165,93,0.10) !important;
+  border: 2.5px solid var(--green) !important;
+  box-shadow: 0 0 0 3px rgba(59,165,93,0.14) !important;
+  outline: none !important;
+}
+.grow-stage.s3 .gs-dot {
+  background: transparent !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+.grow-stage .gs-name {
+  font-size: 9px !important;
+  letter-spacing: 0.09em !important;
+  color: var(--gray-2) !important;
+}
+.grow-stage.now .gs-name {
+  color: var(--green-text) !important;
+  font-weight: 700 !important;
+}
+
 /* —— English 排版自适应：允许标题换行，防止文字溢出 —— */
 html[lang="en"] section h2,
 html[lang="en"] .s-title,
@@ -2954,9 +3051,9 @@ html[lang="en"] .nav-label {
         <p data-i18n="app.step1.desc">对准叶片轻轻一扫，AI 认出种类，再把探针添加进来 — 分步引导，一次完成。</p>
         <div class="ac-visual">
           <div class="scan-frame">
-            <div class="scan-bracket"></div>
+            <div class="scan-pulse sp1"></div>
+            <div class="scan-pulse sp2"></div>
             <div class="scan-leaf"></div>
-            <div class="scan-line"></div>
           </div>
         </div>
         <a class="ac-btn" href="#app" data-i18n="app.learnmore">了解更多 <span class="ac-btn-arrow">→</span></a>
