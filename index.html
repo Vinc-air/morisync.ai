@@ -2115,6 +2115,334 @@ section h2,
     white-space: nowrap;
   }
 }
+
+/* ============================================================
+   TERRAVA STYLE OVERRIDE — 全站统一风格升级
+   参考: Terrava Green Infrastructure Platform
+   圆角 · Pill标签 · 柔和阴影 · 留白 · 克制配色
+   ============================================================ */
+
+/* —— 1. 全局 section 分隔：去掉硬边框，用更大留白替代 —— */
+.painsec,
+.lampsec,
+.perovsec,
+.offlinesec,
+.appsec,
+.datasec,
+.hwsec,
+.nurserysec,
+.loopsec {
+  border-bottom: none;
+}
+
+/* 偶数 section 轻浅底色，制造节奏感 */
+.painsec,
+.perovsec,
+.datasec,
+.nurserysec {
+  background: #F7F6F3;
+}
+
+/* —— 2. eyebrow / kicker / sec-num → Pill 标签风格 —— */
+.eyebrow,
+.kicker,
+.sec-kicker {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--gray-1);
+  background: rgba(0,0,0,.05);
+  border: 1px solid rgba(0,0,0,.09);
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin-bottom: 16px;
+  line-height: 1.4;
+  width: fit-content;
+}
+.deepsec .eyebrow,
+.deepsec .kicker {
+  color: rgba(255,255,255,.7);
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.18);
+}
+
+/* sec-num: 段落编号也改为 pill */
+.sec-num {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-1);
+  background: rgba(0,0,0,.05);
+  border: 1px solid rgba(0,0,0,.09);
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin-bottom: 16px;
+  white-space: nowrap;
+  width: fit-content;
+}
+.deepsec .sec-num {
+  color: rgba(255,255,255,.7);
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.18);
+}
+.sec-num .total { opacity: 0.5; }
+
+/* showcase eyebrow 内嵌的 sec-num / eyebrow 保持原有布局 */
+.showcase-eyebrow .sec-num,
+.showcase-eyebrow .eyebrow {
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  letter-spacing: 0.18em;
+}
+
+/* —— 3. 所有卡片圆角统一升级 —— */
+
+/* Hardware 双卡 */
+.hw-card {
+  border-radius: 20px !important;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.07) !important;
+  border-top-width: 1px !important;
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  transition: transform .4s var(--ease), box-shadow .4s;
+}
+.hw-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -14px rgba(0,0,0,.13);
+}
+/* Solar 卡：绿色左边条替代顶边条 */
+.hw-card.solar-card {
+  border-left: 3px solid var(--green) !important;
+  border-top: 1px solid rgba(0,0,0,.07) !important;
+}
+.hw-card.lite-card {
+  border-left: 3px solid var(--gray-3) !important;
+  border-top: 1px solid rgba(0,0,0,.07) !important;
+}
+
+/* Hardware 命名区 */
+.hw-naming {
+  border-radius: 16px !important;
+  border: 1px solid rgba(0,0,0,.07) !important;
+  background: #F7F6F3;
+}
+
+/* Nursery wall */
+.nursery-wall {
+  border-radius: 20px !important;
+  border: 1px solid rgba(0,0,0,.07) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,.07);
+}
+.nursery-shot {
+  border-radius: 20px !important;
+  border: 1px solid rgba(0,0,0,.07) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,.10);
+}
+
+/* Overview 小卡片 */
+.nw-ov {
+  border-radius: 12px !important;
+  border: 1px solid rgba(0,0,0,.07) !important;
+  background: var(--white) !important;
+}
+
+/* ec-chip 生态标签 */
+.nw-ecosys .ec-chip {
+  border-radius: 999px !important;
+  border: 1px solid rgba(0,0,0,.09) !important;
+  background: var(--white) !important;
+}
+
+/* Nursery grid 植物卡片 */
+.ng-card {
+  border-radius: 14px !important;
+  border: 1px solid rgba(0,0,0,.07) !important;
+  background: var(--white) !important;
+  box-shadow: 0 1px 6px rgba(0,0,0,.04);
+}
+.ng-card:hover {
+  box-shadow: 0 10px 28px -10px rgba(0,0,0,.12);
+}
+
+/* Hero chip 浮动数据气泡 */
+.hero-chip {
+  border-radius: 14px !important;
+  border: 1px solid rgba(0,0,0,.07) !important;
+}
+
+/* Loop section slabs */
+.slab {
+  border-radius: 0;
+}
+.tide {
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.07);
+  box-shadow: 0 4px 24px rgba(0,0,0,.07);
+}
+
+/* Perov section 能源卡 */
+.perov-card,
+.perov-row,
+.hw-spec-row,
+.energy-card {
+  border-radius: 14px !important;
+}
+
+/* Data section 数据卡 */
+.gc-card,
+.data-card,
+.datasec-card {
+  border-radius: 20px !important;
+  border: 1px solid rgba(0,0,0,.07) !important;
+  box-shadow: 0 2px 16px rgba(0,0,0,.06) !important;
+}
+
+/* Offline Do/Don't 对照表 */
+.offline-card,
+.od-card,
+.off-card {
+  border-radius: 16px !important;
+  border: 1px solid rgba(0,0,0,.07) !important;
+}
+
+/* Pain stats 痛点数据区顶部线改为圆角容器感 */
+.pain-stats {
+  border-top: 1px solid rgba(0,0,0,.08);
+}
+
+/* showcase 大容器圆角保持，背景稍调 */
+.showcase-sticky {
+  border-radius: 24px;
+  background: #F4F4F2;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 8px 48px rgba(0,0,0,.08);
+}
+
+/* —— 4. Showcase callout chips 圆角升级 —— */
+.callout {
+  border-radius: 12px !important;
+}
+
+/* —— 5. 诊断 chip / 状态行 圆角升级 —— */
+.diag-chip {
+  border-radius: 10px !important;
+}
+
+/* —— 6. Perov 能源篇 光谱带 / 技术卡 —— */
+.tech-pill,
+.hw-badge {
+  border-radius: 999px !important;
+}
+
+/* —— 7. Loop section 整体背景 —— */
+.loopsec {
+  background: var(--white);
+}
+
+/* —— 8. Footer 顶部圆角（视觉收束）—— */
+.footer {
+  border-radius: 24px 24px 0 0;
+  margin-top: 0;
+}
+
+/* —— 9. 全局 section 间距微调（更多呼吸感）—— */
+.narrativesec { padding: var(--pad-section-narrative); }
+.productsec   { padding: clamp(72px,10vh,120px) var(--pad-x); }
+
+/* —— 10. Pain section 大数字区底部留白 —— */
+.pain-lede {
+  margin-bottom: clamp(24px,4vh,48px);
+}
+
+/* —— 11. Perov section hw-card（能源篇）—— */
+.hw-card {
+  border-radius: 20px !important;
+  border: 1px solid rgba(0,0,0,.07) !important;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  transition: transform .4s var(--ease), box-shadow .4s;
+}
+.hw-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -14px rgba(0,0,0,.12);
+}
+.hw-card.v1 { border-left: 3px solid var(--green) !important; border-top: 1px solid rgba(0,0,0,.07) !important; }
+.hw-card.v2 { border-left: 3px solid var(--amber) !important; border-top: 1px solid rgba(0,0,0,.07) !important; }
+
+/* hw-badge pill */
+.hw-badge {
+  border-radius: 999px !important;
+  padding: 4px 12px !important;
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+/* —— 12. Offline Do/Don't 对照表 —— */
+.vp {
+  border-radius: 16px !important;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.07) !important;
+  margin-bottom: 12px;
+  gap: 2px;
+}
+.vg { border-radius: 0 !important; }
+.vb { border-radius: 0 !important; }
+
+/* —— 13. Data section glass-card 升级 —— */
+.glass-card {
+  border-radius: 24px !important;
+  border: 1px solid rgba(0,0,0,.07) !important;
+  box-shadow: 0 4px 28px rgba(0,0,0,.08) !important;
+}
+.gc-cta {
+  border-radius: 999px !important;
+  margin-top: 18px;
+}
+.gc-mi {
+  border-radius: 10px !important;
+}
+
+/* —— 14. Perov vision 引用块 —— */
+.perov-vision {
+  border-left: none !important;
+  padding-left: 0 !important;
+  background: rgba(59,165,93,.06);
+  border: 1px solid rgba(59,165,93,.15) !important;
+  border-radius: 16px;
+  padding: 24px 28px !important;
+}
+
+/* —— 15. Loop section tide 格子 slabs —— */
+.tide {
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.07);
+  box-shadow: 0 4px 32px rgba(0,0,0,.08);
+}
+.slab {
+  border-right-color: rgba(0,0,0,.06);
+}
+
+/* —— 16. Spec rows 分隔线变浅 —— */
+.spec-r {
+  border-bottom-color: rgba(0,0,0,.05) !important;
+}
+
+/* —— mobile —— */
+@media (max-width: 480px) {
+  .footer { border-radius: 16px 16px 0 0; }
+  .tide { border-radius: 12px; }
+  .showcase-sticky { border-radius: 16px; }
+}
 </style>
 </head>
 <body>
