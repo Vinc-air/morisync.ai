@@ -2506,75 +2506,108 @@ section h2,
 .datasec-copy h2 { color: rgba(255,255,255,0.92) !important; }
 .datasec-lede { color: rgba(255,255,255,0.52) !important; }
 
-/* glass-card — dark frosted glass */
-.glass-card {
-  background: rgba(255,255,255,0.07) !important;
-  backdrop-filter: blur(28px) saturate(1.4) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(1.4) !important;
-  border: 1px solid rgba(255,255,255,0.11) !important;
-  border-radius: 24px !important;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.50), inset 0 1px 0 rgba(255,255,255,0.12) !important;
-}
+/* ===== New ds-dash multi-card component ===== */
 
-/* Ring chart */
+/* Shared dark glass base */
 .gc-track { stroke: rgba(255,255,255,0.10) !important; }
-.gc-prog  { stroke: #4CD964 !important; filter: drop-shadow(0 0 4px rgba(76,217,100,0.7)); }
-.gc-pct   { color: rgba(255,255,255,0.92) !important; }
-.gc-pct small { color: rgba(255,255,255,0.40) !important; }
+.gc-prog  { stroke: #4CD964 !important; filter: drop-shadow(0 0 5px rgba(76,217,100,0.75)); }
+.gc-pct   { color: rgba(255,255,255,0.92) !important; font-family: var(--font-mono); }
+.gc-pct small { color: rgba(255,255,255,0.38) !important; }
+.gc-name  { font-size: 17px !important; font-weight: 700 !important; color: rgba(255,255,255,0.92) !important; letter-spacing: -.02em !important; line-height: 1.2 !important; }
+.gc-status { color: #4CD964 !important; font-weight: 600 !important; font-size: 13px !important; margin: 6px 0 2px !important; }
+.gc-statusdot { background: #4CD964 !important; box-shadow: 0 0 8px rgba(76,217,100,0.70) !important; }
+.gc-loc   { font-size: 11px !important; color: rgba(255,255,255,0.38) !important; }
 
-/* Card text */
-.gc-name   { color: rgba(255,255,255,0.92) !important; }
-.gc-status { color: #4CD964 !important; font-weight: 600 !important; }
-.gc-statusdot {
-  background: #4CD964 !important;
-  box-shadow: 0 0 8px rgba(76,217,100,0.7) !important;
+/* Dashboard wrapper */
+.ds-dash {
+  width: 320px;
+  display: flex; flex-direction: column; gap: 10px;
 }
-.gc-loc    { color: rgba(255,255,255,0.42) !important; }
-.gc-divider { background: rgba(255,255,255,0.09) !important; }
 
-/* Metric icon tiles */
-.gc-mi {
-  width: 32px !important; height: 32px !important;
-  border-radius: 10px !important;
-  display: flex !important; align-items: center !important; justify-content: center !important;
-  font-size: 15px !important; line-height: 1 !important;
+/* Top row */
+.ds-top { display: flex; gap: 10px; }
+
+/* Ring tile — green-tinted glass */
+.ds-ring-tile {
+  flex: 0 0 128px; height: 142px;
+  background: linear-gradient(148deg, rgba(59,165,93,0.30) 0%, rgba(12,35,20,0.60) 100%);
+  border: 1px solid rgba(76,217,100,0.18);
+  border-radius: 20px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 5px;
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
 }
-.gc-mi-water { background: rgba(100,180,255,0.20) !important; }
-.gc-mi-water::after { content: '💧'; font-size: 13px; }
-.gc-mi-light { background: rgba(255,204,60,0.20) !important; }
-.gc-mi-light::after { content: '☀'; font-size: 13px; }
-.gc-mi-nut   { background: rgba(76,217,100,0.20) !important; }
-.gc-mi-nut::after { content: '🌿'; font-size: 12px; }
-.gc-mi-temp  { background: rgba(255,90,60,0.20) !important; }
-.gc-mi-temp::after { content: '🌡'; font-size: 13px; }
-
-/* Metric values */
-.gc-mv { color: rgba(255,255,255,0.88) !important; font-size: 18px !important; }
-.gc-mv small { color: rgba(255,255,255,0.38) !important; }
-.gc-mk { color: rgba(255,255,255,0.38) !important; }
-
-/* CTA button — pill */
-.gc-cta {
-  border-radius: 999px !important;
-  margin-top: 18px !important;
-  background: rgba(59,165,93,0.18) !important;
-  border: 1px solid rgba(76,217,100,0.28) !important;
-  color: #4CD964 !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.01em !important;
-  padding: 11px 20px !important;
+.ds-ring-tile .gc-ring { width: 90px; height: 90px; }
+.ds-health-label {
+  font-size: 8.5px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.36);
 }
-.gc-cta:hover { background: rgba(59,165,93,0.30) !important; }
 
-/* Float chips — dark glass */
+/* Plant info tile */
+.ds-plant-tile {
+  flex: 1; min-width: 0;
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 20px;
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+  padding: 16px 14px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.ds-sync-row {
+  display: flex; align-items: center; gap: 5px;
+  margin-top: 8px; font-size: 10px;
+  color: rgba(255,255,255,0.34);
+}
+
+/* Metric 2×2 grid */
+.ds-metrics-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.ds-mc-tile {
+  border-radius: 18px; border: 1px solid transparent;
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  padding: 14px 14px 12px;
+  display: flex; flex-direction: column; gap: 1px;
+}
+.mc-water { background: linear-gradient(148deg, rgba(77,166,255,0.22) 0%, rgba(15,45,80,0.30) 100%); border-color: rgba(77,166,255,0.16); }
+.mc-light { background: linear-gradient(148deg, rgba(255,204,60,0.22) 0%, rgba(80,55,10,0.30) 100%); border-color: rgba(255,204,60,0.16); }
+.mc-fert  { background: linear-gradient(148deg, rgba(76,217,100,0.22) 0%, rgba(10,50,22,0.30) 100%); border-color: rgba(76,217,100,0.16); }
+.mc-temp  { background: linear-gradient(148deg, rgba(255,85,60,0.22) 0%, rgba(80,18,8,0.30) 100%); border-color: rgba(255,85,60,0.16); }
+
+.ds-mc-ico  { font-size: 16px; margin-bottom: 5px; }
+.ds-mc-num  { font-family: var(--font-mono); font-size: 26px; font-weight: 800; color: rgba(255,255,255,0.92); letter-spacing: -0.02em; line-height: 1; }
+.ds-mc-num span { font-size: 11px; color: rgba(255,255,255,0.36); font-weight: 500; margin-left: 1px; }
+.ds-mc-num-sm { font-size: 19px; font-weight: 700; color: rgba(255,255,255,0.92); letter-spacing: -0.01em; line-height: 1; }
+.ds-mc-label { font-size: 9px; letter-spacing: 0.11em; text-transform: uppercase; color: rgba(255,255,255,0.36); margin-top: 5px; }
+.ds-mc-bar { height: 3px; background: rgba(255,255,255,0.10); border-radius: 2px; margin-top: 9px; overflow: hidden; }
+.ds-mc-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #4CD964, #8FF5A4); }
+.ds-mc-dots { display: flex; gap: 4px; margin-top: 9px; align-items: center; }
+.ds-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.13); flex-shrink: 0; }
+.ds-dot.on { background: #4CD964; box-shadow: 0 0 5px rgba(76,217,100,0.55); }
+
+/* CTA */
+.ds-cta {
+  display: flex; align-items: center; justify-content: center;
+  padding: 13px 20px; border-radius: 999px;
+  background: rgba(59,165,93,0.16);
+  border: 1px solid rgba(76,217,100,0.24);
+  color: #4CD964; font-size: 13px; font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  transition: background 0.2s;
+}
+.ds-cta:hover { background: rgba(59,165,93,0.28); }
+
+/* Float chip — dark glass */
 .float-chip {
-  background: rgba(15,28,18,0.82) !important;
+  background: rgba(12,24,16,0.84) !important;
   border: 1px solid rgba(255,255,255,0.11) !important;
-  color: rgba(255,255,255,0.80) !important;
+  color: rgba(255,255,255,0.78) !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.07) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06) !important;
 }
 
 /* —— 14. Perov vision 引用块 —— */
@@ -3267,32 +3300,62 @@ html[lang="en"] .nav-label {
       <p class="datasec-lede" data-i18n="data.lede">土壤湿度、光照强度、养分水平、环境温度，实时汇入档案。一眼便知，这株 Monstera 过得好不好。</p>
     </div>
     <div class="datasec-visual">
-      <div class="glass-card reveal" id="statusCard">
-        <div class="gc-head">
-          <div class="gc-ring" data-pct="92">
-            <svg viewBox="0 0 110 110">
-              <circle class="gc-track" cx="55" cy="55" r="46"/>
-              <circle class="gc-prog" cx="55" cy="55" r="46"/>
-            </svg>
-            <div class="gc-pct">92<small>%</small></div>
+      <div class="ds-dash reveal" id="statusCard">
+
+        <!-- Row 1: ring tile + plant info tile -->
+        <div class="ds-top">
+          <div class="ds-ring-tile">
+            <div class="gc-ring" data-pct="92">
+              <svg viewBox="0 0 110 110">
+                <circle class="gc-track" cx="55" cy="55" r="46"/>
+                <circle class="gc-prog" cx="55" cy="55" r="46"/>
+              </svg>
+              <div class="gc-pct">92<small>%</small></div>
+            </div>
+            <div class="ds-health-label" data-i18n="data.health">健康指数</div>
           </div>
-          <div class="gc-meta">
+          <div class="ds-plant-tile">
             <div class="gc-name">Monstera Deliciosa</div>
-            <div class="gc-status"><span class="gc-statusdot"></span>Thriving</div>
+            <div class="gc-status"><span class="gc-statusdot"></span><span data-i18n="data.gc.status">茁壮</span></div>
             <div class="gc-loc" data-i18n="data.gc.loc">客厅 · 窗边</div>
+            <div class="ds-sync-row"><span class="fcd green"></span><span data-i18n="data.synced">2分钟前同步</span></div>
           </div>
         </div>
-        <div class="gc-divider"></div>
-        <div class="gc-metrics">
-          <div class="gc-metric"><div class="gc-mi gc-mi-water"></div><div class="gc-mv">64<small>%</small></div><div class="gc-mk">Moisture</div></div>
-          <div class="gc-metric"><div class="gc-mi gc-mi-light"></div><div class="gc-mv">820<small>lx</small></div><div class="gc-mk">Light</div></div>
-          <div class="gc-metric"><div class="gc-mi gc-mi-nut"></div><div class="gc-mv">pH 6.4</div><div class="gc-mk">Nutrients</div></div>
-          <div class="gc-metric"><div class="gc-mi gc-mi-temp"></div><div class="gc-mv">23<small>°C</small></div><div class="gc-mk">Temp</div></div>
+
+        <!-- Row 2: 2×2 metric cards -->
+        <div class="ds-metrics-grid">
+          <div class="ds-mc-tile mc-water">
+            <span class="ds-mc-ico">💧</span>
+            <div class="ds-mc-num">64<span>%</span></div>
+            <div class="ds-mc-label" data-i18n="data.m.moisture">土壤湿度</div>
+            <div class="ds-mc-bar"><div class="ds-mc-fill" style="width:64%"></div></div>
+          </div>
+          <div class="ds-mc-tile mc-light">
+            <span class="ds-mc-ico">☀</span>
+            <div class="ds-mc-num">820<span>lx</span></div>
+            <div class="ds-mc-label" data-i18n="data.m.light">光照强度</div>
+          </div>
+          <div class="ds-mc-tile mc-fert">
+            <span class="ds-mc-ico">🌱</span>
+            <div class="ds-mc-num-sm" data-i18n="data.m.fert.val">优良</div>
+            <div class="ds-mc-label" data-i18n="data.m.fert">土壤肥力</div>
+            <div class="ds-mc-dots">
+              <span class="ds-dot on"></span><span class="ds-dot on"></span>
+              <span class="ds-dot on"></span><span class="ds-dot"></span><span class="ds-dot"></span>
+            </div>
+          </div>
+          <div class="ds-mc-tile mc-temp">
+            <span class="ds-mc-ico">🌡</span>
+            <div class="ds-mc-num">23<span>°C</span></div>
+            <div class="ds-mc-label" data-i18n="data.m.temp">环境温度</div>
+          </div>
         </div>
-        <div class="gc-cta" data-i18n="data.gc.cta">查看护理建议 →</div>
+
+        <!-- CTA -->
+        <div class="ds-cta" data-i18n="data.gc.cta">查看护理建议 →</div>
       </div>
-      <div class="float-chip fc1 reveal"><span class="fcd green"></span>Solar Charging · Active</div>
-      <div class="float-chip fc2 reveal"><span class="fcd green"></span>Synced 2 min ago</div>
+
+      <div class="float-chip fc1 reveal"><span class="fcd green"></span><span data-i18n="data.solar">Solar Charging · Active</span></div>
     </div>
   </div>
 </section>
@@ -3825,7 +3888,16 @@ const TRANSLATIONS = {
     'data.h2': '每一株，都有自己的一页。',
     'data.lede': '土壤湿度、光照强度、养分水平、环境温度，实时汇入档案。一眼便知，这株 Monstera 过得好不好。',
     'data.gc.loc': '客厅 · 窗边',
+    'data.gc.status': '茁壮',
     'data.gc.cta': '查看护理建议 →',
+    'data.health': '健康指数',
+    'data.synced': '2 分钟前同步',
+    'data.m.moisture': '土壤湿度',
+    'data.m.light': '光照强度',
+    'data.m.fert': '土壤肥力',
+    'data.m.fert.val': '优良',
+    'data.m.temp': '环境温度',
+    'data.solar': 'Solar Charging · Active',
     'loop.eyebrow': 'Closed Loop · 软硬联动',
     'loop.h2': '硬件感知，软件思考，<span class="hl">光语作答</span>。',
     'loop.desc': '同一根探针，先在土里读数，再让数据与思考在云端涌动；最终所有累积涌成一道光，回到它头顶——绿是安好，红是告急。',
@@ -4030,7 +4102,16 @@ const TRANSLATIONS = {
     'data.h2': 'Every plant has its own page.',
     'data.lede': 'Soil moisture, light intensity, nutrients, ambient temperature — all streaming into your plant\'s profile. One look tells you how your Monstera is doing.',
     'data.gc.loc': 'Living Room · By Window',
+    'data.gc.status': 'Thriving',
     'data.gc.cta': 'View Care Recommendations →',
+    'data.health': 'Health Score',
+    'data.synced': 'Synced 2 min ago',
+    'data.m.moisture': 'Soil Moisture',
+    'data.m.light': 'Light Intensity',
+    'data.m.fert': 'Fertility',
+    'data.m.fert.val': 'Good',
+    'data.m.temp': 'Temperature',
+    'data.solar': 'Solar Charging · Active',
     'loop.eyebrow': 'Closed Loop',
     'loop.h2': 'Probe senses. AI thinks. <span class="hl">Light answers.</span>',
     'loop.desc': 'The same probe reads the soil, sends data to the cloud where AI processes it, and the result comes back as a single ring of light — green means fine, red means urgent.',
