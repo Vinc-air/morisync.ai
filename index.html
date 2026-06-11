@@ -2443,6 +2443,19 @@ section h2,
   .tide { border-radius: 12px; }
   .showcase-sticky { border-radius: 16px; }
 }
+
+/* —— lang toggle —— */
+.lang-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 32px; padding: 0 14px;
+  font-size: 11px; font-weight: 600; letter-spacing: .08em;
+  color: var(--gray-1); background: transparent;
+  border: 1px solid rgba(0,0,0,.10); border-radius: 999px;
+  cursor: pointer; transition: all .2s;
+  margin-right: 8px;
+  font-family: var(--font-sans);
+}
+.lang-toggle:hover { background: rgba(0,0,0,.05); color: var(--black); border-color: rgba(0,0,0,.2); }
 </style>
 </head>
 <body>
@@ -2453,17 +2466,18 @@ section h2,
     <span class="brand-text">M<span class="wm-o-ui"></span>riSync</span>
   </a>
   <nav class="nav">
-    <a href="#pain">数据</a>
-    <a href="#product">硬件</a>
-    <a href="#energy">能源</a>
-    <a href="#lamp">光语</a>
-    <a href="#app">软件</a>
-    <a href="#loop">闭环</a>
-    <a href="#hardware">产品</a>
-    <a href="#nursery">植物幼儿园</a>
+    <a href="#pain" data-i18n="nav.data">数据</a>
+    <a href="#product" data-i18n="nav.hardware">硬件</a>
+    <a href="#energy" data-i18n="nav.energy">能源</a>
+    <a href="#lamp" data-i18n="nav.light">光语</a>
+    <a href="#app" data-i18n="nav.app">软件</a>
+    <a href="#loop" data-i18n="nav.loop">闭环</a>
+    <a href="#hardware" data-i18n="nav.products">产品</a>
+    <a href="#nursery" data-i18n="nav.nursery">植物幼儿园</a>
   </nav>
+  <button class="lang-toggle" id="langToggle" aria-label="Switch language">EN</button>
   <a href="#footer" class="topbar-cta">
-    预约 Demo<span class="topbar-cta-arrow">↗</span>
+    <span data-i18n="nav.cta">预约 Demo</span><span class="topbar-cta-arrow">↗</span>
   </a>
 </header>
 
@@ -2477,17 +2491,17 @@ section h2,
       <span class="hero-eyebrow-o"></span>
       <span>RISYNC · SMART PLANT PROBE</span>
     </div>
-    <h1 class="hero-h1-zh">翠影相生，四时同律</h1>
-    <p class="hero-tagline-en">Your plants, always in sync.</p>
-    <p class="hero-h1-en">AI 智能植物养护系统</p>
+    <h1 class="hero-h1-zh" data-i18n="hero.h1">翠影相生，四时同律</h1>
+    <p class="hero-tagline-en" data-i18n="hero.tagline">Your plants, always in sync.</p>
+    <p class="hero-h1-en" data-i18n="hero.h1en">AI 智能植物养护系统</p>
 
     <!-- 描述 lede -->
-    <p class="hero-lede">插入土壤，自动唤醒。湿度、肥力、光照、温度数据实时回传。顶部光语呼吸灯替植物开口说话，看一眼就知道。光伏供电，永久续航。</p>
+    <p class="hero-lede" data-i18n="hero.lede">插入土壤，自动唤醒。湿度、肥力、光照、温度数据实时回传。顶部光语呼吸灯替植物开口说话，看一眼就知道。光伏供电，永久续航。</p>
 
     <!-- CTA 两按钮:主 CTA 融资沟通,副 CTA KS 预约 -->
     <div class="hero-actions">
-      <a href="mailto:hello@morisync.com" class="btn-primary">联系融资</a>
-      <a href="#" class="btn-outline">预约演示</a>
+      <a href="mailto:hello@morisync.com" class="btn-primary" data-i18n="hero.cta1">联系融资</a>
+      <a href="#" class="btn-outline" data-i18n="hero.cta2">预约演示</a>
     </div>
   </div>
 
@@ -2509,49 +2523,49 @@ section h2,
   <div class="sec-num">01<span class="total">/10</span></div>
   <div class="pain-inner">
     <div class="sec-head reveal">
-      <span class="eyebrow">The Quiet Struggle · 一个无声的难题</span>
+      <span class="eyebrow" data-i18n="pain.eyebrow1">The Quiet Struggle · 一个无声的难题</span>
     </div>
-    <p class="pain-lede reveal d1">
+    <p class="pain-lede reveal d1" data-i18n="pain.lede1">
       一整代人把绿植当孩子来养，<span>却总在无意间养不好它们。</span>
     </p>
     <div class="pain-stats">
       <div class="pain-stat reveal d1">
         <div class="big-num">70<span class="unit">%</span></div>
-        <p class="label">的千禧一代与 Z 世代自称<b>「植物父母」</b> — 养绿植已成这一代的生活方式。</p>
+        <p class="label" data-i18n="pain.stat1.label">的千禧一代与 Z 世代自称<b>「植物父母」</b> — 养绿植已成这一代的生活方式。</p>
       </div>
       <div class="pain-stat reveal d2">
         <div class="big-num accent">66<span class="unit">%</span></div>
-        <p class="label">却坦言自己是<b>「植物杀手」</b>。爱是真心的，只是不知道怎么读懂它。</p>
+        <p class="label" data-i18n="pain.stat2.label">却坦言自己是<b>「植物杀手」</b>。爱是真心的，只是不知道怎么读懂它。</p>
       </div>
       <div class="pain-stat reveal d3">
-        <div class="big-num">7<span class="unit">盆</span></div>
-        <p class="label">是每人<b>平均养丢的盆数</b>。不知何时该浇、浇多少；盆越多，越顾不过来。</p>
+        <div class="big-num">7<span class="unit" data-i18n="pain.stat3.unit">盆</span></div>
+        <p class="label" data-i18n="pain.stat3.label">是每人<b>平均养丢的盆数</b>。不知何时该浇、浇多少；盆越多，越顾不过来。</p>
       </div>
     </div>
-    <p class="pain-source reveal">Source · Statista 全美园艺消费者调研</p>
+    <p class="pain-source reveal" data-i18n="pain.source1">Source · Statista 全美园艺消费者调研</p>
 
     <!-- 市场机会小节 — 复用 painsec 现有 class，不新增 CSS -->
     <div class="sec-head reveal" style="margin-top:3.5rem">
-      <span class="eyebrow">The Opportunity · 市场机会</span>
+      <span class="eyebrow" data-i18n="pain.eyebrow2">The Opportunity · 市场机会</span>
     </div>
-    <p class="pain-lede reveal d1">
+    <p class="pain-lede reveal d1" data-i18n="pain.lede2">
       养不好，从来不是小众烦恼 ——<span> 这是一个 7205 万家庭、$18 亿规模的市场。</span>
     </p>
     <div class="pain-stats">
       <div class="pain-stat reveal d1">
-        <div class="big-num">7205<span class="unit">万</span></div>
-        <p class="label">美国园艺家庭 · 潜在用户基数（全美 1.31 亿户 × 55% 园艺渗透）</p>
+        <div class="big-num">7205<span class="unit" data-i18n="pain.stat4.unit">万</span></div>
+        <p class="label" data-i18n="pain.stat4.label">美国园艺家庭 · 潜在用户基数（全美 1.31 亿户 × 55% 园艺渗透）</p>
       </div>
       <div class="pain-stat reveal d2">
         <div class="big-num accent">$18<span class="unit">亿</span></div>
-        <p class="label">室内植物探针的市场天花板（TAM 理论营收）</p>
+        <p class="label" data-i18n="pain.stat5.label">室内植物探针的市场天花板（TAM 理论营收）</p>
       </div>
       <div class="pain-stat reveal d3">
         <div class="big-num">$6.15<span class="unit">亿</span></div>
-        <p class="label">锁定千禧一代室内植物父母 · 可服务人群（SAM）</p>
+        <p class="label" data-i18n="pain.stat6.label">锁定千禧一代室内植物父母 · 可服务人群（SAM）</p>
       </div>
     </div>
-    <p class="pain-source reveal">Source · US Census Bureau、Statista，MoriSync 测算</p>
+    <p class="pain-source reveal" data-i18n="pain.source2">Source · US Census Bureau、Statista，MoriSync 测算</p>
   </div>
 </section>
 
@@ -2562,7 +2576,7 @@ section h2,
     <!-- 顶部 eyebrow -->
     <div class="showcase-eyebrow">
       <div class="sec-num">02<span class="total">/10</span></div>
-      <span class="eyebrow">The Hardware · 硬件</span>
+      <span class="eyebrow" data-i18n="hw.eyebrow">The Hardware · 硬件</span>
     </div>
 
     <!-- 中部 hero:产品图 + 4 callouts(PROBE 巨字已删,产品独占焦点) -->
@@ -2592,27 +2606,27 @@ section h2,
 
       <div class="callout c1" data-step="0">
         <span class="co-dot"></span><div class="co-line"></div>
-        <div class="co-text"><h4>100% PCR 再生铝</h4><p>Glass micro-bead 喷砂，触手温润如石</p></div>
+        <div class="co-text"><h4 data-i18n="hw.c1.title">100% PCR 再生铝</h4><p data-i18n="hw.c1.desc">Glass micro-bead 喷砂，触手温润如石</p></div>
       </div>
       <div class="callout c2" data-step="1">
         <span class="co-dot"></span><div class="co-line"></div>
-        <div class="co-text"><h4>室内光伏供能</h4><p>顶部圆盘把光变成电<br>永不充电</p></div>
+        <div class="co-text"><h4 data-i18n="hw.c2.title">室内光伏供能</h4><p data-i18n="hw.c2.desc">顶部圆盘把光变成电<br>永不充电</p></div>
       </div>
       <div class="callout c3" data-step="2">
         <span class="co-dot"></span><div class="co-line"></div>
-        <div class="co-text"><h4>光语呼吸灯</h4><p>绿色正常 · 黄色提醒 · 红色告急<br>看一眼就懂，无需开机</p></div>
+        <div class="co-text"><h4 data-i18n="hw.c3.title">光语呼吸灯</h4><p data-i18n="hw.c3.desc">绿色正常 · 黄色提醒 · 红色告急<br>看一眼就懂，无需开机</p></div>
       </div>
       <div class="callout c4" data-step="3">
         <span class="co-dot"></span><div class="co-line"></div>
-        <div class="co-text"><h4>抗腐蚀电容探针</h4><p>双叉电容传感<br>土壤湿度与肥力如实回传</p></div>
+        <div class="co-text"><h4 data-i18n="hw.c4.title">抗腐蚀电容探针</h4><p data-i18n="hw.c4.desc">双叉电容传感<br>土壤湿度与肥力如实回传</p></div>
       </div>
     </div>
 
     <!-- 底部副标题 -->
     <div class="showcase-foot">
       <div>
-        <h3>一支探针，处处用心。</h3>
-        <p>从铝合金外壳到电容传感,每个细节都按工业精度打磨。</p>
+        <h3 data-i18n="hw.foot.title">一支探针，处处用心。</h3>
+        <p data-i18n="hw.foot.desc">从铝合金外壳到电容传感,每个细节都按工业精度打磨。</p>
       </div>
     </div>
 
@@ -2626,9 +2640,9 @@ section h2,
     <div class="lampsec-head reveal">
       <div class="sec-num">03<span class="total">/10</span></div>
       <div class="s-anchor" data-en="Light Language">光语</div>
-      <span class="eyebrow">Ambient Light · 光语交互</span>
-      <h2>不必开机。光，会先告诉你。</h2>
-      <p class="lamp-lede">最好的提醒，是不用掏手机就知道。顶部呼吸灯用颜色与节奏说话，走过它身边那一眼，状态了然于心。</p>
+      <span class="eyebrow" data-i18n="lamp.eyebrow">Ambient Light · 光语交互</span>
+      <h2 data-i18n="lamp.h2">不必开机。光，会先告诉你。</h2>
+      <p class="lamp-lede" data-i18n="lamp.lede">最好的提醒，是不用掏手机就知道。顶部呼吸灯用颜色与节奏说话，走过它身边那一眼，状态了然于心。</p>
     </div>
 
     <div class="lamp-stage">
@@ -2646,8 +2660,8 @@ section h2,
         <div class="lamp-state active" data-state="thrive">
           <span class="ls-swatch thrive"></span>
           <div class="ls-body">
-            <h4>茁壮 · Thriving <span class="rhythm">绿 · 4s</span></h4>
-            <p>土壤水分充足，植物健康。绿意缓缓呼吸，无需打扰。</p>
+            <h4 data-i18n="lamp.s1.title">茁壮 · Thriving <span class="rhythm">绿 · 4s</span></h4>
+            <p data-i18n="lamp.s1.desc">土壤水分充足，植物健康。绿意缓缓呼吸，无需打扰。</p>
             <div class="lamp-spec">#3BA55D · Slow pulse · 4s</div>
           </div>
         </div>
@@ -2655,8 +2669,8 @@ section h2,
         <div class="lamp-state" data-state="remind">
           <span class="ls-swatch remind"></span>
           <div class="ls-body">
-            <h4>提醒 · Reminder <span class="rhythm">黄 · 2.5s</span></h4>
-            <p>水分或养分开始走低，宜留意。黄环从容起伏，提醒而不催促。</p>
+            <h4 data-i18n="lamp.s2.title">提醒 · Reminder <span class="rhythm">黄 · 2.5s</span></h4>
+            <p data-i18n="lamp.s2.desc">水分或养分开始走低，宜留意。黄环从容起伏，提醒而不催促。</p>
             <div class="lamp-spec">#EF9F27 · Medium pulse · 2.5s</div>
           </div>
         </div>
@@ -2664,8 +2678,8 @@ section h2,
         <div class="lamp-state" data-state="feed">
           <span class="ls-swatch feed"></span>
           <div class="ls-body">
-            <h4>告急 · Needs Water <span class="rhythm">红 · 1.5s</span></h4>
-            <p>土壤极干，需立刻浇水。节奏骤然加快，请尽快处理。</p>
+            <h4 data-i18n="lamp.s3.title">告急 · Needs Water <span class="rhythm">红 · 1.5s</span></h4>
+            <p data-i18n="lamp.s3.desc">土壤极干，需立刻浇水。节奏骤然加快，请尽快处理。</p>
             <div class="lamp-spec">#E24B4A · Fast pulse · 1.5s</div>
           </div>
         </div>
@@ -2673,15 +2687,15 @@ section h2,
         <div class="lamp-state" data-state="offline">
           <span class="ls-swatch offline"></span>
           <div class="ls-body">
-            <h4>离线 · Offline <span class="rhythm">灰 · 静态</span></h4>
-            <p>设备关闭 / 充电中 / 信号失联。灰环静止，等待重连。</p>
+            <h4 data-i18n="lamp.s4.title">离线 · Offline <span class="rhythm">灰 · 静态</span></h4>
+            <p data-i18n="lamp.s4.desc">设备关闭 / 充电中 / 信号失联。灰环静止，等待重连。</p>
             <div class="lamp-spec">#D8D7D2 · No animation · Offline</div>
           </div>
         </div>
       </div>
     </div>
 
-    <p class="lamp-foot reveal">颜色即语言，节奏即语气。这，就是光语。</p>
+    <p class="lamp-foot reveal" data-i18n="lamp.foot">颜色即语言，节奏即语气。这，就是光语。</p>
   </div>
 </section>
 
@@ -2691,9 +2705,9 @@ section h2,
     <div class="perov-head reveal">
       <div class="sec-num">04<span class="total">/10</span></div>
       <div class="s-anchor" data-en="Perovskite">钙钛矿</div>
-      <span class="perov-kicker"><span class="pk-dot"></span>Energy Core · Next-Gen</span>
-      <h2>让一支探针，从光里取电。</h2>
-      <p class="perov-lede">
+      <span class="perov-kicker" data-i18n="energy.eyebrow"><span class="pk-dot"></span>Energy Core · Next-Gen</span>
+      <h2 data-i18n="energy.h2">让一支探针，从光里取电。</h2>
+      <p class="perov-lede" data-i18n="energy.lede">
         探针摆脱换电池，取决于一件事：把<b>室内那点漫反射光</b>，尽可能多地变成电。效率天花板最高的材料，正是<b>钙钛矿。</b>
       </p>
     </div>
@@ -2703,38 +2717,38 @@ section h2,
       <div class="hw-card v1">
         <div class="hw-spectrum"></div>
         <div class="hw-top">
-          <span class="hw-badge">MVP 实装</span>
-          <div class="hw-name">V1 · DSSC / OPV</div>
-          <p class="hw-desc">当前量产方案。染料敏化 / 有机光伏，室内光已可驱动低功耗 IoT。</p>
+          <span class="hw-badge" data-i18n="energy.v1.badge">MVP 实装</span>
+          <div class="hw-name" data-i18n="energy.v1.name">V1 · DSSC / OPV</div>
+          <p class="hw-desc" data-i18n="energy.v1.desc">当前量产方案。染料敏化 / 有机光伏，室内光已可驱动低功耗 IoT。</p>
         </div>
         <div class="hw-specs">
-          <div class="spec-r"><span class="sk">材料体系</span><span class="sv">DSSC / OPV</span></div>
-          <div class="spec-r"><span class="sk">状态</span><span class="sv">MVP 实装</span></div>
-          <div class="spec-r"><span class="sk">功率密度</span><span class="sv">约 30–50 μW/cm² @ 200 lux</span></div>
-          <div class="spec-r"><span class="sk">理论上限</span><span class="sv">14–15% PCE</span></div>
-          <div class="spec-r"><span class="sk">室内适配</span><span class="sv">LED / 荧光灯光谱</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="energy.v1.s1k">材料体系</span><span class="sv" data-i18n="energy.v1.s1v">DSSC / OPV</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="energy.v1.s2k">状态</span><span class="sv" data-i18n="energy.v1.s2v">MVP 实装</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="energy.v1.s3k">功率密度</span><span class="sv" data-i18n="energy.v1.s3v">约 30–50 μW/cm² @ 200 lux</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="energy.v1.s4k">理论上限</span><span class="sv" data-i18n="energy.v1.s4v">14–15% PCE</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="energy.v1.s5k">室内适配</span><span class="sv" data-i18n="energy.v1.s5v">LED / 荧光灯光谱</span></div>
         </div>
       </div>
 
       <div class="hw-card v2">
         <div class="hw-spectrum"></div>
         <div class="hw-top">
-          <span class="hw-badge">调研中</span>
-          <div class="hw-name">V2 · 钙钛矿 Perovskite</div>
-          <p class="hw-desc">行业前沿的候选材料。据公开研究，带隙可调、室内效率有望数倍于硅基。</p>
+          <span class="hw-badge" data-i18n="energy.v2.badge">调研中</span>
+          <div class="hw-name" data-i18n="energy.v2.name">V2 · 钙钛矿 Perovskite</div>
+          <p class="hw-desc" data-i18n="energy.v2.desc">行业前沿的候选材料。据公开研究，带隙可调、室内效率有望数倍于硅基。</p>
         </div>
         <div class="hw-specs">
-          <div class="spec-r"><span class="sk">材料体系</span><span class="sv">Perovskite</span></div>
-          <div class="spec-r"><span class="sk">状态</span><span class="sv">行业前沿 · 调研中</span></div>
-          <div class="spec-r"><span class="sk">功率密度</span><span class="sv">&gt;100 μW/cm² @ 200 lux</span></div>
-          <div class="spec-r"><span class="sk">理论上限</span><span class="sv">&gt;30% PCE</span></div>
-          <div class="spec-r"><span class="sk">优势</span><span class="sv">室内效率 3× 硅基</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="energy.v2.s1k">材料体系</span><span class="sv" data-i18n="energy.v2.s1v">Perovskite</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="energy.v2.s2k">状态</span><span class="sv" data-i18n="energy.v2.s2v">行业前沿 · 调研中</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="energy.v2.s3k">功率密度</span><span class="sv" data-i18n="energy.v2.s3v">&gt;100 μW/cm² @ 200 lux</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="energy.v2.s4k">理论上限</span><span class="sv" data-i18n="energy.v2.s4v">&gt;30% PCE</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="energy.v2.s5k">优势</span><span class="sv" data-i18n="energy.v2.s5v">室内效率 3× 硅基</span></div>
         </div>
       </div>
     </div>
 
     <!-- 段末视野宣言:M(o)riSync 植入 o 环 -->
-    <div class="perov-vision reveal d2">
+    <div class="perov-vision reveal d2" data-i18n="energy.vision">
       钙钛矿室内光伏仍处行业前沿研究阶段。当前量产采用 V1 方案；钙钛矿作为远期方向，M<span class="wm-o-sm"></span>riSync 正持续调研其应用可能。
       <span class="vision-source">Source · 钙钛矿室内光伏公开研究综述 · 2026</span>
     </div>
@@ -2747,42 +2761,42 @@ section h2,
     <div class="reveal">
       <div class="sec-num">05<span class="total">/10</span></div>
       <div class="s-anchor" data-en="Offline First">离线本地</div>
-      <span class="eyebrow">Offline First · 数据归你</span>
-      <h2>数据归你，不归云。</h2>
-      <p class="offlinesec-lede">探针失联也不丢数据。本地优先的架构让你的植物档案永远可读，无订阅负担，生态开放。</p>
+      <span class="eyebrow" data-i18n="offline.eyebrow">Offline First · 数据归你</span>
+      <h2 data-i18n="offline.h2">数据归你，不归云。</h2>
+      <p class="offlinesec-lede" data-i18n="offline.lede">探针失联也不丢数据。本地优先的架构让你的植物档案永远可读，无订阅负担，生态开放。</p>
     </div>
 
     <div class="vp-stack reveal d1">
       <div class="vp">
         <div class="vg">
-          <div class="vl">&#x2713; M<span class="wm-o-sm"></span>riSync 离线本地</div>
-          <div class="vq">探针失联 48 小时，本地缓存照常告警，Wi-Fi 一恢复同步全数据</div>
+          <div class="vl" data-i18n="offline.vp1.gl">&#x2713; M<span class="wm-o-sm"></span>riSync 离线本地</div>
+          <div class="vq" data-i18n="offline.vp1.gq">探针失联 48 小时，本地缓存照常告警，Wi-Fi 一恢复同步全数据</div>
         </div>
         <div class="vb">
-          <div class="vl">&#x2717; 云端依赖</div>
-          <div class="vq">云端服务器宕机，所有用户植物数据集体失语</div>
+          <div class="vl" data-i18n="offline.vp1.bl">&#x2717; 云端依赖</div>
+          <div class="vq" data-i18n="offline.vp1.bq">云端服务器宕机，所有用户植物数据集体失语</div>
         </div>
       </div>
 
       <div class="vp">
         <div class="vg">
-          <div class="vl">&#x2713; 无订阅 · 买断使用</div>
-          <div class="vq">买回家用三年，服务器关了也能用，数据完整保留在本地</div>
+          <div class="vl" data-i18n="offline.vp2.gl">&#x2713; 无订阅 · 买断使用</div>
+          <div class="vq" data-i18n="offline.vp2.gq">买回家用三年，服务器关了也能用，数据完整保留在本地</div>
         </div>
         <div class="vb">
-          <div class="vl">&#x2717; 订阅绑定</div>
-          <div class="vq">订阅到期，设备变废铁，数据本地不可读</div>
+          <div class="vl" data-i18n="offline.vp2.bl">&#x2717; 订阅绑定</div>
+          <div class="vq" data-i18n="offline.vp2.bq">订阅到期，设备变废铁，数据本地不可读</div>
         </div>
       </div>
 
       <div class="vp">
         <div class="vg">
-          <div class="vl">&#x2713; Matter 直连</div>
-          <div class="vq">Matter 直连 Apple / Google / Amazon / Samsung 智能家居系统，无需走云端中介，本地协议保障</div>
+          <div class="vl" data-i18n="offline.vp3.gl">&#x2713; Matter 直连</div>
+          <div class="vq" data-i18n="offline.vp3.gq">Matter 直连 Apple / Google / Amazon / Samsung 智能家居系统，无需走云端中介，本地协议保障</div>
         </div>
         <div class="vb">
-          <div class="vl">&#x2717; 专属生态孤岛</div>
-          <div class="vq">专属 App + 专属云，换设备数据迁移困难，生态锁定</div>
+          <div class="vl" data-i18n="offline.vp3.bl">&#x2717; 专属生态孤岛</div>
+          <div class="vq" data-i18n="offline.vp3.bq">专属 App + 专属云，换设备数据迁移困难，生态锁定</div>
         </div>
       </div>
     </div>
@@ -2794,16 +2808,16 @@ section h2,
   <div class="appsec-inner">
     <div class="reveal">
       <div class="sec-num">06<span class="total">/10</span></div>
-      <span class="eyebrow">The App · 软件</span>
-      <h2>看得见的，不止一盏灯。</h2>
-      <p class="appsec-lede">光语给你即时的安心，App 给你完整的全貌。从一次扫描，到一整段生长。</p>
+      <span class="eyebrow" data-i18n="app.eyebrow">The App · 软件</span>
+      <h2 data-i18n="app.h2">看得见的，不止一盏灯。</h2>
+      <p class="appsec-lede" data-i18n="app.lede">光语给你即时的安心，App 给你完整的全貌。从一次扫描，到一整段生长。</p>
     </div>
 
     <div class="app-flow">
       <div class="app-card reveal d1">
         <div class="ac-step">STEP 01</div>
-        <h4>扫一扫，即识别</h4>
-        <p>对准叶片轻轻一扫，AI 认出种类，再把探针添加进来 — 分步引导，一次完成。</p>
+        <h4 data-i18n="app.step1.title">扫一扫，即识别</h4>
+        <p data-i18n="app.step1.desc">对准叶片轻轻一扫，AI 认出种类，再把探针添加进来 — 分步引导，一次完成。</p>
         <div class="ac-visual">
           <div class="scan-frame">
             <div class="scan-bracket"></div>
@@ -2811,36 +2825,36 @@ section h2,
             <div class="scan-line"></div>
           </div>
         </div>
-        <a class="ac-btn" href="#app">了解更多 <span class="ac-btn-arrow">→</span></a>
+        <a class="ac-btn" href="#app" data-i18n="app.learnmore">了解更多 <span class="ac-btn-arrow">→</span></a>
       </div>
 
       <div class="app-card featured reveal d2">
         <div class="ac-step">STEP 02</div>
-        <h4>状态，一目了然</h4>
-        <p>缺水、缺肥、病害，一一指认，写成你看得懂的话。</p>
+        <h4 data-i18n="app.step2.title">状态，一目了然</h4>
+        <p data-i18n="app.step2.desc">缺水、缺肥、病害，一一指认，写成你看得懂的话。</p>
         <div class="ac-visual">
           <div class="diag-chips">
-            <div class="diag-chip"><span class="dc-dot ok"></span>种类已识别 · Monstera<span class="dc-tag">100%</span></div>
-            <div class="diag-chip"><span class="dc-dot warn"></span>土壤偏干 · 建议浇水<span class="dc-tag">今天</span></div>
-            <div class="diag-chip"><span class="dc-dot ok"></span>叶片健康 · 无病害<span class="dc-tag">正常</span></div>
+            <div class="diag-chip"><span class="dc-dot ok"></span><span data-i18n="app.diag1">种类已识别 · Monstera</span><span class="dc-tag">100%</span></div>
+            <div class="diag-chip"><span class="dc-dot warn"></span><span data-i18n="app.diag2">土壤偏干 · 建议浇水</span><span class="dc-tag">今天</span></div>
+            <div class="diag-chip"><span class="dc-dot ok"></span><span data-i18n="app.diag3">叶片健康 · 无病害</span><span class="dc-tag">正常</span></div>
           </div>
         </div>
-        <a class="ac-btn" href="#app">了解更多 <span class="ac-btn-arrow">→</span></a>
+        <a class="ac-btn" href="#app" data-i18n="app.learnmore">了解更多 <span class="ac-btn-arrow">→</span></a>
       </div>
 
       <div class="app-card reveal d3">
         <div class="ac-step">STEP 03</div>
-        <h4>陪它，走过每一程</h4>
-        <p>成长、开花、结果，每一个阶段都被记录成册。回头看，是你与它一起走过的时光。</p>
+        <h4 data-i18n="app.step3.title">陪它，走过每一程</h4>
+        <p data-i18n="app.step3.desc">成长、开花、结果，每一个阶段都被记录成册。回头看，是你与它一起走过的时光。</p>
         <div class="ac-visual">
           <div class="grow-track">
             <div class="grow-connector"></div>
-            <div class="grow-stage s1"><span class="gs-dot"></span><span class="gs-name">成长</span></div>
-            <div class="grow-stage s2 now"><span class="gs-dot"></span><span class="gs-name">开花</span></div>
-            <div class="grow-stage s3"><span class="gs-dot"></span><span class="gs-name">结果</span></div>
+            <div class="grow-stage s1"><span class="gs-dot"></span><span class="gs-name" data-i18n="app.grow1">成长</span></div>
+            <div class="grow-stage s2 now"><span class="gs-dot"></span><span class="gs-name" data-i18n="app.grow2">开花</span></div>
+            <div class="grow-stage s3"><span class="gs-dot"></span><span class="gs-name" data-i18n="app.grow3">结果</span></div>
           </div>
         </div>
-        <a class="ac-btn" href="#app">了解更多 <span class="ac-btn-arrow">→</span></a>
+        <a class="ac-btn" href="#app" data-i18n="app.learnmore">了解更多 <span class="ac-btn-arrow">→</span></a>
       </div>
     </div>
   </div>
@@ -2851,9 +2865,9 @@ section h2,
   <div class="datasec-inner">
     <div class="datasec-copy reveal">
       <div class="sec-num">07<span class="total">/10</span></div>
-      <span class="eyebrow">Live Data · 实时数据</span>
-      <h2>每一株，都有自己的一页。</h2>
-      <p class="datasec-lede">土壤湿度、光照强度、养分水平、环境温度，实时汇入档案。一眼便知，这株 Monstera 过得好不好。</p>
+      <span class="eyebrow" data-i18n="data.eyebrow">Live Data · 实时数据</span>
+      <h2 data-i18n="data.h2">每一株，都有自己的一页。</h2>
+      <p class="datasec-lede" data-i18n="data.lede">土壤湿度、光照强度、养分水平、环境温度，实时汇入档案。一眼便知，这株 Monstera 过得好不好。</p>
     </div>
     <div class="datasec-visual">
       <div class="glass-card reveal" id="statusCard">
@@ -2868,7 +2882,7 @@ section h2,
           <div class="gc-meta">
             <div class="gc-name">Monstera Deliciosa</div>
             <div class="gc-status"><span class="gc-statusdot"></span>Thriving</div>
-            <div class="gc-loc">客厅 · 窗边</div>
+            <div class="gc-loc" data-i18n="data.gc.loc">客厅 · 窗边</div>
           </div>
         </div>
         <div class="gc-divider"></div>
@@ -2878,7 +2892,7 @@ section h2,
           <div class="gc-metric"><div class="gc-mi gc-mi-nut"></div><div class="gc-mv">pH 6.4</div><div class="gc-mk">Nutrients</div></div>
           <div class="gc-metric"><div class="gc-mi gc-mi-temp"></div><div class="gc-mv">23<small>°C</small></div><div class="gc-mk">Temp</div></div>
         </div>
-        <div class="gc-cta">查看护理建议 &rarr;</div>
+        <div class="gc-cta" data-i18n="data.gc.cta">查看护理建议 →</div>
       </div>
       <div class="float-chip fc1 reveal"><span class="fcd green"></span>Solar Charging · Active</div>
       <div class="float-chip fc2 reveal"><span class="fcd green"></span>Synced 2 min ago</div>
@@ -2892,30 +2906,30 @@ section h2,
 
     <div class="loop-head reveal">
       <div class="sec-num">08<span class="total">/10</span></div>
-      <span class="eyebrow">Closed Loop · 软硬联动</span>
-      <h2>硬件感知，软件思考，<span class="hl">光语作答</span>。</h2>
-      <p>同一根探针，先在土里读数，再让数据与思考在云端涌动；最终所有累积涌成一道光，回到它头顶——绿是安好，红是告急。</p>
+      <span class="eyebrow" data-i18n="loop.eyebrow">Closed Loop · 软硬联动</span>
+      <h2 data-i18n="loop.h2">硬件感知，软件思考，<span class="hl">光语作答</span>。</h2>
+      <p data-i18n="loop.desc">同一根探针，先在土里读数，再让数据与思考在云端涌动；最终所有累积涌成一道光，回到它头顶——绿是安好，红是告急。</p>
     </div>
 
     <div class="tide" id="tide">
 
       <!-- 01 感知 · 真实探针(入土的输入端) -->
       <div class="slab s1">
-        <span class="s-no">01 / 感知</span>
+        <span class="s-no" data-i18n="loop.s1.no">01 / 感知</span>
         <div class="s-figure">
           <picture>
             <source srcset="assets/probe-head@2x.webp" type="image/webp">
             <img class="s-shot" src="assets/probe-head@2x.png" alt="MoriSync 探针头部俯视,太阳能采集面与呼吸环" loading="eager" width="54" height="54">
           </picture>
         </div>
-        <h4>探针感知</h4>
-        <p>双叉入土，自动唤醒，土壤被持续读取。</p>
-        <div class="s-read"><span class="rv">42<span class="u">%</span></span><span class="rk">湿度</span></div>
+        <h4 data-i18n="loop.s1.title">探针感知</h4>
+        <p data-i18n="loop.s1.desc">双叉入土，自动唤醒，土壤被持续读取。</p>
+        <div class="s-read"><span class="rv">42<span class="u">%</span></span><span class="rk" data-i18n="loop.s1.rk">湿度</span></div>
       </div>
 
       <!-- 02 回传 · 数据态:信号上行 -->
       <div class="slab s2">
-        <span class="s-no">02 / 回传</span>
+        <span class="s-no" data-i18n="loop.s2.no">02 / 回传</span>
         <div class="s-figure">
           <picture>
             <source srcset="assets/probe-panel@2x.webp" type="image/webp">
@@ -2923,14 +2937,14 @@ section h2,
           </picture>
           <span class="viz-up" aria-hidden="true"></span>
         </div>
-        <h4>数据回传</h4>
-        <p>湿度、光照、肥力，离线缓存或上云。</p>
-        <div class="s-read"><span class="rv">3<span class="u">维</span></span><span class="rk">维度</span></div>
+        <h4 data-i18n="loop.s2.title">数据回传</h4>
+        <p data-i18n="loop.s2.desc">湿度、光照、肥力，离线缓存或上云。</p>
+        <div class="s-read"><span class="rv">3<span class="u">维</span></span><span class="rk" data-i18n="loop.s2.rk">维度</span></div>
       </div>
 
       <!-- 03 思考 · 数据态:AI 收敛 -->
       <div class="slab s3">
-        <span class="s-no">03 / 思考</span>
+        <span class="s-no" data-i18n="loop.s3.no">03 / 思考</span>
         <div class="s-figure">
           <picture>
             <source srcset="assets/probe-ring@2x.webp" type="image/webp">
@@ -2938,15 +2952,15 @@ section h2,
           </picture>
           <span class="viz-think" aria-hidden="true"></span>
         </div>
-        <h4>AI 解读</h4>
-        <p>按物种与近况，多源收束为专属方案。</p>
-        <div class="s-read"><span class="rv">98<span class="u">%</span></span><span class="rk">置信</span></div>
+        <h4 data-i18n="loop.s3.title">AI 解读</h4>
+        <p data-i18n="loop.s3.desc">按物种与近况，多源收束为专属方案。</p>
+        <div class="s-read"><span class="rv">98<span class="u">%</span></span><span class="rk" data-i18n="loop.s3.rk">置信</span></div>
       </div>
 
       <!-- 04 作答 · 涌浪(加宽)· 真实探针发光 -->
       <div class="surge">
-        <span class="ch-tag">Light Speaks · 光语</span>
-        <span class="ch-no">04 / 作答</span>
+        <span class="ch-tag" data-i18n="loop.surge.tag">Light Speaks · 光语</span>
+        <span class="ch-no" data-i18n="loop.s4.no">04 / 作答</span>
         <div class="surge-row">
           <div class="probe-stage">
             <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
@@ -2957,16 +2971,16 @@ section h2,
             </picture>
           </div>
           <div class="surge-copy">
-            <span class="s-no">04 / 作答</span>
-            <h3>光语作答</h3>
-            <p>所有读数与思考，最终回到探针头顶那圈光。无需打开 App，一眼即知。</p>
+            <span class="s-no" data-i18n="loop.s4.no">04 / 作答</span>
+            <h3 data-i18n="loop.s4.title">光语作答</h3>
+            <p data-i18n="loop.s4.desc">所有读数与思考，最终回到探针头顶那圈光。无需打开 App，一眼即知。</p>
             <div class="light-state">
               <span class="dot"></span>
               <span class="ls-txt"><span class="ls-state">一切安好</span><span class="ls-sub">SIGNAL · STABLE</span></span>
             </div>
             <div class="ch-return">
               <svg viewBox="0 0 24 24" fill="none"><path d="M9 5 L4 10 L9 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 10 H15 a5 5 0 0 1 5 5 v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              闭环 · 回到硬件本身
+              <span data-i18n="loop.s4.return">闭环 · 回到硬件本身</span>
             </div>
           </div>
         </div>
@@ -3005,8 +3019,8 @@ section h2,
     </div>
 
     <div class="loop-foot reveal">
-      <span class="lf-cap">The Closed Loop</span>
-      <span class="lf-eq"><b>感知</b><span class="ar">&rarr;</span><b>回传</b><span class="ar">&rarr;</span><b>思考</b><span class="ar">&rarr;</span><b>作答</b><span class="ar">&rarr;</span><span class="back">又回到硬件</span></span>
+      <span class="lf-cap" data-i18n="loop.foot.cap">The Closed Loop</span>
+      <span class="lf-eq" data-i18n="loop.foot.eq"><b>感知</b><span class="ar">→</span><b>回传</b><span class="ar">→</span><b>思考</b><span class="ar">→</span><b>作答</b><span class="ar">→</span><span class="back">又回到硬件</span></span>
     </div>
 
   </div>
@@ -3017,25 +3031,25 @@ section h2,
   <div class="hwsec-inner">
     <div class="reveal">
       <div class="sec-num">09<span class="total">/10</span></div>
-      <span class="eyebrow">The Hardware · 产品线</span>
-      <h2>Solar 与 Lite，两种探针选择。</h2>
-      <p class="hwsec-lede">同一套感知系统，两种供电方案。永不充电的旗舰，与灵活可拆的入门款。</p>
+      <span class="eyebrow" data-i18n="hardware.eyebrow">The Hardware · 产品线</span>
+      <h2 data-i18n="hardware.h2">Solar 与 Lite，两种探针选择。</h2>
+      <p class="hwsec-lede" data-i18n="hardware.lede">同一套感知系统，两种供电方案。永不充电的旗舰，与灵活可拆的入门款。</p>
     </div>
 
     <!-- 命名规范区:灰底卡 -->
     <div class="hw-naming reveal d1">
-      <span class="eyebrow">命名规则</span>
+      <span class="eyebrow" data-i18n="hardware.naming.eyebrow">命名规则</span>
       <div class="hw-naming-row">
         <div class="hw-name-entry">
           <div class="hw-name-big">M<span class="wm-o-ui"></span>riSync Solar</div>
-          <div class="hw-name-note">旗舰版 · 光伏供电 · 终身无需充电</div>
+          <div class="hw-name-note" data-i18n="hardware.solar.note">旗舰版 · 光伏供电 · 终身无需充电</div>
         </div>
         <div class="hw-name-entry">
           <div class="hw-name-big">M<span class="wm-o-ui"></span>riSync Lite</div>
-          <div class="hw-name-note">入门版 · 磁吸可拆换电池</div>
+          <div class="hw-name-note" data-i18n="hardware.lite.note">入门版 · 磁吸可拆换电池</div>
         </div>
       </div>
-      <p style="margin-top:14px;font-size:11px;color:var(--gray-2);">App 内首次提及后，后续直接用 Solar 与 Lite。不用「版本 A/B」「Pro/Standard」等命名。</p>
+      <p style="margin-top:14px;font-size:11px;color:var(--gray-2);" data-i18n="hardware.naming.note">App 内首次提及后，后续直接用 Solar 与 Lite。不用「版本 A/B」「Pro/Standard」等命名。</p>
     </div>
 
     <!-- 双卡详情 -->
@@ -3043,35 +3057,35 @@ section h2,
       <!-- Solar 卡 -->
       <div class="hw-card solar-card">
         <div class="hw-top">
-          <span class="hw-badge">旗舰</span>
+          <span class="hw-badge" data-i18n="hardware.solar.badge">旗舰</span>
           <div class="hw-name">M<span class="wm-o-ui" style="border-width:2px;"></span>riSync Solar</div>
-          <p class="hw-desc">旗舰探针。室内自然光即可自供电，永不充电。</p>
+          <p class="hw-desc" data-i18n="hardware.solar.desc">旗舰探针。室内自然光即可自供电，永不充电。</p>
         </div>
         <div class="hw-specs">
-          <div class="spec-r"><span class="sk">供电方式</span><span class="sv">100% 光伏供电 · 永不充电</span></div>
-          <div class="spec-r"><span class="sk">外壳材质</span><span class="sv">100% PCR Aluminum</span></div>
-          <div class="spec-r"><span class="sk">表面工艺</span><span class="sv">Glass micro-bead 玻璃微珠喷砂</span></div>
-          <div class="spec-r"><span class="sk">传感器</span><span class="sv">Capacitive 电容式抗腐蚀探针</span></div>
-          <div class="spec-r"><span class="sk">数据维度</span><span class="sv">土壤水分 / 养分 / 光照 / 温度</span></div>
-          <div class="spec-r"><span class="sk">光语呼吸灯</span><span class="sv">绿色正常 · 黄色提醒 · 红色告急</span></div>
-          <div class="spec-r"><span class="sk">App 图标态</span><span class="sv">&#9679; Mori Green · 光照供电中</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="hardware.solar.s1k">供电方式</span><span class="sv" data-i18n="hardware.solar.s1v">100% 光伏供电 · 永不充电</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="hardware.solar.s2k">外壳材质</span><span class="sv" data-i18n="hardware.solar.s2v">100% PCR Aluminum</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="hardware.solar.s3k">表面工艺</span><span class="sv" data-i18n="hardware.solar.s3v">Glass micro-bead 玻璃微珠喷砂</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="hardware.solar.s4k">传感器</span><span class="sv" data-i18n="hardware.solar.s4v">Capacitive 电容式抗腐蚀探针</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="hardware.solar.s5k">数据维度</span><span class="sv" data-i18n="hardware.solar.s5v">土壤水分 / 养分 / 光照 / 温度</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="hardware.solar.s6k">光语呼吸灯</span><span class="sv" data-i18n="hardware.solar.s6v">绿色正常 · 黄色提醒 · 红色告急</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="hardware.solar.s7k">App 图标态</span><span class="sv" data-i18n="hardware.solar.s7v">● Mori Green · 光照供电中</span></div>
         </div>
       </div>
 
       <!-- Lite 卡 -->
       <div class="hw-card lite-card">
         <div class="hw-top">
-          <span class="hw-badge">入门</span>
+          <span class="hw-badge" data-i18n="hardware.lite.badge">入门</span>
           <div class="hw-name">M<span class="wm-o-ui" style="border-width:2px;"></span>riSync Lite</div>
-          <p class="hw-desc">入门款。探针长期插土，只需取下磁吸电池充电，数据零中断。</p>
+          <p class="hw-desc" data-i18n="hardware.lite.desc">入门款。探针长期插土，只需取下磁吸电池充电，数据零中断。</p>
         </div>
         <div class="hw-specs">
-          <div class="spec-r"><span class="sk">供电方式</span><span class="sv">磁吸可拆换电池</span></div>
-          <div class="spec-r"><span class="sk">充电方式</span><span class="sv">多槽充电底座（同时 8 颗）</span></div>
-          <div class="spec-r"><span class="sk">关键卖点</span><span class="sv">探针永不离土 · 数据零中断</span></div>
-          <div class="spec-r"><span class="sk">数据维度</span><span class="sv">土壤水分 / 养分 / 光照 / 温度</span></div>
-          <div class="spec-r"><span class="sk">光语呼吸灯</span><span class="sv">绿色正常 · 黄色提醒 · 红色告急</span></div>
-          <div class="spec-r"><span class="sk">App 图标态</span><span class="sv">&#9679; Amber · 电量 &lt;30%</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="hardware.lite.s1k">供电方式</span><span class="sv" data-i18n="hardware.lite.s1v">磁吸可拆换电池</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="hardware.lite.s2k">充电方式</span><span class="sv" data-i18n="hardware.lite.s2v">多槽充电底座（同时 8 颗）</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="hardware.lite.s3k">关键卖点</span><span class="sv" data-i18n="hardware.lite.s3v">探针永不离土 · 数据零中断</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="hardware.lite.s4k">数据维度</span><span class="sv" data-i18n="hardware.lite.s4v">土壤水分 / 养分 / 光照 / 温度</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="hardware.lite.s5k">光语呼吸灯</span><span class="sv" data-i18n="hardware.lite.s5v">绿色正常 · 黄色提醒 · 红色告急</span></div>
+          <div class="spec-r"><span class="sk" data-i18n="hardware.lite.s6k">App 图标态</span><span class="sv" data-i18n="hardware.lite.s6v">● Amber · 电量 &lt;30%</span></div>
         </div>
       </div>
     </div>
@@ -3083,9 +3097,9 @@ section h2,
   <div class="nurserysec-inner">
     <div class="reveal">
       <div class="sec-num">10<span class="total">/10</span></div>
-      <span class="eyebrow">Plant Nursery · 植物幼儿园</span>
-      <h2>一面墙，照看一屋子绿。</h2>
-      <p class="nursery-lede">接入 Apple Home、Google Home 与 Amazon Alexa，把家里每一株植物排成一面绿墙。谁渴了、谁该添养料，抬头一望便知。</p>
+      <span class="eyebrow" data-i18n="nursery.eyebrow">Plant Nursery · 植物幼儿园</span>
+      <h2 data-i18n="nursery.h2">一面墙，照看一屋子绿。</h2>
+      <p class="nursery-lede" data-i18n="nursery.lede">接入 Apple Home、Google Home 与 Amazon Alexa，把家里每一株植物排成一面绿墙。谁渴了、谁该添养料，抬头一望便知。</p>
     </div>
 
     <div class="nursery-shot reveal d1">
@@ -3106,16 +3120,16 @@ section h2,
 <!-- ===== S9 · Footer — 品牌收束 ===== -->
 <footer class="footer" id="footer">
   <div class="footer-inner">
-    <div class="footer-big">与自然<span class="footer-em">同频。</span></div>
-    <p class="footer-sub">照顾绿植不再需要费心牵挂。养一屋子绿，水到渠成。</p>
+    <div class="footer-big" data-i18n="footer.big">与自然<span class="footer-em">同频。</span></div>
+    <p class="footer-sub" data-i18n="footer.sub">照顾绿植不再需要费心牵挂。养一屋子绿，水到渠成。</p>
     <div class="footer-actions">
-      <a href="mailto:hello@morisync.com" class="btn-primary">预约一场 Demo</a>
-      <a href="mailto:hello@morisync.com" class="btn-outline">联系我们</a>
+      <a href="mailto:hello@morisync.com" class="btn-primary" data-i18n="footer.cta1">预约一场 Demo</a>
+      <a href="mailto:hello@morisync.com" class="btn-outline" data-i18n="footer.cta2">联系我们</a>
     </div>
     <div class="footer-row">
       <!-- footer 品牌区:M(o)riSync(TM) · UI Standard 档 + TM 上标 -->
       <span class="footer-brand">M<span class="wm-o-ui"></span>riSync<sup>TM</sup></span>
-      <span class="footer-note">Smart Plant Probe · Investor Preview · 2026</span>
+      <span class="footer-note" data-i18n="footer.note">Smart Plant Probe · Investor Preview · 2026</span>
     </div>
   </div>
 </footer>
@@ -3231,6 +3245,424 @@ const lampIO = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.3 });
 lampIO.observe(document.getElementById('lamp'));
+
+/* ---------- i18n · Bilingual EN/ZH ---------- */
+const TRANSLATIONS = {
+  zh: {
+    'nav.data': '数据',
+    'nav.hardware': '硬件',
+    'nav.energy': '能源',
+    'nav.light': '光语',
+    'nav.app': '软件',
+    'nav.loop': '闭环',
+    'nav.products': '产品',
+    'nav.nursery': '植物幼儿园',
+    'nav.cta': '预约 Demo',
+    'hero.h1': '翠影相生，四时同律',
+    'hero.tagline': 'Your plants, always in sync.',
+    'hero.h1en': 'AI 智能植物养护系统',
+    'hero.lede': '插入土壤，自动唤醒。湿度、肥力、光照、温度数据实时回传。顶部光语呼吸灯替植物开口说话，看一眼就知道。光伏供电，永久续航。',
+    'hero.cta1': '联系融资',
+    'hero.cta2': '预约演示',
+    'pain.eyebrow1': 'The Quiet Struggle · 一个无声的难题',
+    'pain.lede1': '一整代人把绿植当孩子来养，<span>却总在无意间养不好它们。</span>',
+    'pain.stat1.label': '的千禧一代与 Z 世代自称<b>「植物父母」</b> — 养绿植已成这一代的生活方式。',
+    'pain.stat2.label': '却坦言自己是<b>「植物杀手」</b>。爱是真心的，只是不知道怎么读懂它。',
+    'pain.stat3.unit': '盆',
+    'pain.stat3.label': '是每人<b>平均养丢的盆数</b>。不知何时该浇、浇多少；盆越多，越顾不过来。',
+    'pain.source1': 'Source · Statista 全美园艺消费者调研',
+    'pain.eyebrow2': 'The Opportunity · 市场机会',
+    'pain.lede2': '养不好，从来不是小众烦恼 ——<span> 这是一个 7205 万家庭、$18 亿规模的市场。</span>',
+    'pain.stat4.unit': '万',
+    'pain.stat4.label': '美国园艺家庭 · 潜在用户基数（全美 1.31 亿户 × 55% 园艺渗透）',
+    'pain.stat5.label': '室内植物探针的市场天花板（TAM 理论营收）',
+    'pain.stat6.label': '锁定千禧一代室内植物父母 · 可服务人群（SAM）',
+    'pain.source2': 'Source · US Census Bureau、Statista，MoriSync 测算',
+    'hw.eyebrow': 'The Hardware · 硬件',
+    'hw.c1.title': '100% PCR 再生铝',
+    'hw.c1.desc': 'Glass micro-bead 喷砂，触手温润如石',
+    'hw.c2.title': '室内光伏供能',
+    'hw.c2.desc': '顶部圆盘把光变成电<br>永不充电',
+    'hw.c3.title': '光语呼吸灯',
+    'hw.c3.desc': '绿色正常 · 黄色提醒 · 红色告急<br>看一眼就懂，无需开机',
+    'hw.c4.title': '抗腐蚀电容探针',
+    'hw.c4.desc': '双叉电容传感<br>土壤湿度与肥力如实回传',
+    'hw.foot.title': '一支探针，处处用心。',
+    'hw.foot.desc': '从铝合金外壳到电容传感,每个细节都按工业精度打磨。',
+    'lamp.eyebrow': 'Ambient Light · 光语交互',
+    'lamp.h2': '不必开机。光，会先告诉你。',
+    'lamp.lede': '最好的提醒，是不用掏手机就知道。顶部呼吸灯用颜色与节奏说话，走过它身边那一眼，状态了然于心。',
+    'lamp.s1.title': '茁壮 · Thriving <span class="rhythm">绿 · 4s</span>',
+    'lamp.s1.desc': '土壤水分充足，植物健康。绿意缓缓呼吸，无需打扰。',
+    'lamp.s2.title': '提醒 · Reminder <span class="rhythm">黄 · 2.5s</span>',
+    'lamp.s2.desc': '水分或养分开始走低，宜留意。黄环从容起伏，提醒而不催促。',
+    'lamp.s3.title': '告急 · Needs Water <span class="rhythm">红 · 1.5s</span>',
+    'lamp.s3.desc': '土壤极干，需立刻浇水。节奏骤然加快，请尽快处理。',
+    'lamp.s4.title': '离线 · Offline <span class="rhythm">灰 · 静态</span>',
+    'lamp.s4.desc': '设备关闭 / 充电中 / 信号失联。灰环静止，等待重连。',
+    'lamp.foot': '颜色即语言，节奏即语气。这，就是光语。',
+    'energy.eyebrow': 'Energy Core · Next-Gen',
+    'energy.h2': '让一支探针，从光里取电。',
+    'energy.lede': '探针摆脱换电池，取决于一件事：把<b>室内那点漫反射光</b>，尽可能多地变成电。效率天花板最高的材料，正是<b>钙钛矿。</b>',
+    'energy.v1.badge': 'MVP 实装',
+    'energy.v1.name': 'V1 · DSSC / OPV',
+    'energy.v1.desc': '当前量产方案。染料敏化 / 有机光伏，室内光已可驱动低功耗 IoT。',
+    'energy.v1.s1k': '材料体系',
+    'energy.v1.s1v': 'DSSC / OPV',
+    'energy.v1.s2k': '状态',
+    'energy.v1.s2v': 'MVP 实装',
+    'energy.v1.s3k': '功率密度',
+    'energy.v1.s3v': '约 30–50 μW/cm² @ 200 lux',
+    'energy.v1.s4k': '理论上限',
+    'energy.v1.s4v': '14–15% PCE',
+    'energy.v1.s5k': '室内适配',
+    'energy.v1.s5v': 'LED / 荧光灯光谱',
+    'energy.v2.badge': '调研中',
+    'energy.v2.name': 'V2 · 钙钛矿 Perovskite',
+    'energy.v2.desc': '行业前沿的候选材料。据公开研究，带隙可调、室内效率有望数倍于硅基。',
+    'energy.v2.s1k': '材料体系',
+    'energy.v2.s1v': 'Perovskite',
+    'energy.v2.s2k': '状态',
+    'energy.v2.s2v': '行业前沿 · 调研中',
+    'energy.v2.s3k': '功率密度',
+    'energy.v2.s3v': '>100 μW/cm² @ 200 lux',
+    'energy.v2.s4k': '理论上限',
+    'energy.v2.s4v': '>30% PCE',
+    'energy.v2.s5k': '优势',
+    'energy.v2.s5v': '室内效率 3× 硅基',
+    'energy.vision': '钙钛矿室内光伏仍处行业前沿研究阶段。当前量产采用 V1 方案；钙钛矿作为远期方向，M<span class="wm-o-sm"></span>riSync 正持续调研其应用可能。<span class="vision-source">Source · 钙钛矿室内光伏公开研究综述 · 2026</span>',
+    'offline.eyebrow': 'Offline First · 数据归你',
+    'offline.h2': '数据归你，不归云。',
+    'offline.lede': '探针失联也不丢数据。本地优先的架构让你的植物档案永远可读，无订阅负担，生态开放。',
+    'offline.vp1.gl': '&#x2713; M<span class="wm-o-sm"></span>riSync 离线本地',
+    'offline.vp1.gq': '探针失联 48 小时，本地缓存照常告警，Wi-Fi 一恢复同步全数据',
+    'offline.vp1.bl': '&#x2717; 云端依赖',
+    'offline.vp1.bq': '云端服务器宕机，所有用户植物数据集体失语',
+    'offline.vp2.gl': '&#x2713; 无订阅 · 买断使用',
+    'offline.vp2.gq': '买回家用三年，服务器关了也能用，数据完整保留在本地',
+    'offline.vp2.bl': '&#x2717; 订阅绑定',
+    'offline.vp2.bq': '订阅到期，设备变废铁，数据本地不可读',
+    'offline.vp3.gl': '&#x2713; Matter 直连',
+    'offline.vp3.gq': 'Matter 直连 Apple / Google / Amazon / Samsung 智能家居系统，无需走云端中介，本地协议保障',
+    'offline.vp3.bl': '&#x2717; 专属生态孤岛',
+    'offline.vp3.bq': '专属 App + 专属云，换设备数据迁移困难，生态锁定',
+    'app.eyebrow': 'The App · 软件',
+    'app.h2': '看得见的，不止一盏灯。',
+    'app.lede': '光语给你即时的安心，App 给你完整的全貌。从一次扫描，到一整段生长。',
+    'app.step1.title': '扫一扫，即识别',
+    'app.step1.desc': '对准叶片轻轻一扫，AI 认出种类，再把探针添加进来 — 分步引导，一次完成。',
+    'app.step2.title': '状态，一目了然',
+    'app.step2.desc': '缺水、缺肥、病害，一一指认，写成你看得懂的话。',
+    'app.step3.title': '陪它，走过每一程',
+    'app.step3.desc': '成长、开花、结果，每一个阶段都被记录成册。回头看，是你与它一起走过的时光。',
+    'app.learnmore': '了解更多 <span class="ac-btn-arrow">→</span>',
+    'app.diag1': '种类已识别 · Monstera',
+    'app.diag2': '土壤偏干 · 建议浇水',
+    'app.diag3': '叶片健康 · 无病害',
+    'app.grow1': '成长',
+    'app.grow2': '开花',
+    'app.grow3': '结果',
+    'data.eyebrow': 'Live Data · 实时数据',
+    'data.h2': '每一株，都有自己的一页。',
+    'data.lede': '土壤湿度、光照强度、养分水平、环境温度，实时汇入档案。一眼便知，这株 Monstera 过得好不好。',
+    'data.gc.loc': '客厅 · 窗边',
+    'data.gc.cta': '查看护理建议 →',
+    'loop.eyebrow': 'Closed Loop · 软硬联动',
+    'loop.h2': '硬件感知，软件思考，<span class="hl">光语作答</span>。',
+    'loop.desc': '同一根探针，先在土里读数，再让数据与思考在云端涌动；最终所有累积涌成一道光，回到它头顶——绿是安好，红是告急。',
+    'loop.s1.no': '01 / 感知',
+    'loop.s1.title': '探针感知',
+    'loop.s1.desc': '双叉入土，自动唤醒，土壤被持续读取。',
+    'loop.s1.rk': '湿度',
+    'loop.s2.no': '02 / 回传',
+    'loop.s2.title': '数据回传',
+    'loop.s2.desc': '湿度、光照、肥力，离线缓存或上云。',
+    'loop.s2.rk': '维度',
+    'loop.s3.no': '03 / 思考',
+    'loop.s3.title': 'AI 解读',
+    'loop.s3.desc': '按物种与近况，多源收束为专属方案。',
+    'loop.s3.rk': '置信',
+    'loop.surge.tag': 'Light Speaks · 光语',
+    'loop.s4.no': '04 / 作答',
+    'loop.s4.title': '光语作答',
+    'loop.s4.desc': '所有读数与思考，最终回到探针头顶那圈光。无需打开 App，一眼即知。',
+    'loop.s4.state': '一切安好',
+    'loop.s4.return': '闭环 · 回到硬件本身',
+    'loop.foot.cap': 'The Closed Loop',
+    'loop.foot.eq': '<b>感知</b><span class="ar">→</span><b>回传</b><span class="ar">→</span><b>思考</b><span class="ar">→</span><b>作答</b><span class="ar">→</span><span class="back">又回到硬件</span>',
+    'hardware.eyebrow': 'The Hardware · 产品线',
+    'hardware.h2': 'Solar 与 Lite，两种探针选择。',
+    'hardware.lede': '同一套感知系统，两种供电方案。永不充电的旗舰，与灵活可拆的入门款。',
+    'hardware.naming.eyebrow': '命名规则',
+    'hardware.solar.note': '旗舰版 · 光伏供电 · 终身无需充电',
+    'hardware.lite.note': '入门版 · 磁吸可拆换电池',
+    'hardware.naming.note': 'App 内首次提及后，后续直接用 Solar 与 Lite。不用「版本 A/B」「Pro/Standard」等命名。',
+    'hardware.solar.badge': '旗舰',
+    'hardware.solar.desc': '旗舰探针。室内自然光即可自供电，永不充电。',
+    'hardware.solar.s1k': '供电方式',
+    'hardware.solar.s1v': '100% 光伏供电 · 永不充电',
+    'hardware.solar.s2k': '外壳材质',
+    'hardware.solar.s2v': '100% PCR Aluminum',
+    'hardware.solar.s3k': '表面工艺',
+    'hardware.solar.s3v': 'Glass micro-bead 玻璃微珠喷砂',
+    'hardware.solar.s4k': '传感器',
+    'hardware.solar.s4v': 'Capacitive 电容式抗腐蚀探针',
+    'hardware.solar.s5k': '数据维度',
+    'hardware.solar.s5v': '土壤水分 / 养分 / 光照 / 温度',
+    'hardware.solar.s6k': '光语呼吸灯',
+    'hardware.solar.s6v': '绿色正常 · 黄色提醒 · 红色告急',
+    'hardware.solar.s7k': 'App 图标态',
+    'hardware.solar.s7v': '● Mori Green · 光照供电中',
+    'hardware.lite.badge': '入门',
+    'hardware.lite.desc': '入门款。探针长期插土，只需取下磁吸电池充电，数据零中断。',
+    'hardware.lite.s1k': '供电方式',
+    'hardware.lite.s1v': '磁吸可拆换电池',
+    'hardware.lite.s2k': '充电方式',
+    'hardware.lite.s2v': '多槽充电底座（同时 8 颗）',
+    'hardware.lite.s3k': '关键卖点',
+    'hardware.lite.s3v': '探针永不离土 · 数据零中断',
+    'hardware.lite.s4k': '数据维度',
+    'hardware.lite.s4v': '土壤水分 / 养分 / 光照 / 温度',
+    'hardware.lite.s5k': '光语呼吸灯',
+    'hardware.lite.s5v': '绿色正常 · 黄色提醒 · 红色告急',
+    'hardware.lite.s6k': 'App 图标态',
+    'hardware.lite.s6v': '● Amber · 电量 <30%',
+    'nursery.eyebrow': 'Plant Nursery · 植物幼儿园',
+    'nursery.h2': '一面墙，照看一屋子绿。',
+    'nursery.lede': '接入 Apple Home、Google Home 与 Amazon Alexa，把家里每一株植物排成一面绿墙。谁渴了、谁该添养料，抬头一望便知。',
+    'footer.big': '与自然<span class="footer-em">同频。</span>',
+    'footer.sub': '照顾绿植不再需要费心牵挂。养一屋子绿，水到渠成。',
+    'footer.cta1': '预约一场 Demo',
+    'footer.cta2': '联系我们',
+    'footer.note': 'Smart Plant Probe · Investor Preview · 2026'
+  },
+  en: {
+    'nav.data': 'Data',
+    'nav.hardware': 'Hardware',
+    'nav.energy': 'Energy',
+    'nav.light': 'Light',
+    'nav.app': 'App',
+    'nav.loop': 'Loop',
+    'nav.products': 'Products',
+    'nav.nursery': 'Plant Nursery',
+    'nav.cta': 'Book Demo',
+    'hero.h1': 'In Tune With Every Season',
+    'hero.tagline': 'Your plants, always in sync.',
+    'hero.h1en': 'AI-Powered Plant Care System',
+    'hero.lede': 'Insert. Awaken. Sync. Moisture, nutrients, light, and temperature — streamed in real time. The light ring speaks for your plants at a glance. Solar-powered, forever.',
+    'hero.cta1': 'Contact Investors',
+    'hero.cta2': 'Book a Demo',
+    'pain.eyebrow1': 'The Quiet Struggle',
+    'pain.lede1': 'A whole generation treats plants like family — <span>and keeps losing them anyway.</span>',
+    'pain.stat1.label': 'of Millennials &amp; Gen Z call themselves <b>"plant parents"</b> — houseplants have become a lifestyle.',
+    'pain.stat2.label': 'admit they&#39;re <b>"plant killers."</b> The love is real. Reading the plant is the hard part.',
+    'pain.stat3.unit': 'pots',
+    'pain.stat3.label': 'is the average number of plants each person has lost. Never knowing when or how much to water — it adds up.',
+    'pain.source1': 'Source · Statista U.S. Gardening Consumer Survey',
+    'pain.eyebrow2': 'The Opportunity',
+    'pain.lede2': 'This isn&#39;t a niche problem — <span>it&#39;s a 72M household, $1.8B market.</span>',
+    'pain.stat4.unit': 'M',
+    'pain.stat4.label': 'U.S. gardening households · Potential user base (131M households × 55% gardening penetration)',
+    'pain.stat5.label': 'Total addressable market for indoor plant probes (TAM)',
+    'pain.stat6.label': 'Targeting millennial indoor plant parents · Serviceable addressable market (SAM)',
+    'pain.source2': 'Source · US Census Bureau, Statista, MoriSync estimates',
+    'hw.eyebrow': 'The Hardware',
+    'hw.c1.title': '100% PCR Recycled Aluminum',
+    'hw.c1.desc': 'Glass micro-bead sandblasted — smooth to the touch.',
+    'hw.c2.title': 'Indoor Solar Power',
+    'hw.c2.desc': 'The top disc converts light to electricity.<br>Never charge it.',
+    'hw.c3.title': 'Light Language Ring',
+    'hw.c3.desc': 'Green = healthy · Yellow = caution · Red = urgent<br>One glance tells all.',
+    'hw.c4.title': 'Corrosion-Resistant Sensor',
+    'hw.c4.desc': 'Dual-fork capacitive sensing.<br>Soil moisture &amp; nutrients, always accurate.',
+    'hw.foot.title': 'One probe. Every detail matters.',
+    'hw.foot.desc': 'From the aluminum shell to the capacitive sensor — every detail crafted to industrial precision.',
+    'lamp.eyebrow': 'Ambient Light',
+    'lamp.h2': 'No app needed. The light tells you first.',
+    'lamp.lede': 'The best notification is one that doesn&#39;t interrupt. The top ring speaks through color and rhythm — walk past it once and you already know.',
+    'lamp.s1.title': 'Thriving <span class="rhythm">Green · 4s</span>',
+    'lamp.s1.desc': 'Soil moisture is healthy. The plant is thriving. Green breathes slowly — no action needed.',
+    'lamp.s2.title': 'Reminder <span class="rhythm">Yellow · 2.5s</span>',
+    'lamp.s2.desc': 'Moisture or nutrients are getting low. The amber ring pulses gently — a calm reminder, not an alarm.',
+    'lamp.s3.title': 'Urgent <span class="rhythm">Red · 1.5s</span>',
+    'lamp.s3.desc': 'Soil is critically dry. Water needed immediately. The fast pulse says: act now.',
+    'lamp.s4.title': 'Offline <span class="rhythm">Gray · Static</span>',
+    'lamp.s4.desc': 'Device off / charging / disconnected. The gray ring is still — waiting to reconnect.',
+    'lamp.foot': 'Color is language. Rhythm is tone. That\'s Light Language.',
+    'energy.eyebrow': 'Energy Core · Next-Gen',
+    'energy.h2': 'Power a probe with light itself.',
+    'energy.lede': 'Eliminating batteries comes down to one thing: converting <b>indoor ambient light</b> into electricity as efficiently as possible. The highest-ceiling material for this is <b>Perovskite.</b>',
+    'energy.v1.badge': 'In Production',
+    'energy.v1.name': 'V1 · DSSC / OPV',
+    'energy.v1.desc': 'Current production solution. Dye-sensitized / organic photovoltaics — indoor light already powers low-energy IoT.',
+    'energy.v1.s1k': 'Material',
+    'energy.v1.s1v': 'DSSC / OPV',
+    'energy.v1.s2k': 'Status',
+    'energy.v1.s2v': 'MVP Production',
+    'energy.v1.s3k': 'Power Density',
+    'energy.v1.s3v': '~30–50 μW/cm² @ 200 lux',
+    'energy.v1.s4k': 'Theoretical Max',
+    'energy.v1.s4v': '14–15% PCE',
+    'energy.v1.s5k': 'Indoor Spectrum',
+    'energy.v1.s5v': 'LED / Fluorescent',
+    'energy.v2.badge': 'In Research',
+    'energy.v2.name': 'V2 · Perovskite',
+    'energy.v2.desc': 'Industry frontier candidate. Tunable bandgap — indoor efficiency potentially 3× silicon per public research.',
+    'energy.v2.s1k': 'Material',
+    'energy.v2.s1v': 'Perovskite',
+    'energy.v2.s2k': 'Status',
+    'energy.v2.s2v': 'Industry frontier · In research',
+    'energy.v2.s3k': 'Power Density',
+    'energy.v2.s3v': '>100 μW/cm² @ 200 lux',
+    'energy.v2.s4k': 'Theoretical Max',
+    'energy.v2.s4v': '>30% PCE',
+    'energy.v2.s5k': 'Key Advantage',
+    'energy.v2.s5v': 'Indoor efficiency 3× silicon',
+    'energy.vision': 'Perovskite indoor photovoltaics remain at the frontier of active research. Current production uses V1; Perovskite is a long-term direction M<span class="wm-o-sm"></span>riSync continues to investigate.<span class="vision-source">Source · Perovskite Indoor PV Research Review · 2026</span>',
+    'offline.eyebrow': 'Offline First · Your Data',
+    'offline.h2': 'Your data. Not the cloud&#39;s.',
+    'offline.lede': 'Probe goes offline — data doesn\'t. A local-first architecture means your plant records are always readable. No subscription required. Open ecosystem.',
+    'offline.vp1.gl': '&#x2713; MoriSync Offline-First',
+    'offline.vp1.gq': 'Probe offline for 48 hours — local cache keeps alerting. Wi-Fi restored — all data syncs.',
+    'offline.vp1.bl': '&#x2717; Cloud-Dependent',
+    'offline.vp1.bq': 'Server goes down — every user\'s plant data goes silent.',
+    'offline.vp2.gl': '&#x2713; No Subscription · Own It Forever',
+    'offline.vp2.gq': 'Use it for years. Even if the server shuts down, your local data stays intact.',
+    'offline.vp2.bl': '&#x2717; Subscription Lock-In',
+    'offline.vp2.bq': 'Subscription expires — device becomes useless. Local data unreadable.',
+    'offline.vp3.gl': '&#x2713; Matter Direct Connect',
+    'offline.vp3.gq': 'Connects directly to Apple / Google / Amazon / Samsung smart home — no cloud middleman. Local protocol guaranteed.',
+    'offline.vp3.bl': '&#x2717; Walled Garden',
+    'offline.vp3.bq': 'Proprietary app + cloud. Switching devices means losing your data. Ecosystem lock-in.',
+    'app.eyebrow': 'The App',
+    'app.h2': 'More than a light. A full picture.',
+    'app.lede': 'The light ring gives you instant peace of mind. The app gives you the full story — from one scan to an entire growth journey.',
+    'app.step1.title': 'Scan &amp; Identify',
+    'app.step1.desc': 'Point at a leaf. AI identifies the species and guides you to add the probe — step by step, done in one.',
+    'app.step2.title': 'Status at a Glance',
+    'app.step2.desc': 'Dry soil, low nutrients, disease — identified and explained in plain language.',
+    'app.step3.title': 'Every Chapter, Remembered',
+    'app.step3.desc': 'Every growth stage documented. Looking back, it\'s the story of every season you shared.',
+    'app.learnmore': 'Learn More <span class="ac-btn-arrow">→</span>',
+    'app.diag1': 'Species Identified · Monstera',
+    'app.diag2': 'Soil Dry · Water Recommended',
+    'app.diag3': 'Leaves Healthy · No Disease',
+    'app.grow1': 'Growth',
+    'app.grow2': 'Bloom',
+    'app.grow3': 'Fruit',
+    'data.eyebrow': 'Live Data',
+    'data.h2': 'Every plant has its own page.',
+    'data.lede': 'Soil moisture, light intensity, nutrients, ambient temperature — all streaming into your plant\'s profile. One look tells you how your Monstera is doing.',
+    'data.gc.loc': 'Living Room · By Window',
+    'data.gc.cta': 'View Care Recommendations →',
+    'loop.eyebrow': 'Closed Loop',
+    'loop.h2': 'Probe senses. AI thinks. <span class="hl">Light answers.</span>',
+    'loop.desc': 'The same probe reads the soil, sends data to the cloud where AI processes it, and the result comes back as a single ring of light — green means fine, red means urgent.',
+    'loop.s1.no': '01 / Sense',
+    'loop.s1.title': 'Probe Senses',
+    'loop.s1.desc': 'Forks in soil, auto-awaken, continuous soil readings.',
+    'loop.s1.rk': 'Moisture',
+    'loop.s2.no': '02 / Transmit',
+    'loop.s2.title': 'Data Transmits',
+    'loop.s2.desc': 'Moisture, light, nutrients — cached locally or sent to cloud.',
+    'loop.s2.rk': 'Dimensions',
+    'loop.s3.no': '03 / Think',
+    'loop.s3.title': 'AI Interprets',
+    'loop.s3.desc': 'Species + recent history — multi-source convergence into a personalized plan.',
+    'loop.s3.rk': 'Confidence',
+    'loop.surge.tag': 'Light Speaks',
+    'loop.s4.no': '04 / Answer',
+    'loop.s4.title': 'Light Answers',
+    'loop.s4.desc': 'Every reading and thought returns as a ring of light on the probe. No app needed. One glance tells all.',
+    'loop.s4.state': 'All Good',
+    'loop.s4.return': 'Loop Closed · Back to Hardware',
+    'loop.foot.cap': 'The Closed Loop',
+    'loop.foot.eq': '<b>Sense</b><span class="ar">→</span><b>Transmit</b><span class="ar">→</span><b>Think</b><span class="ar">→</span><b>Answer</b><span class="ar">→</span><span class="back">Back to hardware</span>',
+    'hardware.eyebrow': 'The Hardware · Products',
+    'hardware.h2': 'Solar and Lite. Two probe options.',
+    'hardware.lede': 'Same sensing system, two power options. The flagship that never charges, and the flexible entry model.',
+    'hardware.naming.eyebrow': 'Naming Convention',
+    'hardware.solar.note': 'Flagship · Solar-powered · Never charges',
+    'hardware.lite.note': 'Entry · Magnetic removable battery',
+    'hardware.naming.note': 'After first mention in the app, refer to them simply as Solar and Lite. No "Version A/B" or "Pro/Standard" naming.',
+    'hardware.solar.badge': 'Flagship',
+    'hardware.solar.desc': 'The flagship probe. Indoor ambient light self-powers it — never needs charging.',
+    'hardware.solar.s1k': 'Power',
+    'hardware.solar.s1v': '100% Solar · Never charges',
+    'hardware.solar.s2k': 'Shell',
+    'hardware.solar.s2v': '100% PCR Aluminum',
+    'hardware.solar.s3k': 'Finish',
+    'hardware.solar.s3v': 'Glass micro-bead sandblasted',
+    'hardware.solar.s4k': 'Sensor',
+    'hardware.solar.s4v': 'Capacitive anti-corrosion probe',
+    'hardware.solar.s5k': 'Data',
+    'hardware.solar.s5v': 'Moisture / Nutrients / Light / Temp',
+    'hardware.solar.s6k': 'Light Ring',
+    'hardware.solar.s6v': 'Green OK · Yellow Caution · Red Urgent',
+    'hardware.solar.s7k': 'App Icon',
+    'hardware.solar.s7v': '● Mori Green · Solar charging',
+    'hardware.lite.badge': 'Entry',
+    'hardware.lite.desc': 'The entry model. Probe stays in soil — just remove and charge the magnetic battery. Zero data interruption.',
+    'hardware.lite.s1k': 'Power',
+    'hardware.lite.s1v': 'Magnetic removable battery',
+    'hardware.lite.s2k': 'Charging',
+    'hardware.lite.s2v': 'Multi-slot dock (8 batteries at once)',
+    'hardware.lite.s3k': 'Key Feature',
+    'hardware.lite.s3v': 'Probe stays in soil · Zero data gap',
+    'hardware.lite.s4k': 'Data',
+    'hardware.lite.s4v': 'Moisture / Nutrients / Light / Temp',
+    'hardware.lite.s5k': 'Light Ring',
+    'hardware.lite.s5v': 'Green OK · Yellow Caution · Red Urgent',
+    'hardware.lite.s6k': 'App Icon',
+    'hardware.lite.s6v': '● Amber · Battery <30%',
+    'nursery.eyebrow': 'Plant Nursery',
+    'nursery.h2': 'One wall. Every plant at a glance.',
+    'nursery.lede': 'Connect to Apple Home, Google Home, and Amazon Alexa. Line up every plant on a living green wall — see who\'s thirsty and who needs nutrients at a glance.',
+    'footer.big': 'In Sync With <span class="footer-em">Nature.</span>',
+    'footer.sub': 'Caring for plants no longer needs to be a worry. A houseful of green, effortlessly.',
+    'footer.cta1': 'Book a Demo',
+    'footer.cta2': 'Contact Us',
+    'footer.note': 'Smart Plant Probe · Investor Preview · 2026'
+  }
+};
+
+function applyLang(lang) {
+  const dict = TRANSLATIONS[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) {
+      el.innerHTML = dict[key];
+    }
+  });
+
+  /* Update TIDE_STATES text for the current animation state */
+  const tideStateTxt = document.querySelector('#tide .light-state .ls-state');
+  if (tideStateTxt) {
+    tideStateTxt.textContent = lang === 'en' ? 'All Good' : '一切安好';
+  }
+
+  /* Update toggle button label */
+  const btn = document.getElementById('langToggle');
+  if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中文';
+
+  /* Update html lang attribute */
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+}
+
+/* Init language on load */
+(function () {
+  const savedLang = localStorage.getItem('ms_lang') || 'zh';
+  applyLang(savedLang);
+  const btn = document.getElementById('langToggle');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      const current = localStorage.getItem('ms_lang') || 'zh';
+      const next = current === 'zh' ? 'en' : 'zh';
+      localStorage.setItem('ms_lang', next);
+      applyLang(next);
+    });
+  }
+})();
 </script>
 
 </body>
