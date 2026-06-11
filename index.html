@@ -1,0 +1,2859 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MoriSync · 与自然同频</title>
+
+<!-- Kumbh Sans 几何无衬线(VIS 单字族)+ Noto Sans SC 中文 fallback -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   MoriSync 投资人站 · VIS v1.0 落地版
+   视觉系统:VIS-Landing-Guide-2026-06-06
+   字体:Kumbh Sans + PingFang SC + Noto Sans SC 中英分栈
+   色板:VIS 八色全量替换
+   ============================================================ */
+
+/* ---------- VIS v1.0 设计 Token ---------- */
+:root{
+  /* —— 主色(VIS 八色)—— */
+  --green:        #3BA55D;   /* Mori Green · CTA / 光语正常 / wordmark o 环唯一绿 */
+  --green-dim:    rgba(59,165,93,.1);  /* Thriving Tint · 浅绿底 */
+  --green-glow:   rgba(59,165,93,.4);  /* Solar 卡 shadow / 光环 */
+  --green-text:   #2E8A4A;   /* 绿色文字 · 对比度高于 Mori Green */
+  --black:        #0A0A09;   /* VIS Deep Black · 主文字 / 强调 */
+  --near-black:   #1A1A18;   /* 次级深墨 · 正文 */
+  --white:        #FFFFFF;   /* Pure White · 全局底色 */
+  --stone:        #EEECEA;   /* VIS Stone · divider / card border / 次级底 */
+
+  /* —— 功能色 —— */
+  --amber:        #EF9F27;   /* Amber · 警示 / Lite 电量 */
+  --red:          #E24B4A;   /* Critical Red · 光语告急 / 缺水 */
+
+  /* —— 灰阶系列(VIS gray-1 ~ gray-4)—— */
+  --gray-1:       #6B6B68;   /* 三级文字 / 描述文 */
+  --gray-2:       #AEADA8;   /* 四级 / caption / eyebrow */
+  --gray-3:       #D8D7D2;   /* hairline / card border */
+  --gray-4:       #EEECEA;   /* hover 底 / 浅底(同 stone)*/
+
+  /* —— 拉丝铝(仅限 Hardware 段实物图渲染使用)—— */
+  --alu-hi:       #F2F3F2;
+  --alu-mid:      #C7CCC9;
+  --alu-lo:       #9AA09C;
+  --alu-edge:     #7E847F;
+
+  /* —— 字体:中英分栈 —— */
+  --font-sans:    'Kumbh Sans', 'PingFang SC', 'Noto Sans SC', -apple-system, 'Helvetica Neue', sans-serif;
+  --font-mono:    'SF Mono', 'JetBrains Mono', 'Kumbh Sans', monospace;
+
+  /* —— 留白节奏(VIS .sw padding 96px 48px)—— */
+  --pad-x:        clamp(24px, 6vw, 48px);  /* 上限 48px 对齐 VIS */
+  --section-gap:  clamp(72px, 12vh, 96px);  /* 比现网 240px 更紧凑 */
+
+  /* —— 动效曲线 —— */
+  --ease:         cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* —— 浮岛玻璃 token(提案 1.1 新增,容器级语义不受元件圆角约束)—— */
+  --glass-bg:     rgba(255,255,255,.70);
+  --glass-blur:   blur(22px) saturate(1.8);
+  --glass-border: rgba(0,0,0,.07);
+  --island-r:     999px;
+
+  /* —— S8 Tide of Light 专用 token —— */
+  --green-soft:   #58C97D;   /* 中间绿:动画/描边/辅助文字 */
+  --green-deep:   #2C8049;   /* 深绿:hover 态 */
+  --green-led:    #69FA72;   /* 探针环实测亮绿,仅用于 04 glow */
+  --void:         #0B1410;   /* 暗场墨色(继承绿 hue) */
+  --void-2:       #0F1A14;   /* 暗场次深墨 */
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+body{
+  font-family: var(--font-sans);
+  color: var(--black);
+  background: var(--white);  /* VIS 纯白底,废除暖纸 paper */
+  overflow-x: hidden;
+  line-height: 1.5;
+  /* 无纸纹噪点:VIS Organic Minimalism 纯白克制感 */
+}
+
+/* ============================================================
+   Wordmark o 环:通用实现(em 相对尺寸,随字号等比缩放)
+   ============================================================ */
+/* o 环替代小写 o */
+.wm-o{
+  display: inline-block;
+  border-radius: 50%;
+  border: 0.11em solid var(--green);  /* 与 VIS wm-o 一致 */
+  width: 0.65em;
+  height: 0.65em;
+  flex-shrink: 0;
+  position: relative;
+  top: 0.05em;  /* baseline 对齐微调 */
+  margin: 0 -0.01em;  /* 收紧与邻近字符的间距 */
+}
+/* UI Standard 档(21-22px)· topbar / footer */
+.wm-o-ui{
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  width: 0.65em;
+  height: 0.65em;
+  position: relative;
+  top: 0.05em;
+  margin: 0 -0.01em;
+}
+/* 小号档(14px eyebrow 级) */
+.wm-o-sm{
+  display: inline-block;
+  border-radius: 50%;
+  border: 1.5px solid var(--green);
+  width: 0.65em;
+  height: 0.65em;
+  position: relative;
+  top: 0.04em;
+  margin: 0 -0.01em;
+}
+
+/* ============================================================
+   通用工具
+   ============================================================ */
+/* reveal:IntersectionObserver 入场动画 */
+.reveal{ opacity:0; transform:translateY(28px); transition:opacity .85s var(--ease), transform .85s var(--ease); }
+.reveal.in{ opacity:1; transform:none; }
+.reveal.d1{ transition-delay:.06s }
+.reveal.d2{ transition-delay:.12s }
+.reveal.d3{ transition-delay:.18s }
+.reveal.d4{ transition-delay:.24s }
+
+/* eyebrow:VIS 规格 font-size 10px / weight 600 / letter-spacing .1em / uppercase */
+.eyebrow{
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gray-2);
+  margin-bottom: 14px;
+}
+
+/* 章节标题通用 */
+.sec-num{
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gray-2);
+  margin-bottom: 14px;
+  display: block;
+}
+
+/* ============================================================
+   顶栏 — 提案 1.1 浮岛玻璃 nav + 提案 3.2 chip-style CTA
+   ============================================================ */
+.topbar{
+  position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+  z-index: 200;
+  display: inline-flex; align-items: center; gap: 0;
+  /* 浮岛胶囊容器 */
+  padding: 8px 8px 8px 20px;
+  border-radius: var(--island-r);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 24px -6px rgba(10,10,9,.10), 0 1px 3px rgba(10,10,9,.06);
+  /* 宽度自适应内容,最大限制防止过宽 */
+  max-width: calc(100vw - 40px);
+  white-space: nowrap;
+  transition: box-shadow .4s var(--ease), background .4s var(--ease);
+}
+/* 滚动后略加深背景 */
+.topbar.solid{
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 6px 32px -8px rgba(10,10,9,.14), 0 1px 4px rgba(10,10,9,.08);
+}
+
+/* 顶栏品牌区:M(o)riSync · UI Standard 档 */
+.brand{
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.brand-text{ display:inline-flex; align-items:center; }
+
+.nav{ display:flex; gap:20px; margin: 0 20px; }
+.nav a{
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--gray-1);
+  text-decoration: none;
+  transition: color .2s;
+}
+.nav a:hover{ color: var(--black); }
+
+/* 提案 3.2 chip-style CTA:白底胶囊 + 右侧黑圆箭头 */
+.topbar-cta{
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  height: 36px;
+  padding: 0 0 0 14px;
+  background: var(--white);
+  border-radius: var(--island-r);
+  border: 1px solid rgba(0,0,0,.08);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--near-black);
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background .25s var(--ease), border-color .25s;
+}
+.topbar-cta-arrow{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-left: 10px;
+  background: var(--near-black);
+  color: var(--white);
+  border-radius: 50%;
+  font-size: 13px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: background .25s var(--ease);
+}
+.topbar-cta:hover{ background: var(--green-dim); border-color: rgba(59,165,93,.25); }
+.topbar-cta:hover .topbar-cta-arrow{ background: var(--green); }
+
+/* 移动端降级:全宽 + 弱玻璃 + 无圆角胶囊 */
+@media(max-width:768px){
+  .topbar{
+    top: 0; left: 0; right: 0; transform: none;
+    width: 100%; max-width: 100%;
+    border-radius: 0;
+    padding: 12px 16px;
+    border-left: none; border-right: none; border-top: none;
+    background: rgba(255,255,255,.82);
+  }
+  .nav{ display: none; }
+  .brand{ font-size: 17px; }
+}
+@media(min-width:769px) and (max-width:980px){
+  .nav{ display: none; }
+}
+
+/* ============================================================
+   S1 · HERO — 全幅底图 + 文字左半区叠加(图作大背景,文字在上)
+   ============================================================ */
+.hero{
+  position: relative;             /* 层叠定位基准 */
+  padding-top: 72px;              /* 顶栏高度留白 */
+  background: var(--white);
+  overflow: hidden;
+  min-height: 100vh;  /* Hero 满屏,撑到 viewport 底部 */
+  display: flex;
+  align-items: center;            /* 文字垂直居中 */
+}
+
+/* 文字内容左对齐 · 占左半区 · 叠在图上方 */
+.hero-copy{
+  position: relative;
+  z-index: 2;                     /* 在图与遮罩之上 */
+  padding: clamp(40px, 6vh, 80px) var(--pad-x);
+  max-width: 1080px;              /* 容纳八字主标题「土壤之下,万物可知」单行展示 */
+  width: 100%;
+}
+
+.hero-eyebrow{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gray-2);
+  margin-bottom: 28px;
+}
+.hero-eyebrow::before{
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+/* 中文主标题 · Display 级 · Kumbh+PingFang · Black 900
+   ── 八字「土壤之下,万物可知」nowrap 单行,字号上限由 132 降到 100 fit 1080 容器 */
+.hero-h1-zh{
+  font-weight: 900;
+  font-size: clamp(44px, 7vw, 100px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--near-black);
+  margin-bottom: 18px;
+  white-space: nowrap;
+}
+
+/* 品牌标语行 · 英文 · 中文主标下方、副标上方 · 克制纤细 */
+.hero-tagline-en{
+  font-weight: 400;
+  font-size: clamp(13px, 1.4vw, 18px);
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  color: var(--green-text);
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+/* 副标题 · 产品定位 · 中文为主 · 中等灰 */
+.hero-h1-en{
+  font-weight: 600;
+  font-size: clamp(20px, 2.6vw, 34px);
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--gray-1);
+  margin-bottom: 28px;
+  white-space: nowrap;
+}
+
+/* 描述文 */
+.hero-lede{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--gray-1);
+  max-width: 480px;
+  margin-bottom: 36px;
+}
+
+/* CTA 按钮组 */
+.hero-actions{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+
+/* 主 CTA · Mori Green 实心 · 胶囊 chip 形态 · 文字左 + 箭头圆右 */
+.btn-primary{
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--white);
+  background: var(--green);
+  /* chip 形态:胶囊 + 左侧文字 24px + 右侧箭头圆 + 右 padding 8px */
+  height: 52px;
+  padding: 0 8px 0 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: background .2s, transform .28s var(--ease),
+              box-shadow .28s var(--ease);
+}
+/* 右侧白色实心箭头圆 · 绿箭头反白(印章感,与副 CTA 白底深圆镜像)*/
+.btn-primary::after{
+  content: '\2192';
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--green);
+  font-size: 15px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s var(--ease), transform .28s var(--ease);
+}
+/* hover 态 */
+.btn-primary:hover{
+  background: var(--green-text);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -8px rgba(59,165,93,.45);
+}
+.btn-primary:hover::after{
+  transform: translateX(3px);
+}
+
+/* 副 CTA · 白底胶囊 chip · 文字左 + 深色箭头圆右 */
+.btn-outline{
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--near-black);
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,.12);
+  height: 52px;
+  padding: 0 8px 0 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: border-color .2s, box-shadow .2s;
+}
+/* 右侧深色箭头圆 · 与主 CTA 白圆形成镜像 */
+.btn-outline::after{
+  content: '\2192';
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--near-black);
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s var(--ease), transform .28s var(--ease);
+}
+.btn-outline:hover{
+  border-color: rgba(0,0,0,.22);
+  box-shadow: 0 4px 16px -6px rgba(10,10,9,.14);
+}
+.btn-outline:hover::after{
+  transform: translateX(3px);
+}
+
+/* Hero 图作全幅大背景 · 文字叠在其上 */
+.hero-image{
+  position: absolute;
+  inset: 0;                       /* 铺满 hero 容器 */
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: right center;  /* 探针居右占焦点,左半区是空白墙面给文字底 */
+}
+
+/* 左侧白渐变遮罩 · 仅保护左 45% 文字区可读性 · 中后段 55%+ 图色保持原样 */
+.hero::after{
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgba(255,255,255,0.92) 0%,
+    rgba(255,255,255,0.78) 18%,
+    rgba(255,255,255,0.30) 35%,
+    rgba(255,255,255,0) 48%
+  );
+}
+
+/* ============================================================
+   任务 A 1.2 · Hero 浮动数据 chip
+   ============================================================ */
+.hero-chip-wrap{
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.hero-chip{
+  position: absolute;
+  padding: 8px 14px;
+  background: rgba(255,255,255,.75);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border: 1px solid rgba(0,0,0,.07);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--near-black);
+  letter-spacing: .02em;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 4px 16px -6px rgba(10,10,9,.12);
+}
+/* 右上 chip · 硬件数量 */
+.hero-chip.hc-hw{
+  top: 18%;
+  right: 6%;
+}
+/* 左下 chip · 融资状态 */
+.hero-chip.hc-status{
+  bottom: 20%;
+  right: 22%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hero-chip.hc-status::before{
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+  box-shadow: 0 0 8px var(--green-glow);
+}
+@media(max-width:768px){ .hero-chip-wrap{ display:none; } }
+
+/* ============================================================
+   任务 A 3.1 · 白圆 36px 跳转按钮 .btn-circle
+   ============================================================ */
+.btn-circle{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--gray-3);
+  color: var(--near-black);
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background .25s var(--ease), color .25s var(--ease),
+              border-color .25s var(--ease), transform .25s var(--ease);
+}
+.btn-circle:hover{
+  background: var(--near-black);
+  color: var(--white);
+  border-color: var(--near-black);
+  transform: translateX(2px);
+}
+.btn-circle svg{
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+/* 任务 A 3.3 旧 ::after hover 规则已迁移到新 ::before chip 方案,此处保留注释占位 */
+
+/* ============================================================
+   任务 B · 全站大字 / 按钮 / eyebrow / chip 文字锁单行
+   ============================================================ */
+/* ---- 任务 B nowrap 合集 ----
+   规则:仅对「设计上就是单行」的元素加锁:
+   · 章节编号(sn-major / sn-minor)
+   · eyebrow / nav 链接 / chip / pill
+   · 按钮文字
+   不对含 <br> 的多行 h2 / 长句 lede 加 nowrap
+   --------------------------------- */
+.sn-major,
+.sn-minor { white-space: nowrap; }
+
+.eyebrow,
+.nav a,
+.hero-eyebrow,
+.hw-badge,
+.ec-chip,
+.nw-ov b,
+.nw-room-title,
+.float-chip,
+.gc-name,
+.gc-status { white-space: nowrap; }
+
+.btn-primary,
+.btn-outline,
+.topbar-cta,
+.topbar-cta-arrow,
+.gc-cta { white-space: nowrap; }
+
+/* ============================================================
+   任务 C · 全站主 section min-height:100vh
+   ============================================================ */
+.painsec,
+.lampsec,
+.perovsec,
+.offlinesec,
+.appsec,
+.datasec,
+.hwsec,
+.nurserysec {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* S8 loopsec 已替换为 Tide of Light */
+
+/* 各 section 内层容器在 flex 布局中保持正常文档流 */
+.painsec > .pain-inner,
+.lampsec > .lampsec-inner,
+.perovsec > *,
+.offlinesec > .offlinesec-inner,
+.appsec > .appsec-inner,
+.datasec > .datasec-inner,
+.hwsec > .hwsec-inner,
+.nurserysec > .nurserysec-inner {
+  width: 100%;
+}
+
+/* Hero 分隔线下滚动提示 */
+.scroll-hint{
+  position: absolute;
+  bottom: 32px;
+  left: var(--pad-x);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gray-2);
+  opacity: .6;
+}
+.scroll-hint .sh-bar{
+  width: 1px;
+  height: 32px;
+  background: var(--gray-3);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-hint .sh-bar::after{
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--green);
+  animation: scrollBar 1.8s var(--ease) infinite;
+}
+@keyframes scrollBar{ 0%{ top:-100% } 100%{ top:200% } }
+
+@media(max-width:768px){
+  .hero-tagline-en{ font-size: clamp(11px, 3.2vw, 14px); letter-spacing: 0.08em; white-space: normal; }
+  .hero-h1-zh{ font-size: clamp(44px, 12vw, 72px); }
+  .hero{ min-height: 88vh; }
+  /* 移动端 mask 加重让文字背景更纯(小屏左半区与图重叠更严重)*/
+  .hero::after{
+    background: linear-gradient(
+      to right,
+      rgba(255,255,255,0.98) 0%,
+      rgba(255,255,255,0.94) 55%,
+      rgba(255,255,255,0.75) 100%
+    );
+  }
+}
+
+/* ============================================================
+   S2 · 痛点段(数据洞察)
+   ============================================================ */
+.painsec{
+  padding: var(--section-gap) var(--pad-x);
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-3);
+}
+.pain-inner{ max-width:1180px; margin:0 auto; }
+
+/* 大号 lede 段落 */
+.pain-lede{
+  font-weight: 700;
+  font-size: clamp(22px, 3.6vw, 44px);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--near-black);
+  max-width: 820px;
+  margin: 22px 0 0;
+}
+.pain-lede span{ color: var(--gray-2); font-weight: 400; }
+
+.pain-stats{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(28px, 5vw, 64px);
+  margin-top: clamp(56px, 8vh, 96px);
+  border-top: 1px solid var(--gray-3);
+  padding-top: clamp(36px, 5vh, 60px);
+}
+.pain-stat{}
+.big-num{
+  font-weight: 900;
+  font-size: clamp(56px, 11vw, 96px);
+  line-height: .9;
+  letter-spacing: -0.04em;
+  color: var(--black);
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+.big-num .unit{ font-size: clamp(20px, 3.4vw, 36px); font-weight: 700; color: var(--gray-2); }
+.big-num.accent{ color: var(--green); }
+.pain-stat .label{
+  margin-top: 18px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--gray-1);
+  max-width: 280px;
+}
+.pain-stat .label b{ color: var(--near-black); font-weight: 600; }
+.pain-source{ margin-top: 44px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--gray-2); }
+
+@media(max-width:900px){
+  .pain-stats{ grid-template-columns:1fr; gap:40px; }
+}
+
+/* ============================================================
+   S3 · 硬件篇 — Apple AirPods Pro 棚拍风(v2 · 2026-06-07)
+   ============================================================ */
+.showcase{
+  position: relative;
+  background: var(--white);
+  /* 一屏预算:整段恰好一个视口,垂直居中容器。
+     顶部 64px 为 fixed 浮岛导航(top16+~44h)避让,底部 24px 对称收口。
+     硬锁 height:100dvh + overflow:hidden,杜绝 grid 居中/drop-shadow 撑出的 ~20px 溢出。 */
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 64px 0 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.showcase-sticky{
+  position: relative;
+  /* Apple #F5F5F7 圆角大容器 */
+  background: #F5F5F7;
+  border-radius: 28px;
+  padding: 36px 56px 32px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  row-gap: 12px;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* 高度预算:视口 - 上下 padding(64+24) = 容器净高,恰好一屏不滚动 */
+  width: calc(100% - 48px);
+  height: calc(100dvh - 88px);
+}
+
+/* 顶部 eyebrow */
+.showcase-eyebrow{
+  display: flex; align-items: center; gap: 16px;
+  z-index: 6;
+}
+.showcase-eyebrow .sec-num{
+  font-family: var(--font-mono);
+  font-size: 13px; color: var(--black);
+}
+.showcase-eyebrow .eyebrow{
+  font-size: 12px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gray-1);
+}
+
+/* 中部 hero:产品图独占焦点(PROBE 巨字已删) */
+.showcase-hero{
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  /* 探针渲染高度 = 响应式单一真源。产品图与 SVG 覆盖层共用此变量,
+     保证「绿点/引线」随产品图同步缩放,所有视口都精确贴在部件上。 */
+  --probe-h: clamp(300px, 56vh, 520px);
+}
+
+/* 产品图 — 棚拍主角:居中、够大、落地接触阴影 */
+.showcase-product-img{
+  position: relative;
+  /* 一屏预算内重新定高:hero 行净高约 100dvh-280px,
+     产品取 56vh 为基准,上下各留 callout 与呼吸位。
+     height 抽成 --probe-h(值不变),供 SVG 覆盖层同步缩放。 */
+  height: var(--probe-h);
+  width: auto;
+  max-width: 100%;
+  z-index: 2;
+  transition: transform 1.1s var(--ease);
+  /* 棚拍双层阴影:主体投影 + 极淡地面接触阴影,把探针"放在台面上" */
+  filter:
+    drop-shadow(0 24px 40px rgba(10,10,9,.10))
+    drop-shadow(0 4px 6px rgba(10,10,9,.05));
+  object-fit: contain;
+}
+/* 地面接触镜面倒影 — 极淡,只增强"立在桌上"的真实感 */
+.showcase-hero::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: clamp(8px, 4vh, 36px);
+  transform: translateX(-50%);
+  width: clamp(120px, 16vw, 200px);
+  height: 18px;
+  background: radial-gradient(ellipse at center,
+              rgba(10,10,9,.14) 0%, rgba(10,10,9,.06) 45%, transparent 72%);
+  filter: blur(3px);
+  z-index: 1;            /* 接触阴影在产品下方 */
+  pointer-events: none;
+}
+
+/* 底部副标题 */
+.showcase-foot{
+  display: flex; justify-content: space-between; align-items: end;
+  gap: 32px; z-index: 6;
+}
+.showcase-foot h3{
+  font-size: clamp(22px, 2vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--black);
+  margin: 0;
+}
+.showcase-foot p{
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--gray-1);
+  max-width: 520px;
+  line-height: 1.6;
+}
+
+/* callout 标注 — Apple 风浮卡(白底 + 柔阴影) */
+.callout{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  opacity: 1;
+  visibility: visible;
+  z-index: 5;
+  /* 垂直居中于 dot 落点(各 c1-c4 用 top% + translateY(-50%) 对齐部件) */
+}
+.co-dot{
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--green); flex-shrink: 0;
+  box-shadow: 0 0 0 5px rgba(59,165,93,.18), 0 0 14px rgba(59,165,93,.6);
+}
+.co-line{
+  width: 64px; height: 1px;
+  background: linear-gradient(90deg, var(--gray-2), transparent);
+  flex-shrink: 0;
+}
+.co-text{
+  width: 240px; flex-shrink: 0;
+  background: #FFFFFF;
+  border: 1px solid rgba(10,10,9,.08);
+  border-radius: 14px;
+  padding: 14px 18px;
+  box-shadow: 0 14px 32px rgba(10,10,9,.10), 0 2px 8px rgba(10,10,9,.05);
+}
+.co-text h4{
+  font-size: 14px; font-weight: 700; color: var(--black);
+  margin: 0 0 4px; letter-spacing: -0.005em; line-height: 1.3;
+}
+.co-text p{
+  font-size: 12px; color: var(--gray-1);
+  line-height: 1.55; margin: 0;
+}
+
+/* ── 引线连接器覆盖层(SVG)──
+   盖在产品图上、同尺寸同缩放、viewBox 用产品自然像素(1024×1536)。
+   故 SVG 坐标 = 产品自然像素 = 永远贴在部件上,随 --probe-h 同步缩放。
+   绿点/引线脱离卡片、绝对定位到真实部件;overflow:visible 不撑高 section。 */
+.co-svg{
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  /* 与产品图同尺寸同比例:height=--probe-h,width 按自然比 1024/1536 反推。
+     两者完全重叠并同步缩放,SVG 内坐标即产品自然像素,不再依赖固定 px。 */
+  height: var(--probe-h);
+  width: calc(var(--probe-h) * 1024 / 1536);
+  overflow: visible;
+  pointer-events: none;
+  z-index: 4;                     /* 产品图(z2)之上、文字卡(z5)之下 */
+}
+/* 引线:细灰线,non-scaling 保持 1px;靠绿点端用 gradient 渐隐(各 line 单独定义) */
+.co-svg .co-leader{
+  stroke: var(--gray-2);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: .85;
+}
+/* 绿点:沿用 --green + 外发光质感(描边光晕 + drop-shadow) */
+.co-svg .co-dot-svg{
+  fill: var(--green);
+  stroke: rgba(59,165,93,.18);
+  stroke-width: 5;                /* 外圈柔光环,对应原 box-shadow 0 0 0 5px */
+  filter: drop-shadow(0 0 6px rgba(59,165,93,.6));
+}
+
+/* 4 张文字卡(co-text)绝对定位成 2×2 网格,用同一个 --probe-h 缩放,
+   才能与 SVG 引线锚点同源对齐:卡内侧边/垂直位置 = calc(50% ± 系数 * --probe-h),
+   系数 = (自然坐标 - 中心)/1536。SVG 内坐标也按 /1536 映射,故所有尺寸都对齐。
+   计算:0.288=(70-512)/1536≈(954-512)/1536;-0.285=(330-768)/1536;+0.073=(880-768)/1536。
+   左排卡内侧边在右(right 定位,向左展开);右排卡内侧边在左(left 定位,向右展开)。
+   绿点+引线全部交给 .co-svg,故 .callout 退化为「只放卡」的定位容器。 */
+.callout .co-dot,
+.callout .co-line{ display: none; }   /* dot/line 由 SVG 承担 */
+.callout{ display: block; }           /* 取消 flex,卡内不再有行布局 */
+
+/* 左·上:再生铝 → 内侧(右)边 x=70,锚 y=330 */
+.callout.c1{ top: calc(50% - 0.285 * var(--probe-h)); right: calc(50% + 0.288 * var(--probe-h)); left: auto; transform: translateY(-50%); }
+/* 右·上:光伏 → 内侧(左)边 x=954,锚 y=330 */
+.callout.c2{ top: calc(50% - 0.285 * var(--probe-h)); left: calc(50% + 0.288 * var(--probe-h)); right: auto; transform: translateY(-50%); }
+/* 右·下:光语 → 内侧(左)边 x=954,锚 y=880 */
+.callout.c3{ top: calc(50% + 0.073 * var(--probe-h)); left: calc(50% + 0.288 * var(--probe-h)); right: auto; transform: translateY(-50%); }
+/* 左·下:电容 → 内侧(右)边 x=70,锚 y=880 */
+.callout.c4{ top: calc(50% + 0.073 * var(--probe-h)); right: calc(50% + 0.288 * var(--probe-h)); left: auto; transform: translateY(-50%); }
+
+/* showcase-beats 已停用(同屏全展示模式,无需滚动撑高) */
+.showcase-beats{ display: none; }
+.beat{ height: 0; }
+
+/* 移动端 */
+@media(max-width:980px){
+  /* 移动端不强制一屏:回归正常文档流,撤销桌面端的 100dvh 硬锁高度与裁切 */
+  .showcase{
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    display: block;
+    place-items: initial;
+    padding: 24px 0;
+  }
+  .showcase-sticky{
+    position: relative; height: auto; min-height: 0;
+    width: auto;
+    border-radius: 20px;
+    margin: 0 16px;
+    padding: 32px 24px;
+    display: flex; flex-direction: column; align-items: stretch;
+  }
+  .showcase-hero{ min-height: 52vh; }
+  .showcase-product-img{ height: 46vh; max-width: 80%; }
+  /* 撤销桌面端接触阴影伪元素(移动端竖排,无台面构图) */
+  .showcase-hero::after{ display: none; }
+  .showcase-foot{ flex-direction: column; align-items: start; }
+
+  /* 移动端:隐藏引线连接器覆盖层(绿点+引线),避免绝对定位泄漏 */
+  .co-svg{ display: none; }
+
+  /* 移动端:4 张卡脱离绝对定位,回归产品图下方竖排堆叠流。
+     用 .callout.cN 提高优先级,确保覆盖桌面 .callout.c1~c4 的 calc 定位与 translateY,
+     不让桌面的 transform/偏移泄漏到移动端(static 下 top/left/right 已失效,但 transform 仍生效)。 */
+  .callout,
+  .callout.c1, .callout.c2, .callout.c3, .callout.c4{
+    position: static;
+    top: auto; left: auto; right: auto;
+    margin: 8px 0;
+    opacity: 1; visibility: visible; transform: none;
+  }
+
+  /* 用一个 flex 容器包裹 4 张卡:产品图下方 */
+  .showcase-hero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+  /* 产品图本身 z-index 无需改,已是 relative flow */
+  .showcase-hero .showcase-product-img{
+    margin-bottom: 16px;
+  }
+  /* 移动端文字卡占满宽度 */
+  .co-text{ width: auto; }
+}
+
+/* ============================================================
+   S3b · 光语交互 — VIS 三态呼吸灯(严格 3 色)
+   ============================================================ */
+.lampsec{
+  padding: var(--section-gap) var(--pad-x);
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-3);
+}
+.lampsec-inner{ max-width:1080px; margin:0 auto; }
+.lampsec-head{ max-width:720px; }
+/* ============================================================
+   提案 2.1 章节编号 NN/MM — 通用 .section-counter
+   ============================================================ */
+.section-counter{
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+.section-counter .sn-major{
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 400;
+  color: var(--near-black);
+  letter-spacing: -.02em;
+  line-height: 1;
+  font-family: var(--font-sans);
+}
+.section-counter .sn-minor{
+  font-size: clamp(18px, 1.6vw, 24px);
+  font-weight: 400;
+  color: var(--gray-2);
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+/* ============================================================
+   提案 2.2 Features 巨字 anchor — .s-anchor
+   ============================================================ */
+.s-anchor{
+  /* 中文版默认 · 2-4 字单行展示,字号 110 上限 */
+  font-size: clamp(56px, 8vw, 110px);
+  font-weight: 900;
+  letter-spacing: -.02em;       /* 中文优化字距(英文风格 -.04em 中文会粘连)*/
+  line-height: .95;
+  color: var(--near-black);
+  margin: 10px 0 28px;
+  word-break: keep-all;          /* 中文不词内断行 */
+  white-space: nowrap;           /* 中文 2-4 字均单行,溢出靠容器横向留白吸收 */
+}
+/* 英文版切换 · 给 anchor 加 lang="en" 或 .is-en 即可
+   英文 10-14 char 比中文 2-4 字宽 2-3 倍,需:
+   ─ 字距紧排 -0.04em(英文显示窗口审美)
+   ─ 字号上限降到 92px 避免撑出容器
+   ─ 允许折行作 fallback */
+.s-anchor[lang="en"], .s-anchor.is-en{
+  font-size: clamp(48px, 6.5vw, 92px);
+  letter-spacing: -.04em;
+  white-space: normal;
+}
+
+/* 光语段 h2(与 s-anchor 搭配后缩小为副标题档)*/
+.lampsec-head h2{
+  font-weight: 900;
+  font-size: clamp(28px, 3.5vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin-top: 10px;
+}
+
+.lamp-lede{
+  font-size: 16px;
+  color: var(--gray-1);
+  line-height: 1.7;
+  max-width: 480px;
+  margin-top: 20px;
+}
+
+.lamp-stage{
+  margin-top: clamp(52px, 7vh, 80px);
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+}
+
+/* VIS .lr 三态圆环 */
+.lamp-demo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 340px;
+}
+.lamp-disc{
+  position: relative;
+  width: 260px;
+  height: 260px;
+}
+.lamp-disc .ld-bezel{
+  position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 45deg, var(--alu-hi), var(--alu-lo), var(--alu-mid), var(--alu-edge), var(--alu-hi), var(--alu-mid), var(--alu-lo), var(--alu-hi));
+  box-shadow:inset 0 3px 5px rgba(255,255,255,.7), inset 0 -5px 10px rgba(0,0,0,.22), 0 18px 50px -14px rgba(10,10,9,.26);
+}
+/* 呼吸环:默认绿正常 */
+.lamp-ring{
+  position:absolute;inset:16px;border-radius:50%;background:transparent;
+  border:7px solid var(--green);
+  box-shadow: 0 0 18px var(--green-glow), inset 0 0 12px rgba(59,165,93,.4);
+  animation:lampBreath 4s ease-in-out infinite;
+  transition:border-color .9s var(--ease);
+}
+.lamp-disc .ld-solar{
+  position:absolute;inset:28px;border-radius:50%;
+  background:radial-gradient(circle at 38% 30%, #3a3d40 0%, #1a1c1e 45%, #0a0b0c 100%);
+  box-shadow:inset 0 4px 14px rgba(0,0,0,.6);
+  overflow:hidden;
+}
+.lamp-disc .ld-solar::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent 0 22px,rgba(255,255,255,.05) 22px 23px),repeating-linear-gradient(90deg,transparent 0 22px,rgba(255,255,255,.05) 22px 23px);}
+.lamp-halo{position:absolute;inset:-28px;border-radius:50%;z-index:-1;background:radial-gradient(circle,var(--green-glow) 0%,transparent 62%);opacity:.28;filter:blur(20px);animation:haloBreath 4s ease-in-out infinite;}
+
+@keyframes lampBreath{
+  0%,100%{ box-shadow:0 0 14px var(--green-glow),inset 0 0 10px rgba(59,165,93,.35); }
+  50%{ box-shadow:0 0 28px rgba(59,165,93,.5),inset 0 0 16px rgba(59,165,93,.5); }
+}
+@keyframes haloBreath{ 0%,100%{opacity:.22;transform:scale(.96);} 50%{opacity:.36;transform:scale(1.04);} }
+
+/* 告急态:红色 1.5s 急促 */
+.lamp-disc[data-state="feed"] .lamp-ring{
+  border-color:var(--red);
+  animation-duration:1.5s;
+  box-shadow:0 0 18px rgba(226,75,74,.45),inset 0 0 12px rgba(226,75,74,.4);
+}
+.lamp-disc[data-state="feed"] .lamp-halo{background:radial-gradient(circle,rgba(226,75,74,.35) 0%,transparent 62%);}
+
+/* 离线态:灰 无动画 */
+.lamp-disc[data-state="offline"] .lamp-ring{
+  border-color:var(--gray-3);
+  animation:none;
+  box-shadow:none;
+}
+.lamp-disc[data-state="offline"] .lamp-halo{opacity:0;}
+
+/* 提醒态:琥珀 中速 2.5s */
+.lamp-disc[data-state="remind"] .lamp-ring{
+  border-color:var(--amber);
+  animation-duration:2.5s;
+  box-shadow:0 0 18px rgba(239,159,39,.45),inset 0 0 12px rgba(239,159,39,.4);
+}
+.lamp-disc[data-state="remind"] .lamp-halo{background:radial-gradient(circle,rgba(239,159,39,.32) 0%,transparent 62%);}
+.ls-swatch.remind{ background:var(--amber); box-shadow:0 0 10px rgba(239,159,39,.5); }
+
+/* 状态卡列表 */
+.lamp-states{display:flex;flex-direction:column;gap:10px;}
+.lamp-state{
+  display:flex;align-items:flex-start;gap:16px;cursor:pointer;
+  padding:16px 18px;border-radius:4px;
+  background:transparent;border:1px solid transparent;
+  transition:background .3s var(--ease), border-color .3s;
+}
+.lamp-state:hover{ background:var(--gray-4); }
+.lamp-state.active{
+  background:var(--white);
+  border-color:var(--gray-3);
+  box-shadow:0 2px 12px rgba(10,10,9,.07);
+}
+.ls-swatch{
+  width:16px;height:16px;border-radius:50%;flex-shrink:0;margin-top:3px;
+}
+.ls-swatch.thrive{ background:var(--green); box-shadow:0 0 10px var(--green-glow); }
+.ls-swatch.feed{   background:var(--red);   box-shadow:0 0 10px rgba(226,75,74,.45); }
+.ls-swatch.offline{ background:var(--gray-3); }
+.ls-body h4{
+  font-size:15px;font-weight:600;color:var(--black);letter-spacing:-0.01em;
+  display:flex;align-items:baseline;gap:10px;
+}
+.rhythm{
+  font-family:var(--font-mono);font-size:10px;font-weight:500;
+  letter-spacing:.08em;color:var(--gray-2);text-transform:uppercase;
+}
+.ls-body p{font-size:13px;color:var(--gray-1);line-height:1.55;margin-top:4px;}
+
+/* VIS spec 行:颜色 + 周期参数 */
+.lamp-spec{
+  margin-top:4px;
+  font-family:var(--font-mono);
+  font-size:10px;
+  color:var(--gray-2);
+  letter-spacing:.04em;
+}
+
+.lamp-foot{
+  text-align:center;
+  margin-top:clamp(40px,5vh,60px);
+  font-size:16px;
+  color:var(--gray-1);
+  font-style:italic;
+  letter-spacing:-0.01em;
+}
+
+@media(max-width:900px){
+  .lamp-stage{grid-template-columns:1fr;gap:44px;}
+  .lamp-disc{width:200px;height:200px;}
+}
+
+/* ============================================================
+   S3c · 钙钛矿能源篇 — hw-card 双栏 + 光谱带隙背景
+   ============================================================ */
+.perovsec{
+  padding: var(--section-gap) var(--pad-x);
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-3);
+}
+.perov-inner{ max-width:1180px; margin:0 auto; }
+
+/* 钙钛矿段 s-anchor 与 h2 之间留出层级空间 */
+.perov-head .s-anchor{
+  margin-bottom: 0;   /* kicker chip 承接,中间无需额外 margin */
+}
+
+/* perov-kicker chip(VIS pill 公式)*/
+.perov-kicker{
+  display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  color:var(--green-text);
+  padding:6px 12px;border-radius:2px;
+  background:var(--green-dim);border:1px solid rgba(59,165,93,.22);
+}
+.pk-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green-glow);
+  animation:dotPulse 4s ease-in-out infinite;
+}
+@keyframes dotPulse{0%,100%{opacity:1;}50%{opacity:.5;}}
+
+.perov-inner h2{
+  font-weight:900;font-size:clamp(28px,3.5vw,52px);line-height:1.1;
+  letter-spacing:-0.025em;color:var(--black);
+  /* s-anchor 下方增加间距,与巨字锚明确分层 */
+  margin-bottom:20px;margin-top:24px;
+  word-break:keep-all;
+}
+.perov-lede{
+  font-size:16px;line-height:1.7;color:var(--gray-1);
+  max-width:680px;margin-bottom:clamp(44px,6vh,72px);
+}
+.perov-lede b{color:var(--near-black);font-weight:600;}
+
+/* 双卡:VIS hw-card 公式 */
+.perov-cards{
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  margin-bottom:clamp(44px,6vh,72px);
+}
+.hw-card{
+  border:1px solid var(--gray-3);
+  border-radius:4px;
+  overflow:hidden;
+}
+/* V1 卡顶部绿描边 · V2 卡顶部琥珀描边 */
+.hw-card.v1{ border-top:3px solid var(--green); }
+.hw-card.v2{ border-top:3px solid var(--amber); }
+
+/* 光谱带隙渐变背景:80px 高,颜色全部来自 VIS palette */
+.hw-spectrum{
+  height:80px;
+  background:linear-gradient(90deg,
+    var(--red) 0%,
+    var(--amber) 28%,
+    var(--green) 62%,
+    var(--green-text) 100%
+  );
+  opacity:.18;
+}
+.hw-top{padding:22px 24px 18px;}
+.hw-badge{
+  display:inline-block;padding:3px 9px;border-radius:2px;
+  font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.hw-card.v1 .hw-badge{ background:var(--green-dim);color:var(--green-text); }
+.hw-card.v2 .hw-badge{ background:rgba(239,159,39,.1);color:var(--amber); }
+
+.hw-name{font-size:22px;font-weight:900;letter-spacing:-.03em;margin-bottom:8px;}
+.hw-desc{font-size:13px;color:var(--gray-1);line-height:1.6;}
+.hw-specs{padding:0 24px 16px;}
+.spec-r{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 0;border-bottom:1px solid var(--gray-4);font-size:12px;
+}
+.spec-r:last-child{border-bottom:none;}
+.sk{color:var(--gray-2);}
+.sv{color:var(--near-black);font-weight:500;}
+
+/* 段末视野宣言 */
+.perov-vision{
+  max-width:760px;
+  font-size:clamp(15px,2vw,20px);
+  font-weight:500;
+  line-height:1.55;
+  letter-spacing:-0.01em;
+  color:var(--near-black);
+  border-left:3px solid var(--green);
+  padding-left:24px;
+}
+/* MoriSync 中 o 环 */
+.perov-vision .vision-source{
+  display:block;
+  margin-top:14px;
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--gray-2);
+}
+
+@media(max-width:900px){
+  .perov-cards{grid-template-columns:1fr;gap:16px;}
+}
+
+/* ============================================================
+   S4 · 离线本地 — VIS vp Do/Don't 对照表
+   ============================================================ */
+.offlinesec{
+  padding: var(--section-gap) var(--pad-x);
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-3);
+}
+.offlinesec-inner{ max-width:1080px; margin:0 auto; }
+.offlinesec-inner h2{
+  font-weight:900;font-size:clamp(28px,3.5vw,48px);line-height:1.05;
+  letter-spacing:-0.02em;color:var(--black);margin:10px 0 12px;
+}
+.offlinesec-lede{
+  font-size:16px;color:var(--gray-1);line-height:1.7;
+  max-width:520px;margin-bottom:clamp(40px,6vh,60px);
+}
+
+/* VIS vp 公式:vg 绿底 · vb 红底 */
+.vp-stack{ display:flex;flex-direction:column;gap:2px; }
+.vp{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  border-radius:4px;overflow:hidden;border:1px solid var(--gray-3);
+  margin-bottom:2px;
+}
+.vg{padding:20px 22px;background:rgba(59,165,93,.05);}
+.vb{padding:20px 22px;background:rgba(226,75,74,.04);}
+.vl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.vg .vl{color:var(--green-text);}
+.vb .vl{color:#B02020;}
+.vq{font-size:14px;color:var(--near-black);line-height:1.6;}
+.vb .vq{color:var(--gray-2);text-decoration:line-through;text-decoration-color:rgba(226,75,74,.35);}
+
+@media(max-width:640px){
+  .vp{grid-template-columns:1fr;}
+}
+
+/* ============================================================
+   S5 · App 软件篇
+   ============================================================ */
+.appsec{
+  padding: var(--section-gap) var(--pad-x);
+  background: var(--gray-4);
+  border-bottom: 1px solid var(--gray-3);
+}
+.appsec-inner{ max-width:1180px; margin:0 auto; }
+.appsec-inner h2{
+  font-weight:900;font-size:clamp(36px,6vw,72px);line-height:.95;
+  letter-spacing:-0.03em;color:var(--black);margin:14px 0 12px;
+}
+.appsec-lede{
+  font-size:16px;color:var(--gray-1);line-height:1.7;
+  max-width:480px;margin-bottom:clamp(44px,6vh,64px);
+}
+
+.app-flow{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.app-card{
+  background:var(--white);
+  border:1px solid var(--gray-3);
+  border-radius:4px;
+  padding:28px 24px 30px;
+  transition:transform .45s var(--ease), box-shadow .45s;
+}
+.app-card:hover{ transform:translateY(-4px); box-shadow:0 20px 44px -18px rgba(10,10,9,.14); }
+.ac-step{
+  font-family:var(--font-mono);
+  font-size:11px;letter-spacing:.12em;
+  color:var(--green-text);font-weight:600;
+  margin-bottom:14px;
+}
+.app-card h4{font-size:18px;font-weight:700;color:var(--black);margin-bottom:8px;letter-spacing:-0.01em;}
+.app-card p{font-size:13px;color:var(--gray-1);line-height:1.6;}
+.ac-visual{
+  margin-top:22px;height:120px;border-radius:4px;
+  position:relative;overflow:hidden;
+  background:var(--gray-4);border:1px solid var(--gray-3);
+}
+
+/* 扫描动画 */
+.scan-frame{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.scan-leaf{position:relative;width:36px;height:44px;background:linear-gradient(135deg,var(--green),var(--green-text));border-radius:0 100% 0 100%;transform:rotate(-12deg);}
+.scan-leaf::after{content:'';position:absolute;top:10%;left:48%;width:1.5px;height:78%;background:rgba(255,255,255,.55);transform:rotate(8deg);transform-origin:top;border-radius:2px;}
+.scan-bracket{position:absolute;width:64px;height:64px;}
+.scan-bracket::before,.scan-bracket::after{content:'';position:absolute;width:16px;height:16px;border-color:var(--green);border-style:solid;}
+.scan-bracket::before{top:0;left:0;border-width:2px 0 0 2px;border-radius:2px 0 0 0;}
+.scan-bracket::after{bottom:0;right:0;border-width:0 2px 2px 0;border-radius:0 0 2px 0;}
+.scan-line{position:absolute;left:18%;right:18%;height:1.5px;background:linear-gradient(90deg,transparent,var(--green),transparent);animation:scanMove 2.6s var(--ease) infinite;}
+@keyframes scanMove{0%,100%{top:28%}50%{top:72%}}
+
+/* 状态 chips */
+.diag-chips{position:absolute;inset:0;padding:14px;display:flex;flex-direction:column;gap:7px;justify-content:center;}
+.diag-chip{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;color:var(--near-black);font-weight:500;
+  background:var(--white);border:1px solid var(--gray-3);
+  border-radius:4px;padding:6px 10px;
+}
+.dc-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.dc-dot.ok{background:var(--green);}
+.dc-dot.warn{background:var(--amber);}
+.dc-tag{margin-left:auto;font-size:10px;color:var(--gray-2);font-family:var(--font-mono);}
+
+/* 成长轨迹 */
+.grow-track{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-around;padding:0 22px;}
+.grow-stage{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;position:relative;}
+.grow-stage .gs-dot{border-radius:50%;transition:.4s var(--ease);}
+.grow-stage.s1 .gs-dot{width:12px;height:12px;background:var(--gray-3);}
+.grow-stage.s2 .gs-dot{width:20px;height:20px;background:var(--green);box-shadow:0 0 12px var(--green-glow);}
+.grow-stage.s3 .gs-dot{width:28px;height:28px;background:var(--green-text);}
+.grow-stage .gs-name{font-size:10px;letter-spacing:.06em;color:var(--gray-2);text-transform:uppercase;}
+.grow-stage.now .gs-name{color:var(--green-text);font-weight:600;}
+.grow-stage.now .gs-dot{outline:2px solid var(--green);outline-offset:3px;}
+.grow-connector{position:absolute;top:40%;left:22%;right:22%;height:1px;background:repeating-linear-gradient(90deg,var(--gray-3) 0 4px,transparent 4px 8px);z-index:-1;}
+
+@media(max-width:900px){ .app-flow{grid-template-columns:1fr;} }
+
+/* ============================================================
+   S5b · 实时数据状态卡
+   ============================================================ */
+.datasec{
+  padding: var(--section-gap) var(--pad-x);
+  background: var(--gray-4);
+  border-bottom: 1px solid var(--gray-3);
+}
+.datasec-inner{
+  max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(40px,6vw,96px);align-items:start;
+}
+.datasec-copy h2{
+  font-weight:900;font-size:clamp(28px,4.5vw,56px);line-height:1.0;
+  letter-spacing:-0.03em;color:var(--black);margin:14px 0 22px;
+}
+.datasec-lede{font-size:16px;color:var(--gray-1);line-height:1.7;max-width:420px;}
+/* 修复：grid 子项默认 min-width:auto 导致固定宽 card 撑破 1180px 容器
+   两列均加 min-width:0，让 grid 算法正确分配 1fr；
+   datasec-visual 加 overflow:hidden 裁掉 float-chip 的装饰性 -4% 出血，视觉无损 */
+.datasec-copy{min-width:0;}
+.datasec-visual{position:relative;display:flex;justify-content:center;min-width:0;overflow:hidden;}
+
+/* 数据状态卡:VIS lg1 公式 */
+.glass-card{
+  position:relative;width:320px;
+  background:var(--white);
+  border:1px solid var(--gray-3);
+  border-radius:16px;padding:24px;
+  box-shadow:0 2px 20px rgba(10,10,9,.06);
+}
+.gc-head{display:flex;align-items:center;gap:18px;}
+.gc-ring{position:relative;width:88px;height:88px;flex-shrink:0;}
+.gc-ring svg{width:100%;height:100%;transform:rotate(-90deg);}
+.gc-track{fill:none;stroke:var(--gray-3);stroke-width:7;}
+.gc-prog{fill:none;stroke:var(--green);stroke-width:7;stroke-linecap:round;stroke-dasharray:264;stroke-dashoffset:264;transition:stroke-dashoffset 1.6s var(--ease);}
+.gc-ring.in .gc-prog{stroke-dashoffset:20;}
+.gc-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:26px;font-weight:700;color:var(--black);}
+.gc-pct small{font-size:13px;color:var(--gray-2);margin-left:1px;}
+.gc-name{font-size:16px;font-weight:700;color:var(--black);letter-spacing:-.01em;}
+.gc-status{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--green-text);font-weight:500;margin:4px 0 2px;}
+.gc-statusdot{width:6px;height:6px;border-radius:50%;background:var(--green);}
+.gc-loc{font-size:11px;color:var(--gray-2);}
+.gc-divider{height:1px;background:var(--gray-3);margin:18px 0;}
+.gc-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;}
+.gc-mi{width:28px;height:28px;border-radius:8px;margin:0 auto 7px;}
+.gc-mi-water{background:rgba(77,166,255,.15);}
+.gc-mi-light{background:rgba(239,159,39,.15);}
+.gc-mi-nut{background:var(--green-dim);}
+.gc-mi-temp{background:rgba(255,100,60,.13);}
+.gc-mv{font-family:var(--font-mono);font-size:17px;font-weight:700;color:var(--black);}
+.gc-mv small{font-size:10px;color:var(--gray-2);}
+.gc-mk{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-2);margin-top:2px;}
+.gc-cta{
+  margin-top:18px;text-align:center;font-size:13px;font-weight:600;
+  color:var(--green-text);padding:10px;border-radius:4px;
+  background:var(--green-dim);cursor:pointer;transition:.25s var(--ease);
+}
+.gc-cta:hover{background:rgba(59,165,93,.18);}
+
+.float-chip{
+  position:absolute;display:flex;align-items:center;gap:7px;
+  background:var(--white);border:1px solid var(--gray-3);
+  border-radius:20px;padding:8px 14px;font-size:11px;
+  color:var(--near-black);font-weight:500;
+  box-shadow:0 8px 24px -10px rgba(10,10,9,.14);
+}
+.fcd{width:6px;height:6px;border-radius:50%;}
+.fcd.green{background:var(--green);}
+.float-chip.fc1{top:4%;right:-4%;animation:floaty 5s var(--ease) infinite;}
+.float-chip.fc2{bottom:8%;left:-4%;animation:floaty 5.6s var(--ease) infinite .5s;}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+@media(max-width:900px){ .datasec-inner{grid-template-columns:1fr;} .float-chip{display:none;} }
+@media(max-width:480px){ .gc-metrics{grid-template-columns:repeat(2,1fr);gap:10px;} }
+
+/* ============================================================
+   S8 · Tide of Light — 光的涨落(闭环四步同屏)
+   ============================================================ */
+.loopsec{
+  position:relative;
+  background:var(--white);
+  border-bottom:1px solid var(--gray-3);
+  padding:var(--section-gap) var(--pad-x);
+  overflow:hidden;
+}
+.loop-inner{max-width:1200px;margin:0 auto;}
+
+.loop-head{margin-bottom:clamp(40px,6vh,64px);max-width:780px;}
+.loop-head h2{font-weight:900;font-size:clamp(34px,5.2vw,60px);line-height:1.0;letter-spacing:-0.03em;color:var(--black);margin-top:12px;}
+.loop-head .hl{color:var(--green-text);}
+.loop-head p{font-size:15px;color:var(--gray-1);line-height:1.7;max-width:560px;margin-top:18px;}
+
+/* —— 潮汐带:四列 01/02/03 薄板 + 04 涌浪(加宽 2.05fr)—— */
+.tide{
+  position:relative;display:grid;
+  grid-template-columns:1fr 0.92fr 0.86fr 2.05fr;
+  border:1px solid var(--gray-3);border-radius:20px;overflow:hidden;
+  box-shadow:0 30px 80px -40px rgba(10,10,9,.28);
+}
+
+/* —— 01-03 薄板 —— */
+.slab{
+  position:relative;z-index:2;
+  padding:clamp(26px,2.6vw,32px) clamp(18px,1.7vw,24px) clamp(30px,3.4vw,40px);
+  display:flex;flex-direction:column;align-items:flex-start;
+  background:linear-gradient(180deg,#FFFFFF 0%,#FCFCFB 100%);
+  border-right:1px solid var(--gray-4);
+}
+.slab.s2{background:linear-gradient(180deg,#FCFCFB 0%,#F8F8F6 100%);}
+.slab.s3{background:linear-gradient(180deg,#F8F8F6 0%,#F2F4F0 100%);}
+
+.slab .s-no{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;color:var(--green-text);font-weight:600;}
+.slab .s-figure{
+  position:relative;
+  width:54px;height:54px;border-radius:14px;
+  margin:clamp(18px,2vw,24px) 0 16px;
+  background:var(--white);border:1px solid var(--gray-3);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  box-shadow:0 2px 10px rgba(10,10,9,.05);
+  transition:border-color .5s var(--ease),box-shadow .5s var(--ease),transform .5s var(--ease-spring);
+}
+/* 三格盒子统一:s1/s2/s3 同中性边框、同阴影,不跟随状态色变色(去掉 s3 强调框) */
+.slab:hover .s-figure{border-color:var(--gray-2);box-shadow:0 10px 24px -12px rgba(10,10,9,.22);transform:translateY(-2px);}
+
+.slab h4{font-size:16px;font-weight:700;letter-spacing:-0.01em;color:var(--black);margin:0 0 7px;}
+.slab p{font-size:12px;color:var(--gray-1);line-height:1.58;}
+
+.slab .s-read{display:flex;align-items:baseline;gap:6px;width:100%;margin-top:auto;padding-top:clamp(20px,2.6vw,30px);}
+.slab .s-read .rv{font-family:var(--font-mono);font-size:19px;font-weight:700;letter-spacing:-0.02em;color:var(--black);}
+.slab .s-read .rv .u{font-size:11px;color:var(--gray-2);font-weight:500;}
+.slab .s-read .rk{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-2);margin-left:auto;align-self:center;}
+
+/* 入场:三薄板自左向右压入 */
+.slab{opacity:0;transform:translateX(-14px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.tide.in .slab{opacity:1;transform:none;}
+.tide.in .slab.s1{transition-delay:.06s;}
+.tide.in .slab.s2{transition-delay:.16s;}
+.tide.in .slab.s3{transition-delay:.26s;}
+
+/* —— 01/02/03 统一:真实探针特写,同样铺满 s-figure 圆窗(progressive zoom)—— */
+/* 01 整个探针头(银+绿环+黑板) → 02 钻进采集面(纯黑多晶硅格纹) → 03 钻进呼吸环(纯绿环亮光) */
+.s-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.s1 .s-shot{filter:saturate(1.02) contrast(1.02);}
+.s2 .s-shot{filter:saturate(.98) contrast(1.06);}
+.s3 .s-shot{filter:saturate(1.14) contrast(1.04) brightness(1.03);}
+/* 顶部一层极淡白渐隐,让照片底缘融进薄板而非硬切 */
+.slab .s-figure::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(180deg,transparent 58%,rgba(252,252,251,.10) 100%);}
+
+/* 02 语义叠层:一颗上行数据点(采集面 → 上云)*/
+.viz-up{position:absolute;top:7px;left:50%;width:4px;height:4px;border-radius:50%;
+  background:#fff;box-shadow:0 0 5px 1px rgba(88,201,125,.9);opacity:0;transform:translateX(-50%);z-index:2;}
+.tide.in .viz-up{animation:upDot 1.9s var(--ease) infinite;}
+@keyframes upDot{0%{opacity:0;transform:translate(-50%,12px) scale(.5);}38%{opacity:1;}72%,100%{opacity:0;transform:translate(-50%,-7px) scale(1);}}
+
+/* 03 语义叠层:一颗向环心收束的思考光点(信号收敛)*/
+.viz-think{position:absolute;top:50%;left:50%;width:5px;height:5px;border-radius:50%;
+  background:#fff;box-shadow:0 0 7px 2px rgba(88,201,125,.95);opacity:0;
+  transform:translate(-50%,-50%);z-index:2;}
+.tide.in .viz-think{animation:thinkConverge 2.2s var(--ease) infinite;}
+@keyframes thinkConverge{0%{opacity:0;transform:translate(-50%,-50%) translate(11px,-11px) scale(.5);}
+  40%{opacity:1;}70%{opacity:1;transform:translate(-50%,-50%) translate(0,0) scale(1.1);}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(.6);}}
+
+/* —— 04 涌浪(暗场 climax)—— */
+.surge{
+  position:relative;z-index:2;overflow:hidden;
+  background:
+    radial-gradient(110% 80% at 30% 30%, rgba(59,165,93,.20) 0%, transparent 55%),
+    radial-gradient(90% 70% at 50% 118%, rgba(59,165,93,.12) 0%, transparent 60%),
+    linear-gradient(180deg, var(--void-2) 0%, var(--void) 62%, #08110D 100%);
+  padding:clamp(28px,2.8vw,40px);
+  display:flex;flex-direction:column;justify-content:center;
+  isolation:isolate;
+}
+.surge::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+  background-size:44px 44px;
+  -webkit-mask-image:radial-gradient(120% 110% at 40% 40%, #000 30%, transparent 80%);
+  mask-image:radial-gradient(120% 110% at 40% 40%, #000 30%, transparent 80%);
+}
+.surge .ch-tag{position:absolute;top:18px;left:22px;z-index:4;font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--green-soft);display:flex;align-items:center;gap:7px;}
+.surge .ch-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green-soft);box-shadow:0 0 10px var(--green);}
+.surge .ch-no{position:absolute;top:18px;right:22px;z-index:4;font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;color:rgba(255,255,255,.42);}
+
+.surge-row{display:flex;align-items:center;gap:clamp(20px,2.4vw,40px);position:relative;z-index:3;}
+
+/* 探针发光台 */
+.probe-stage{position:relative;flex:0 0 auto;height:clamp(248px,30vw,326px);aspect-ratio:510/1278;display:flex;align-items:center;justify-content:center;}
+.probe-halo{
+  position:absolute;left:50%;top:18%;width:138%;aspect-ratio:1;transform:translate(-50%,-50%);
+  border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle, var(--green-glow) 0%, rgba(59,165,93,.16) 38%, transparent 66%);
+  filter:blur(3px);
+}
+.tide.in .probe-halo{animation:haloBreath 4.2s var(--ease) infinite;}
+@keyframes haloBreath{0%,100%{opacity:.72;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08);}}
+/* 声呐环 */
+.probe-stage .ring{position:absolute;left:50%;top:18%;border-radius:50%;border:1px solid var(--green-soft);opacity:0;transform:translate(-50%,-50%);}
+.tide.in .probe-stage .ring{animation:sonar 4.2s var(--ease) infinite;}
+.tide.in .probe-stage .ring.r2{animation-delay:1.4s;}
+.tide.in .probe-stage .ring.r3{animation-delay:2.8s;}
+@keyframes sonar{
+  0%{width:46%;aspect-ratio:1;opacity:.5;}
+  70%{opacity:.08;}
+  100%{width:128%;aspect-ratio:1;opacity:0;}
+}
+.probe-hero{
+  position:relative;z-index:2;width:100%;height:100%;object-fit:contain;display:block;
+  filter:drop-shadow(0 0 18px var(--green-glow)) drop-shadow(0 14px 30px rgba(0,0,0,.5));
+}
+.tide.in .probe-hero{animation:heroGlow 4.2s var(--ease) infinite;}
+@keyframes heroGlow{
+  0%,100%{filter:drop-shadow(0 0 14px var(--green-glow)) drop-shadow(0 14px 30px rgba(0,0,0,.5));}
+  50%{filter:drop-shadow(0 0 26px rgba(105,250,114,.5)) drop-shadow(0 14px 30px rgba(0,0,0,.5));}
+}
+
+.surge-copy{flex:1;min-width:0;}
+.surge-copy .s-no{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;color:var(--green-soft);font-weight:600;}
+.surge-copy h3{font-size:clamp(22px,3.2vw,30px);font-weight:900;letter-spacing:-0.02em;color:#fff;margin:8px 0 10px;}
+.surge-copy p{font-size:13px;color:rgba(255,255,255,.62);line-height:1.68;max-width:340px;}
+/* 光语状态读出 */
+.surge-copy .light-state{
+  margin-top:16px;display:inline-flex;align-items:center;gap:10px;
+  padding:9px 15px;border-radius:14px;
+  background:rgba(88,201,125,.08);border:1px solid rgba(88,201,125,.26);
+}
+.surge-copy .light-state .dot{width:9px;height:9px;border-radius:50%;background:var(--green-soft);box-shadow:0 0 12px var(--green);flex:0 0 auto;}
+.tide.in .surge-copy .light-state .dot{animation:stateDot 4.2s var(--ease) infinite;}
+@keyframes stateDot{0%,100%{box-shadow:0 0 8px var(--green);}50%{box-shadow:0 0 18px var(--green-led);}}
+.surge-copy .light-state .ls-txt{display:flex;flex-direction:column;line-height:1.2;}
+.surge-copy .light-state .ls-state{font-size:13px;font-weight:700;color:#fff;}
+.surge-copy .light-state .ls-sub{font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;color:rgba(255,255,255,.55);margin-top:2px;}
+.surge-copy .ch-return{
+  margin-top:14px;display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--green-soft);
+}
+.surge-copy .ch-return svg{width:14px;height:14px;}
+
+/* —— 贯穿潮线 —— */
+.tideline{position:absolute;inset:0;z-index:5;pointer-events:none;}
+.tideline svg{width:100%;height:100%;overflow:hidden;}
+.tideline path{fill:none;stroke-linecap:round;}
+.tideline .tl-main{
+  stroke:url(#tideGrad);stroke-width:2;opacity:0;
+  filter:drop-shadow(0 0 4px var(--green-glow));
+  stroke-dasharray:1700;stroke-dashoffset:1700;
+}
+.tide.in .tideline .tl-main{opacity:1;animation:tideDraw 1.8s var(--ease) .2s forwards;}
+@keyframes tideDraw{to{stroke-dashoffset:0;}}
+.tideline .tl-back{stroke:url(#tideBack);stroke-width:1.4;stroke-dasharray:7 12;opacity:0;}
+.tide.in .tideline .tl-back{opacity:.8;animation:backFlow 3.6s linear 1.6s infinite;}
+@keyframes backFlow{to{stroke-dashoffset:38;}}
+.tideline .tl-spark{fill:var(--green-soft);opacity:0;}
+.tide.in .tideline .tl-spark{opacity:1;animation:sparkPulse 2.4s var(--ease) 1.4s infinite;}
+@keyframes sparkPulse{0%,100%{r:2.5;opacity:.5;}50%{r:4;opacity:1;}}
+
+/* —— 底部总结条 —— */
+.loop-foot{
+  margin-top:clamp(34px,5vh,52px);padding-top:24px;border-top:1px solid var(--gray-3);
+  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.loop-foot .lf-cap{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-2);}
+.loop-foot .lf-eq{font-size:14px;color:var(--gray-1);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.loop-foot .lf-eq b{color:var(--black);font-weight:700;}
+.loop-foot .lf-eq .ar{color:var(--gray-3);}
+.loop-foot .lf-eq .back{color:var(--green-text);font-weight:700;}
+
+/* —— CWV 节流:section 不在视口时冻结所有循环动画 —— */
+#tide:not(.anim-run) .ring,
+#tide:not(.anim-run) .probe-halo,
+#tide:not(.anim-run) .probe-hero,
+#tide:not(.anim-run) .light-state .dot,
+#tide:not(.anim-run) .viz-up,
+#tide:not(.anim-run) .viz-think,
+#tide:not(.anim-run) .tideline .tl-back,
+#tide:not(.anim-run) .tideline .tl-spark{
+  animation-play-state:paused !important;
+}
+
+/* —— 响应式 —— */
+@media(max-width:920px){
+  .tide{grid-template-columns:1fr 1fr;}
+  .surge{grid-column:1 / -1;order:-1;min-height:320px;}
+  .surge-row{flex-direction:row;text-align:left;gap:24px;align-items:center;}
+  .probe-stage{height:clamp(220px,40vw,280px);}
+  .surge-copy p{max-width:none;}
+  .slab.s3{grid-column:1 / -1;border-right:none;border-top:1px solid var(--gray-4);}
+  .tideline{display:none;}
+}
+@media(max-width:560px){
+  .tide{grid-template-columns:1fr;}
+  .slab,.slab.s3{border-right:none;border-top:1px solid var(--gray-4);}
+  .slab.s1{border-top:none;}
+  .surge-row{flex-direction:column;text-align:center;align-items:center;gap:20px;}
+  .probe-stage{height:clamp(240px,62vw,300px);}
+  .surge-copy p,.surge-copy h3{margin-left:auto;margin-right:auto;}
+  .surge-copy .light-state{margin-left:auto;margin-right:auto;}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;}}
+
+/* ============================================================
+   S7 · Hardware — Solar & Lite 双卡 (VIS hw-card 公式)
+   ============================================================ */
+.hwsec{
+  padding: var(--section-gap) var(--pad-x);
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-3);
+}
+.hwsec-inner{ max-width:1180px; margin:0 auto; }
+.hwsec-inner h2{
+  font-weight:900;font-size:clamp(36px,6vw,72px);line-height:.95;
+  letter-spacing:-0.03em;color:var(--black);margin:14px 0 12px;
+}
+.hwsec-lede{font-size:16px;color:var(--gray-1);line-height:1.7;max-width:520px;margin-bottom:clamp(44px,6vh,64px);}
+
+/* Naming Convention 灰底区 */
+.hw-naming{
+  background:var(--gray-4);border:1px solid var(--gray-3);border-radius:4px;
+  padding:28px 30px;margin-bottom:24px;
+}
+.hw-naming .eyebrow{margin-bottom:18px;}
+.hw-naming-row{display:flex;gap:clamp(28px,4vw,60px);flex-wrap:wrap;}
+.hw-name-entry{}
+.hw-name-entry .hw-name-big{
+  font-size:28px;font-weight:900;letter-spacing:-0.03em;color:var(--black);
+  display:flex;align-items:center;
+}
+.hw-name-entry .hw-name-note{font-size:12px;color:var(--gray-1);margin-top:4px;}
+
+/* Hardware 双卡 */
+.hw-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+/* Solar 卡 */
+.hw-card.solar-card{ border-top:3px solid var(--green); }
+.hw-card.solar-card .hw-badge{ background:var(--green-dim);color:var(--green-text); }
+/* Lite 卡 */
+.hw-card.lite-card{ border-top:3px solid var(--gray-3); }
+.hw-card.lite-card .hw-badge{ background:var(--gray-4);color:var(--gray-1); }
+
+.hw-card .hw-top{padding:24px 24px 18px;}
+.hw-card .hw-name{font-size:24px;font-weight:900;letter-spacing:-.03em;margin-bottom:8px;display:flex;align-items:center;}
+.hw-card .hw-desc{font-size:13px;color:var(--gray-1);line-height:1.6;}
+.hw-card .hw-specs{padding:0 24px 18px;}
+
+@media(max-width:900px){ .hw-pair{grid-template-columns:1fr;} }
+
+/* ============================================================
+   S8 · 植物幼儿园大屏
+   ============================================================ */
+.nurserysec{
+  padding: var(--section-gap) var(--pad-x);
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-3);
+}
+.nurserysec-inner{ max-width:1180px; margin:0 auto; }
+.nurserysec-inner h2{
+  font-weight:900;font-size:clamp(36px,6vw,72px);line-height:.95;
+  letter-spacing:-0.03em;color:var(--black);margin:14px 0 12px;
+}
+.nursery-lede{font-size:16px;color:var(--gray-1);line-height:1.7;max-width:520px;margin-bottom:clamp(44px,6vh,64px);}
+
+.nursery-wall{
+  background:var(--white);
+  border:1px solid var(--gray-3);
+  border-radius:4px;
+  padding:clamp(20px,3vw,36px);
+  box-shadow:0 2px 20px rgba(10,10,9,.05);
+}
+.nw-overview{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+.nw-ov{
+  display:flex;align-items:center;gap:10px;
+  padding:13px 14px;border-radius:4px;
+  background:var(--gray-4);border:1px solid var(--gray-3);
+}
+.nw-ov .ov-ic{font-size:14px;color:var(--green-text);flex-shrink:0;}
+.nw-ov .ov-body b{display:block;font-size:13px;font-weight:600;color:var(--black);letter-spacing:-.01em;}
+.nw-ov .ov-body i{font-style:normal;font-size:11px;color:var(--gray-2);}
+.nw-ecosys{display:flex;align-items:center;gap:16px;margin-bottom:22px;flex-wrap:wrap;}
+.nw-ecosys .ec-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-2);}
+.nw-ecosys .ec-logos{display:flex;gap:8px;}
+.nw-ecosys .ec-chip{
+  font-size:12px;color:var(--near-black);font-weight:500;
+  padding:5px 12px;border-radius:2px;
+  background:var(--gray-4);border:1px solid var(--gray-3);
+}
+.nw-room{margin-bottom:22px;}
+.nw-room:last-child{margin-bottom:0;}
+.nw-room-title{font-size:12px;font-weight:600;color:var(--black);letter-spacing:.04em;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.nw-room-title .rt-count{font-size:11px;font-weight:400;color:var(--gray-2);}
+.nw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.ng-card{
+  display:flex;align-items:center;gap:12px;
+  background:var(--gray-4);border:1px solid var(--gray-3);
+  border-radius:4px;padding:13px 14px;
+  transition:transform .35s var(--ease-spring),box-shadow .35s,background .3s;
+}
+.ng-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px -12px rgba(10,10,9,.14);background:var(--white);}
+.ng-ring{width:26px;height:26px;border-radius:50%;flex-shrink:0;border:3px solid var(--green);}
+.ng-card[data-st="warn"] .ng-ring{border-color:var(--amber);}
+.ng-card[data-st="feed"] .ng-ring{border-color:var(--red);}
+.ng-info b{display:block;font-size:13px;font-weight:600;color:var(--black);letter-spacing:-.01em;}
+.ng-info i{font-style:normal;font-size:11px;color:var(--gray-1);}
+.ng-card[data-st="ok"] .ng-info i{color:var(--green-text);}
+.ng-card[data-st="warn"] .ng-info i{color:var(--amber);}
+.ng-card[data-st="feed"] .ng-info i{color:var(--red);}
+
+@media(max-width:980px){ .nw-overview{grid-template-columns:repeat(2,1fr);} .nw-grid{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:560px){ .nw-grid{grid-template-columns:1fr;} }
+
+/* S8 补充 · nursery-shot：大屏截图容器（替换原 nursery-wall HTML 面板） */
+.nursery-shot{
+  border-radius:12px;               /* 比卡片 4px 更圆润，与整页浅色高级调性协调 */
+  overflow:hidden;
+  border:1px solid var(--gray-3);   /* 复用既有 hairline border token */
+  box-shadow:
+    0 14px 32px rgba(10,10,9,.10),  /* 主阴影：与行 817 同级的中等层次 */
+    0 2px 8px rgba(10,10,9,.05);    /* 底部薄阴影：增加贴合感 */
+}
+.nursery-shot img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* ============================================================
+   S9 · Footer — VIS 品牌收束
+   ============================================================ */
+.footer{
+  padding: var(--section-gap) var(--pad-x) 48px;
+  background: var(--black);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+/* 底部绿光晕 */
+.footer::before{
+  content:'';position:absolute;top:-20%;left:50%;transform:translateX(-50%);
+  width:80vw;height:50vw;border-radius:50%;
+  background:radial-gradient(circle, rgba(59,165,93,.12) 0%, transparent 60%);
+  pointer-events:none;
+}
+.footer-inner{position:relative;z-index:2;}
+.footer-big{
+  font-weight:900;font-size:clamp(40px,9vw,88px);line-height:1.0;
+  letter-spacing:-0.035em;color:var(--white);margin-bottom:16px;
+}
+.footer-big .footer-em{color:var(--green);}
+.footer-sub{
+  font-size:16px;color:rgba(255,255,255,.55);
+  max-width:420px;line-height:1.7;margin-bottom:56px;
+}
+.footer-actions{display:flex;align-items:center;gap:18px;margin-bottom:72px;}
+.footer .btn-primary{
+  background:var(--white);color:var(--black);
+  box-shadow:0 10px 28px -10px rgba(0,0,0,.35);
+}
+/* footer 主 CTA(白底)圆 → 深实色 + 白箭头 印章感 */
+.footer .btn-primary::after{
+  background:var(--near-black);color:var(--white);
+}
+.footer .btn-primary:hover{background:var(--stone);}
+.footer .btn-outline{
+  color:var(--white);border-color:rgba(255,255,255,.3);
+  background:transparent;
+}
+/* footer 副 CTA(透明底白描边)圆 → 实白 + 深箭头 印章感 */
+.footer .btn-outline::after{
+  background:var(--white);color:var(--near-black);
+}
+.footer .btn-outline:hover{border-color:var(--white);}
+.footer-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:28px;border-top:1px solid rgba(255,255,255,.14);
+  flex-wrap:wrap;gap:14px;
+}
+/* Footer 品牌区:M(o)riSync(TM) · UI Standard 档 + TM 上标 */
+.footer-brand{
+  font-size:21px;font-weight:700;letter-spacing:-.02em;
+  color:var(--white);
+  display:flex;align-items:center;
+}
+.footer-brand .wm-o-ui{ border-color:var(--green); }
+.footer-brand sup{font-size:9px;vertical-align:super;color:rgba(255,255,255,.5);margin-left:2px;}
+.footer-note{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.04em;}
+
+/* reduced-motion 全局降级 */
+@media(prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{opacity:1 !important;transform:none !important;}
+}
+
+/* ============================================================
+   B3-1 · 全局 Token 注入 (Batch3 · 2026-06-06)
+   ============================================================ */
+:root {
+  /* 节奏破网 padding 三段制 */
+  --pad-section-narrative: clamp(120px, 16vh, 200px) var(--pad-x);
+  --pad-section-product:   clamp(48px, 6vh, 80px) var(--pad-x);
+  --pad-section-brand:     clamp(96px, 12vh, 160px) var(--pad-x);
+
+  /* 深底段 token */
+  --bg-deep:            #0A0A09;
+  --text-on-deep:       #F4F2EC;
+  --text-on-deep-soft:  rgba(244,242,236,0.56);
+  --green-on-deep:      #4FC97A;
+  --gray-3-on-deep:     rgba(244,242,236,0.18);
+
+  /* 字号阶梯(VIS 三级强约束) */
+  --text-display:        clamp(72px, 10vw, 140px);
+  --text-display-muted:  clamp(56px,  8vw, 112px);
+  --text-h2:             clamp(56px,  7vw,  96px);
+  --text-h3:             clamp(36px, 4.5vw, 56px);
+  --text-lede:           clamp(18px, 1.5vw, 22px);
+  --text-body:           16px;
+  --text-kicker:         12px;
+
+  /* kicker 字距统一 */
+  --kicker-weight:        700;
+  --kicker-letter-spacing: 0.14em;
+  --kicker-color:         var(--gray-2);
+
+  /* 段编号(NN/MM) */
+  --secnum-font-size:        13px;
+  --secnum-weight:           700;
+  --secnum-letter-spacing:   0.16em;
+  --secnum-color:            var(--gray-2);
+}
+
+/* B3-1 · 段类 selector */
+.narrativesec { padding: var(--pad-section-narrative); }
+.productsec   { padding: var(--pad-section-product); }
+.brandsec     { padding: var(--pad-section-brand); }
+.deepsec      { background: var(--bg-deep); color: var(--text-on-deep); }
+.deepsec .eyebrow,
+.deepsec .kicker,
+.deepsec .sec-num { color: var(--text-on-deep-soft); }
+.deepsec .h-green,
+.deepsec .green-text,
+.deepsec [data-color="green"] { color: var(--green-on-deep); }
+.deepsec hr,
+.deepsec .divider { border-color: var(--gray-3-on-deep); background: var(--gray-3-on-deep); }
+
+/* B3-1 · 移除旧 min-height:100vh 对 section 的批量规则 */
+.painsec,
+.lampsec,
+.perovsec,
+.offlinesec,
+.appsec,
+.datasec,
+.hwsec,
+.nurserysec {
+  min-height: unset;
+}
+
+/* B3-3 · kicker 字距全局统一 */
+.eyebrow,
+.kicker,
+.sec-kicker {
+  font-family: var(--font-sans);
+  font-size: var(--text-kicker);
+  font-weight: var(--kicker-weight);
+  letter-spacing: var(--kicker-letter-spacing);
+  color: var(--kicker-color);
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+/* B3-3 · h2 字号阶梯全局统一 + nowrap
+   使用各段已有选择器精确覆盖,保证特异性足够高 */
+section h2,
+.s-title,
+.lampsec-head h2,
+.perov-inner h2,
+.offlinesec-inner h2,
+.appsec-inner h2,
+.datasec-copy h2,
+.loop-head h2,
+.hwsec-inner h2,
+.nurserysec-inner h2,
+.showcase-label h2 {
+  font-family: var(--font-sans);
+  font-size: var(--text-h2) !important;
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--near-black);
+  white-space: nowrap;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+.deepsec h2 { color: var(--text-on-deep); }
+
+/* B3-3 · mobile h2 回 normal */
+@media (max-width: 480px) {
+  section h2,
+  .s-title,
+  .lampsec-head h2,
+  .perov-inner h2,
+  .offlinesec-inner h2,
+  .appsec-inner h2,
+  .datasec-copy h2,
+  .loop-head h2,
+  .hwsec-inner h2,
+  .nurserysec-inner h2,
+  .showcase-label h2 { white-space: normal; line-height: 1.08; }
+}
+
+/* B3-3-patch · tablet 481-900px h2 降字号保单行
+   canvas 实测: #loop h2 在 42px + 7% 渲染余量 = 674px < content 707px
+   所有三处溢出 h2 均在此字号下安全 */
+@media (min-width: 481px) and (max-width: 900px) {
+  section h2,
+  .s-title,
+  .lampsec-head h2,
+  .perov-inner h2,
+  .offlinesec-inner h2,
+  .appsec-inner h2,
+  .datasec-copy h2,
+  .loop-head h2,
+  .hwsec-inner h2,
+  .nurserysec-inner h2,
+  .showcase-label h2 {
+    font-size: clamp(34px, 5.5vw, 42px) !important;
+    letter-spacing: -0.015em;
+  }
+}
+
+/* B3-4 · 段编号 .sec-num 规则 */
+.sec-num {
+  font-family: var(--font-sans);
+  font-size: var(--secnum-font-size);
+  font-weight: var(--secnum-weight);
+  letter-spacing: var(--secnum-letter-spacing);
+  color: var(--secnum-color);
+  margin-bottom: 8px;
+  white-space: nowrap;
+  display: block;
+  text-transform: uppercase;
+}
+.sec-num .total { opacity: 0.5; }
+.deepsec .sec-num { color: var(--text-on-deep-soft); }
+
+/* B3-7 · P0-02 mobile 375 Footer 按钮截断修复 */
+@media (max-width: 480px) {
+  .footer-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-actions .btn-primary,
+  .footer-actions .btn-outline {
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+    white-space: nowrap;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 顶栏:M(o)riSync — UI Standard 档 ===== -->
+<header class="topbar" id="topbar">
+  <a class="brand" href="#">
+    <span class="brand-text">M<span class="wm-o-ui"></span>riSync</span>
+  </a>
+  <nav class="nav">
+    <a href="#pain">数据</a>
+    <a href="#product">硬件</a>
+    <a href="#energy">能源</a>
+    <a href="#lamp">光语</a>
+    <a href="#app">软件</a>
+    <a href="#loop">闭环</a>
+    <a href="#hardware">产品</a>
+    <a href="#nursery">植物幼儿园</a>
+  </nav>
+  <a href="#footer" class="topbar-cta">
+    预约 Demo<span class="topbar-cta-arrow">↗</span>
+  </a>
+</header>
+
+<!-- ===== S1 · HERO — 文字左对齐 + 底部全幅图 ===== -->
+<section class="brandsec hero" id="hero">
+
+  <!-- 上半区:文字左对齐 -->
+  <div class="hero-copy">
+    <div class="hero-eyebrow">
+      <span>M</span>
+      <span class="hero-eyebrow-o"></span>
+      <span>RISYNC · SMART PLANT PROBE</span>
+    </div>
+    <h1 class="hero-h1-zh">翠影相生，四时同律</h1>
+    <p class="hero-tagline-en">Your plants, always in sync.</p>
+    <p class="hero-h1-en">AI 智能植物养护系统</p>
+
+    <!-- 描述 lede -->
+    <p class="hero-lede">插入土壤，自动唤醒。湿度、肥力、光照、温度数据实时回传。顶部光语呼吸灯替植物开口说话，看一眼就知道。光伏供电，永久续航。</p>
+
+    <!-- CTA 两按钮:主 CTA 融资沟通,副 CTA KS 预约 -->
+    <div class="hero-actions">
+      <a href="mailto:hello@morisync.com" class="btn-primary">联系融资</a>
+      <a href="#" class="btn-outline">预约演示</a>
+    </div>
+  </div>
+
+
+  <!-- 下半区:Hero 图全幅满铺 — morisync-hero-A6.png(探针 + 巴塞罗那椅虚化 + 白盆龟背竹 + Apple 打光)-->
+  <img
+    class="hero-image"
+    src="../assets/gen/morisync-hero-A6.png"
+    alt="MoriSync 智能植物探针 — 探针拉近特写,巴塞罗那椅虚化背景,白石盆龟背竹,Apple 打光风格"
+    width="2048"
+    height="1152"
+    loading="eager"
+    fetchpriority="high"
+  >
+</section>
+
+<!-- ===== S2 · 痛点数据洞察 ===== -->
+<section class="narrativesec painsec" id="pain">
+  <div class="sec-num">01<span class="total">/10</span></div>
+  <div class="pain-inner">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The Quiet Struggle · 一个无声的难题</span>
+    </div>
+    <p class="pain-lede reveal d1">
+      一整代人把绿植当孩子来养，<span>却总在无意间养不好它们。</span>
+    </p>
+    <div class="pain-stats">
+      <div class="pain-stat reveal d1">
+        <div class="big-num">70<span class="unit">%</span></div>
+        <p class="label">的千禧一代与 Z 世代自称<b>「植物父母」</b> — 养绿植已成这一代的生活方式。</p>
+      </div>
+      <div class="pain-stat reveal d2">
+        <div class="big-num accent">66<span class="unit">%</span></div>
+        <p class="label">却坦言自己是<b>「植物杀手」</b>。爱是真心的，只是不知道怎么读懂它。</p>
+      </div>
+      <div class="pain-stat reveal d3">
+        <div class="big-num">7<span class="unit">盆</span></div>
+        <p class="label">是每人<b>平均养丢的盆数</b>。不知何时该浇、浇多少；盆越多，越顾不过来。</p>
+      </div>
+    </div>
+    <p class="pain-source reveal">Source · Statista 全美园艺消费者调研</p>
+
+    <!-- 市场机会小节 — 复用 painsec 现有 class，不新增 CSS -->
+    <div class="sec-head reveal" style="margin-top:3.5rem">
+      <span class="eyebrow">The Opportunity · 市场机会</span>
+    </div>
+    <p class="pain-lede reveal d1">
+      养不好，从来不是小众烦恼 ——<span> 这是一个 7205 万家庭、$18 亿规模的市场。</span>
+    </p>
+    <div class="pain-stats">
+      <div class="pain-stat reveal d1">
+        <div class="big-num">7205<span class="unit">万</span></div>
+        <p class="label">美国园艺家庭 · 潜在用户基数（全美 1.31 亿户 × 55% 园艺渗透）</p>
+      </div>
+      <div class="pain-stat reveal d2">
+        <div class="big-num accent">$18<span class="unit">亿</span></div>
+        <p class="label">室内植物探针的市场天花板（TAM 理论营收）</p>
+      </div>
+      <div class="pain-stat reveal d3">
+        <div class="big-num">$6.15<span class="unit">亿</span></div>
+        <p class="label">锁定千禧一代室内植物父母 · 可服务人群（SAM）</p>
+      </div>
+    </div>
+    <p class="pain-source reveal">Source · US Census Bureau、Statista，MoriSync 测算</p>
+  </div>
+</section>
+
+<!-- ===== S3 · 硬件篇(Apple AirPods Pro 棚拍风)===== -->
+<section class="productsec showcase" id="product">
+  <div class="showcase-sticky">
+
+    <!-- 顶部 eyebrow -->
+    <div class="showcase-eyebrow">
+      <div class="sec-num">02<span class="total">/10</span></div>
+      <span class="eyebrow">The Hardware · 硬件</span>
+    </div>
+
+    <!-- 中部 hero:产品图 + 4 callouts(PROBE 巨字已删,产品独占焦点) -->
+    <div class="showcase-hero">
+      <img id="showcaseProbe" class="showcase-product-img"
+           src="../assets/probe-apple-studio.png"
+           alt="MoriSync 智能植物探针 — 100% PCR 再生铝外壳,光语呼吸灯,室内光伏供能,双叉电容传感">
+
+      <!-- 引线连接器覆盖层:盖在产品图上、同尺寸同缩放,viewBox 用产品自然像素 1024×1536。
+           SVG 坐标 = 产品自然像素 → 绿点/引线永远贴在部件上,随 --probe-h 同步缩放。
+           4 条 line(卡内侧边锚点 → 部件)+ 4 个 green dot(精确落在部件上)。移动端隐藏。 -->
+      <svg class="co-svg" viewBox="0 0 1024 1536" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <!-- c1 再生铝:卡锚(70,330)→圆盘左缘银壳(270,358) 右下,短 -->
+        <line class="co-leader" x1="70"  y1="330" x2="270" y2="358"></line>
+        <!-- c2 光伏:卡锚(954,330)→圆盘上部太阳能板(600,270) 左上 -->
+        <line class="co-leader" x1="954" y1="330" x2="600" y2="270"></line>
+        <!-- c4 电容:卡锚(70,880)→左探针(457,915) 右,长(伸到中央探针) -->
+        <line class="co-leader" x1="70"  y1="880" x2="457" y2="915"></line>
+        <!-- c3 光语:卡锚(954,880)→绿色 LED 环右下弧(647,458) 左上,斜长 -->
+        <line class="co-leader" x1="954" y1="880" x2="647" y2="458"></line>
+        <!-- 绿点(后绘,压在引线端点上;r=20 自然单位,缩放后约 6px) -->
+        <circle class="co-dot-svg" cx="270" cy="358" r="20"></circle>
+        <circle class="co-dot-svg" cx="600" cy="270" r="20"></circle>
+        <circle class="co-dot-svg" cx="457" cy="915" r="20"></circle>
+        <circle class="co-dot-svg" cx="647" cy="458" r="20"></circle>
+      </svg>
+
+      <div class="callout c1" data-step="0">
+        <span class="co-dot"></span><div class="co-line"></div>
+        <div class="co-text"><h4>100% PCR 再生铝</h4><p>Glass micro-bead 喷砂，触手温润如石</p></div>
+      </div>
+      <div class="callout c2" data-step="1">
+        <span class="co-dot"></span><div class="co-line"></div>
+        <div class="co-text"><h4>室内光伏供能</h4><p>顶部圆盘把光变成电<br>永不充电</p></div>
+      </div>
+      <div class="callout c3" data-step="2">
+        <span class="co-dot"></span><div class="co-line"></div>
+        <div class="co-text"><h4>光语呼吸灯</h4><p>绿色正常 · 黄色提醒 · 红色告急<br>看一眼就懂，无需开机</p></div>
+      </div>
+      <div class="callout c4" data-step="3">
+        <span class="co-dot"></span><div class="co-line"></div>
+        <div class="co-text"><h4>抗腐蚀电容探针</h4><p>双叉电容传感<br>土壤湿度与肥力如实回传</p></div>
+      </div>
+    </div>
+
+    <!-- 底部副标题 -->
+    <div class="showcase-foot">
+      <div>
+        <h3>一支探针，处处用心。</h3>
+        <p>从铝合金外壳到电容传感,每个细节都按工业精度打磨。</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="showcase-beats"><div class="beat"></div><div class="beat"></div><div class="beat"></div><div class="beat"></div></div>
+</section>
+
+<!-- ===== S3b · 光语交互 — VIS 三态呼吸灯(绿/红/离线)===== -->
+<section class="narrativesec lampsec" id="lamp">
+  <div class="lampsec-inner">
+    <div class="lampsec-head reveal">
+      <div class="sec-num">03<span class="total">/10</span></div>
+      <div class="s-anchor" data-en="Light Language">光语</div>
+      <span class="eyebrow">Ambient Light · 光语交互</span>
+      <h2>不必开机。光，会先告诉你。</h2>
+      <p class="lamp-lede">最好的提醒，是不用掏手机就知道。顶部呼吸灯用颜色与节奏说话，走过它身边那一眼，状态了然于心。</p>
+    </div>
+
+    <div class="lamp-stage">
+      <div class="lamp-demo reveal d1">
+        <div class="lamp-disc" id="lampDisc" data-state="thrive">
+          <div class="lamp-halo"></div>
+          <div class="ld-bezel"></div>
+          <div class="lamp-ring"></div>
+          <div class="ld-solar"></div>
+        </div>
+      </div>
+
+      <div class="lamp-states reveal d2" id="lampStates">
+        <!-- 正常态 · 绿 · 慢 4s -->
+        <div class="lamp-state active" data-state="thrive">
+          <span class="ls-swatch thrive"></span>
+          <div class="ls-body">
+            <h4>茁壮 · Thriving <span class="rhythm">绿 · 4s</span></h4>
+            <p>土壤水分充足，植物健康。绿意缓缓呼吸，无需打扰。</p>
+            <div class="lamp-spec">#3BA55D · Slow pulse · 4s</div>
+          </div>
+        </div>
+        <!-- 提醒态 · 黄 · 中速 2.5s -->
+        <div class="lamp-state" data-state="remind">
+          <span class="ls-swatch remind"></span>
+          <div class="ls-body">
+            <h4>提醒 · Reminder <span class="rhythm">黄 · 2.5s</span></h4>
+            <p>水分或养分开始走低，宜留意。黄环从容起伏，提醒而不催促。</p>
+            <div class="lamp-spec">#EF9F27 · Medium pulse · 2.5s</div>
+          </div>
+        </div>
+        <!-- 告急态 · 红 · 急促 1.5s -->
+        <div class="lamp-state" data-state="feed">
+          <span class="ls-swatch feed"></span>
+          <div class="ls-body">
+            <h4>告急 · Needs Water <span class="rhythm">红 · 1.5s</span></h4>
+            <p>土壤极干，需立刻浇水。节奏骤然加快，请尽快处理。</p>
+            <div class="lamp-spec">#E24B4A · Fast pulse · 1.5s</div>
+          </div>
+        </div>
+        <!-- 离线态 · 灰 · 静态 -->
+        <div class="lamp-state" data-state="offline">
+          <span class="ls-swatch offline"></span>
+          <div class="ls-body">
+            <h4>离线 · Offline <span class="rhythm">灰 · 静态</span></h4>
+            <p>设备关闭 / 充电中 / 信号失联。灰环静止，等待重连。</p>
+            <div class="lamp-spec">#D8D7D2 · No animation · Offline</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="lamp-foot reveal">颜色即语言，节奏即语气。这，就是光语。</p>
+  </div>
+</section>
+
+<!-- ===== S3c · 钙钛矿能源篇 — 核心技术路线 ===== -->
+<section class="productsec perovsec" id="energy">
+  <div class="perov-inner">
+    <div class="perov-head reveal">
+      <div class="sec-num">04<span class="total">/10</span></div>
+      <div class="s-anchor" data-en="Perovskite">钙钛矿</div>
+      <span class="perov-kicker"><span class="pk-dot"></span>Energy Core · Next-Gen</span>
+      <h2>让一支探针，从光里取电。</h2>
+      <p class="perov-lede">
+        探针摆脱换电池，取决于一件事：把<b>室内那点漫反射光</b>，尽可能多地变成电。效率天花板最高的材料，正是<b>钙钛矿。</b>
+      </p>
+    </div>
+
+    <!-- 双卡:V1 DSSC/OPV(MVP)+ V2 钙钛矿(调研中)-->
+    <div class="perov-cards reveal d1">
+      <div class="hw-card v1">
+        <div class="hw-spectrum"></div>
+        <div class="hw-top">
+          <span class="hw-badge">MVP 实装</span>
+          <div class="hw-name">V1 · DSSC / OPV</div>
+          <p class="hw-desc">当前量产方案。染料敏化 / 有机光伏，室内光已可驱动低功耗 IoT。</p>
+        </div>
+        <div class="hw-specs">
+          <div class="spec-r"><span class="sk">材料体系</span><span class="sv">DSSC / OPV</span></div>
+          <div class="spec-r"><span class="sk">状态</span><span class="sv">MVP 实装</span></div>
+          <div class="spec-r"><span class="sk">功率密度</span><span class="sv">约 30–50 μW/cm² @ 200 lux</span></div>
+          <div class="spec-r"><span class="sk">理论上限</span><span class="sv">14–15% PCE</span></div>
+          <div class="spec-r"><span class="sk">室内适配</span><span class="sv">LED / 荧光灯光谱</span></div>
+        </div>
+      </div>
+
+      <div class="hw-card v2">
+        <div class="hw-spectrum"></div>
+        <div class="hw-top">
+          <span class="hw-badge">调研中</span>
+          <div class="hw-name">V2 · 钙钛矿 Perovskite</div>
+          <p class="hw-desc">行业前沿的候选材料。据公开研究，带隙可调、室内效率有望数倍于硅基。</p>
+        </div>
+        <div class="hw-specs">
+          <div class="spec-r"><span class="sk">材料体系</span><span class="sv">Perovskite</span></div>
+          <div class="spec-r"><span class="sk">状态</span><span class="sv">行业前沿 · 调研中</span></div>
+          <div class="spec-r"><span class="sk">功率密度</span><span class="sv">&gt;100 μW/cm² @ 200 lux</span></div>
+          <div class="spec-r"><span class="sk">理论上限</span><span class="sv">&gt;30% PCE</span></div>
+          <div class="spec-r"><span class="sk">优势</span><span class="sv">室内效率 3× 硅基</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 段末视野宣言:M(o)riSync 植入 o 环 -->
+    <div class="perov-vision reveal d2">
+      钙钛矿室内光伏仍处行业前沿研究阶段。当前量产采用 V1 方案；钙钛矿作为远期方向，M<span class="wm-o-sm"></span>riSync 正持续调研其应用可能。
+      <span class="vision-source">Source · 钙钛矿室内光伏公开研究综述 · 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S4 · 离线本地 — VIS Do/Don't 对照表 ===== -->
+<section class="narrativesec offlinesec" id="offline">
+  <div class="offlinesec-inner">
+    <div class="reveal">
+      <div class="sec-num">05<span class="total">/10</span></div>
+      <div class="s-anchor" data-en="Offline First">离线本地</div>
+      <span class="eyebrow">Offline First · 数据归你</span>
+      <h2>数据归你，不归云。</h2>
+      <p class="offlinesec-lede">探针失联也不丢数据。本地优先的架构让你的植物档案永远可读，无订阅负担，生态开放。</p>
+    </div>
+
+    <div class="vp-stack reveal d1">
+      <div class="vp">
+        <div class="vg">
+          <div class="vl">&#x2713; M<span class="wm-o-sm"></span>riSync 离线本地</div>
+          <div class="vq">探针失联 48 小时，本地缓存照常告警，Wi-Fi 一恢复同步全数据</div>
+        </div>
+        <div class="vb">
+          <div class="vl">&#x2717; 云端依赖</div>
+          <div class="vq">云端服务器宕机，所有用户植物数据集体失语</div>
+        </div>
+      </div>
+
+      <div class="vp">
+        <div class="vg">
+          <div class="vl">&#x2713; 无订阅 · 买断使用</div>
+          <div class="vq">买回家用三年，服务器关了也能用，数据完整保留在本地</div>
+        </div>
+        <div class="vb">
+          <div class="vl">&#x2717; 订阅绑定</div>
+          <div class="vq">订阅到期，设备变废铁，数据本地不可读</div>
+        </div>
+      </div>
+
+      <div class="vp">
+        <div class="vg">
+          <div class="vl">&#x2713; Matter 直连</div>
+          <div class="vq">Matter 直连 Apple / Google / Amazon / Samsung 智能家居系统，无需走云端中介，本地协议保障</div>
+        </div>
+        <div class="vb">
+          <div class="vl">&#x2717; 专属生态孤岛</div>
+          <div class="vq">专属 App + 专属云，换设备数据迁移困难，生态锁定</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S5 · App 软件篇 ===== -->
+<section class="productsec appsec" id="app">
+  <div class="appsec-inner">
+    <div class="reveal">
+      <div class="sec-num">06<span class="total">/10</span></div>
+      <span class="eyebrow">The App · 软件</span>
+      <h2>看得见的，不止一盏灯。</h2>
+      <p class="appsec-lede">光语给你即时的安心，App 给你完整的全貌。从一次扫描，到一整段生长。</p>
+    </div>
+
+    <div class="app-flow">
+      <div class="app-card reveal d1">
+        <div class="ac-step">STEP 01</div>
+        <h4>扫一扫，即识别</h4>
+        <p>对准叶片轻轻一扫，AI 认出种类，再把探针添加进来 — 分步引导，一次完成。</p>
+        <div class="ac-visual">
+          <div class="scan-frame">
+            <div class="scan-bracket"></div>
+            <div class="scan-leaf"></div>
+            <div class="scan-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-card reveal d2">
+        <div class="ac-step">STEP 02</div>
+        <h4>状态，一目了然</h4>
+        <p>缺水、缺肥、病害，一一指认，写成你看得懂的话。</p>
+        <div class="ac-visual">
+          <div class="diag-chips">
+            <div class="diag-chip"><span class="dc-dot ok"></span>种类已识别 · Monstera<span class="dc-tag">100%</span></div>
+            <div class="diag-chip"><span class="dc-dot warn"></span>土壤偏干 · 建议浇水<span class="dc-tag">今天</span></div>
+            <div class="diag-chip"><span class="dc-dot ok"></span>叶片健康 · 无病害<span class="dc-tag">正常</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-card reveal d3">
+        <div class="ac-step">STEP 03</div>
+        <h4>陪它，走过每一程</h4>
+        <p>成长、开花、结果，每一个阶段都被记录成册。回头看，是你与它一起走过的时光。</p>
+        <div class="ac-visual">
+          <div class="grow-track">
+            <div class="grow-connector"></div>
+            <div class="grow-stage s1"><span class="gs-dot"></span><span class="gs-name">成长</span></div>
+            <div class="grow-stage s2 now"><span class="gs-dot"></span><span class="gs-name">开花</span></div>
+            <div class="grow-stage s3"><span class="gs-dot"></span><span class="gs-name">结果</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S5b · 实时数据状态卡 ===== -->
+<section class="productsec datasec" id="data">
+  <div class="datasec-inner">
+    <div class="datasec-copy reveal">
+      <div class="sec-num">07<span class="total">/10</span></div>
+      <span class="eyebrow">Live Data · 实时数据</span>
+      <h2>每一株，都有自己的一页。</h2>
+      <p class="datasec-lede">土壤湿度、光照强度、养分水平、环境温度，实时汇入档案。一眼便知，这株 Monstera 过得好不好。</p>
+    </div>
+    <div class="datasec-visual">
+      <div class="glass-card reveal" id="statusCard">
+        <div class="gc-head">
+          <div class="gc-ring" data-pct="92">
+            <svg viewBox="0 0 110 110">
+              <circle class="gc-track" cx="55" cy="55" r="46"/>
+              <circle class="gc-prog" cx="55" cy="55" r="46"/>
+            </svg>
+            <div class="gc-pct">92<small>%</small></div>
+          </div>
+          <div class="gc-meta">
+            <div class="gc-name">Monstera Deliciosa</div>
+            <div class="gc-status"><span class="gc-statusdot"></span>Thriving</div>
+            <div class="gc-loc">客厅 · 窗边</div>
+          </div>
+        </div>
+        <div class="gc-divider"></div>
+        <div class="gc-metrics">
+          <div class="gc-metric"><div class="gc-mi gc-mi-water"></div><div class="gc-mv">64<small>%</small></div><div class="gc-mk">Moisture</div></div>
+          <div class="gc-metric"><div class="gc-mi gc-mi-light"></div><div class="gc-mv">820<small>lx</small></div><div class="gc-mk">Light</div></div>
+          <div class="gc-metric"><div class="gc-mi gc-mi-nut"></div><div class="gc-mv">pH 6.4</div><div class="gc-mk">Nutrients</div></div>
+          <div class="gc-metric"><div class="gc-mi gc-mi-temp"></div><div class="gc-mv">23<small>°C</small></div><div class="gc-mk">Temp</div></div>
+        </div>
+        <div class="gc-cta">查看护理建议 &rarr;</div>
+      </div>
+      <div class="float-chip fc1 reveal"><span class="fcd green"></span>Solar Charging · Active</div>
+      <div class="float-chip fc2 reveal"><span class="fcd green"></span>Synced 2 min ago</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S8 · Tide of Light — 光的涨落(闭环四步同屏)===== -->
+<section class="loopsec" id="loop">
+  <div class="loop-inner">
+
+    <div class="loop-head reveal">
+      <div class="sec-num">08<span class="total">/10</span></div>
+      <span class="eyebrow">Closed Loop · 软硬联动</span>
+      <h2>硬件感知，软件思考，<span class="hl">光语作答</span>。</h2>
+      <p>同一根探针，先在土里读数，再让数据与思考在云端涌动；最终所有累积涌成一道光，回到它头顶——绿是安好，红是告急。</p>
+    </div>
+
+    <div class="tide" id="tide">
+
+      <!-- 01 感知 · 真实探针(入土的输入端) -->
+      <div class="slab s1">
+        <span class="s-no">01 / 感知</span>
+        <div class="s-figure">
+          <picture>
+            <source srcset="assets/probe-head@2x.webp" type="image/webp">
+            <img class="s-shot" src="assets/probe-head@2x.png" alt="MoriSync 探针头部俯视,太阳能采集面与呼吸环" loading="eager" width="54" height="54">
+          </picture>
+        </div>
+        <h4>探针感知</h4>
+        <p>双叉入土，自动唤醒，土壤被持续读取。</p>
+        <div class="s-read"><span class="rv">42<span class="u">%</span></span><span class="rk">湿度</span></div>
+      </div>
+
+      <!-- 02 回传 · 数据态:信号上行 -->
+      <div class="slab s2">
+        <span class="s-no">02 / 回传</span>
+        <div class="s-figure">
+          <picture>
+            <source srcset="assets/probe-panel@2x.webp" type="image/webp">
+            <img class="s-shot" src="assets/probe-panel@2x.png" alt="探针太阳能采集面特写" loading="eager" width="54" height="54">
+          </picture>
+          <span class="viz-up" aria-hidden="true"></span>
+        </div>
+        <h4>数据回传</h4>
+        <p>湿度、光照、肥力，离线缓存或上云。</p>
+        <div class="s-read"><span class="rv">3<span class="u">维</span></span><span class="rk">维度</span></div>
+      </div>
+
+      <!-- 03 思考 · 数据态:AI 收敛 -->
+      <div class="slab s3">
+        <span class="s-no">03 / 思考</span>
+        <div class="s-figure">
+          <picture>
+            <source srcset="assets/probe-ring@2x.webp" type="image/webp">
+            <img class="s-shot" src="assets/probe-ring@2x.png" alt="探针绿色呼吸环弧光特写" loading="eager" width="54" height="54">
+          </picture>
+          <span class="viz-think" aria-hidden="true"></span>
+        </div>
+        <h4>AI 解读</h4>
+        <p>按物种与近况，多源收束为专属方案。</p>
+        <div class="s-read"><span class="rv">98<span class="u">%</span></span><span class="rk">置信</span></div>
+      </div>
+
+      <!-- 04 作答 · 涌浪(加宽)· 真实探针发光 -->
+      <div class="surge">
+        <span class="ch-tag">Light Speaks · 光语</span>
+        <span class="ch-no">04 / 作答</span>
+        <div class="surge-row">
+          <div class="probe-stage">
+            <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+            <div class="probe-halo"></div>
+            <picture>
+              <source srcset="assets/probe-hero@2x.webp" type="image/webp">
+              <img class="probe-hero" src="assets/probe-hero@2x.png" alt="MoriSync 探针绿环亮起,光语作答" loading="eager" width="220" height="330">
+            </picture>
+          </div>
+          <div class="surge-copy">
+            <span class="s-no">04 / 作答</span>
+            <h3>光语作答</h3>
+            <p>所有读数与思考，最终回到探针头顶那圈光。无需打开 App，一眼即知。</p>
+            <div class="light-state">
+              <span class="dot"></span>
+              <span class="ls-txt"><span class="ls-state">一切安好</span><span class="ls-sub">SIGNAL · STABLE</span></span>
+            </div>
+            <div class="ch-return">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M9 5 L4 10 L9 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 10 H15 a5 5 0 0 1 5 5 v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              闭环 · 回到硬件本身
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 贯穿潮线 -->
+      <div class="tideline" aria-hidden="true">
+        <svg viewBox="0 0 1200 460" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="tideGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#AEADA8" stop-opacity=".5"/>
+              <stop offset="30%" stop-color="#3BA55D" stop-opacity=".7"/>
+              <stop offset="56%" stop-color="#3BA55D" stop-opacity=".95"/>
+              <stop offset="100%" stop-color="#58C97D" stop-opacity="1"/>
+            </linearGradient>
+            <linearGradient id="tideBack" x1="1" y1="0" x2="0" y2="0">
+              <stop offset="0%" stop-color="#58C97D" stop-opacity=".7"/>
+              <stop offset="60%" stop-color="#3BA55D" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#3BA55D" stop-opacity=".1"/>
+            </linearGradient>
+          </defs>
+          <path class="tl-main"
+                d="M 0 392
+                   C 90 382, 150 392, 220 380
+                   C 300 366, 340 356, 420 348
+                   C 510 338, 560 322, 645 296
+                   C 720 272, 755 226, 800 190
+                   C 822 172, 832 162, 842 162"/>
+          <path class="tl-back"
+                d="M 845 196 C 905 300, 900 414, 760 432 C 510 452, 300 448, 140 436 C 92 432, 72 418, 72 380"/>
+          <circle class="tl-spark" cx="842" cy="162"/>
+          <circle class="tl-spark" cx="72" cy="378" style="animation-delay:.8s;"/>
+        </svg>
+      </div>
+
+    </div>
+
+    <div class="loop-foot reveal">
+      <span class="lf-cap">The Closed Loop</span>
+      <span class="lf-eq"><b>感知</b><span class="ar">&rarr;</span><b>回传</b><span class="ar">&rarr;</span><b>思考</b><span class="ar">&rarr;</span><b>作答</b><span class="ar">&rarr;</span><span class="back">又回到硬件</span></span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== S7 · Hardware — Solar & Lite 双卡 ===== -->
+<section class="productsec hwsec" id="hardware">
+  <div class="hwsec-inner">
+    <div class="reveal">
+      <div class="sec-num">09<span class="total">/10</span></div>
+      <span class="eyebrow">The Hardware · 产品线</span>
+      <h2>Solar 与 Lite，两种探针选择。</h2>
+      <p class="hwsec-lede">同一套感知系统，两种供电方案。永不充电的旗舰，与灵活可拆的入门款。</p>
+    </div>
+
+    <!-- 命名规范区:灰底卡 -->
+    <div class="hw-naming reveal d1">
+      <span class="eyebrow">命名规则</span>
+      <div class="hw-naming-row">
+        <div class="hw-name-entry">
+          <div class="hw-name-big">M<span class="wm-o-ui"></span>riSync Solar</div>
+          <div class="hw-name-note">旗舰版 · 光伏供电 · 终身无需充电</div>
+        </div>
+        <div class="hw-name-entry">
+          <div class="hw-name-big">M<span class="wm-o-ui"></span>riSync Lite</div>
+          <div class="hw-name-note">入门版 · 磁吸可拆换电池</div>
+        </div>
+      </div>
+      <p style="margin-top:14px;font-size:11px;color:var(--gray-2);">App 内首次提及后，后续直接用 Solar 与 Lite。不用「版本 A/B」「Pro/Standard」等命名。</p>
+    </div>
+
+    <!-- 双卡详情 -->
+    <div class="hw-pair reveal d2">
+      <!-- Solar 卡 -->
+      <div class="hw-card solar-card">
+        <div class="hw-top">
+          <span class="hw-badge">旗舰</span>
+          <div class="hw-name">M<span class="wm-o-ui" style="border-width:2px;"></span>riSync Solar</div>
+          <p class="hw-desc">旗舰探针。室内自然光即可自供电，永不充电。</p>
+        </div>
+        <div class="hw-specs">
+          <div class="spec-r"><span class="sk">供电方式</span><span class="sv">100% 光伏供电 · 永不充电</span></div>
+          <div class="spec-r"><span class="sk">外壳材质</span><span class="sv">100% PCR Aluminum</span></div>
+          <div class="spec-r"><span class="sk">表面工艺</span><span class="sv">Glass micro-bead 玻璃微珠喷砂</span></div>
+          <div class="spec-r"><span class="sk">传感器</span><span class="sv">Capacitive 电容式抗腐蚀探针</span></div>
+          <div class="spec-r"><span class="sk">数据维度</span><span class="sv">土壤水分 / 养分 / 光照 / 温度</span></div>
+          <div class="spec-r"><span class="sk">光语呼吸灯</span><span class="sv">绿色正常 · 黄色提醒 · 红色告急</span></div>
+          <div class="spec-r"><span class="sk">App 图标态</span><span class="sv">&#9679; Mori Green · 光照供电中</span></div>
+        </div>
+      </div>
+
+      <!-- Lite 卡 -->
+      <div class="hw-card lite-card">
+        <div class="hw-top">
+          <span class="hw-badge">入门</span>
+          <div class="hw-name">M<span class="wm-o-ui" style="border-width:2px;"></span>riSync Lite</div>
+          <p class="hw-desc">入门款。探针长期插土，只需取下磁吸电池充电，数据零中断。</p>
+        </div>
+        <div class="hw-specs">
+          <div class="spec-r"><span class="sk">供电方式</span><span class="sv">磁吸可拆换电池</span></div>
+          <div class="spec-r"><span class="sk">充电方式</span><span class="sv">多槽充电底座（同时 8 颗）</span></div>
+          <div class="spec-r"><span class="sk">关键卖点</span><span class="sv">探针永不离土 · 数据零中断</span></div>
+          <div class="spec-r"><span class="sk">数据维度</span><span class="sv">土壤水分 / 养分 / 光照 / 温度</span></div>
+          <div class="spec-r"><span class="sk">光语呼吸灯</span><span class="sv">绿色正常 · 黄色提醒 · 红色告急</span></div>
+          <div class="spec-r"><span class="sk">App 图标态</span><span class="sv">&#9679; Amber · 电量 &lt;30%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S8 · 植物幼儿园大屏 ===== -->
+<section class="narrativesec nurserysec" id="nursery">
+  <div class="nurserysec-inner">
+    <div class="reveal">
+      <div class="sec-num">10<span class="total">/10</span></div>
+      <span class="eyebrow">Plant Nursery · 植物幼儿园</span>
+      <h2>一面墙，照看一屋子绿。</h2>
+      <p class="nursery-lede">接入 Apple Home、Google Home 与 Amazon Alexa，把家里每一株植物排成一面绿墙。谁渴了、谁该添养料，抬头一望便知。</p>
+    </div>
+
+    <div class="nursery-shot reveal d1">
+      <!-- WebP 优先，PNG 兜底；现代浏览器命中 source，旧浏览器回落 img -->
+      <picture>
+        <source srcset="../assets/nursery-wall-v1.webp" type="image/webp">
+        <img src="../assets/nursery-wall-v1.png"
+             alt="MoriSync 植物幼儿园大屏：一面墙照看一屋子绿"
+             width="2048"
+             height="1376"
+             loading="lazy"
+             decoding="async">
+      </picture>
+    </div>
+  </div>
+</section>
+
+<!-- ===== S9 · Footer — 品牌收束 ===== -->
+<footer class="footer" id="footer">
+  <div class="footer-inner">
+    <div class="footer-big">与自然<span class="footer-em">同频。</span></div>
+    <p class="footer-sub">照顾绿植不再需要费心牵挂。养一屋子绿，水到渠成。</p>
+    <div class="footer-actions">
+      <a href="mailto:hello@morisync.com" class="btn-primary">预约一场 Demo</a>
+      <a href="mailto:hello@morisync.com" class="btn-outline">联系我们</a>
+    </div>
+    <div class="footer-row">
+      <!-- footer 品牌区:M(o)riSync(TM) · UI Standard 档 + TM 上标 -->
+      <span class="footer-brand">M<span class="wm-o-ui"></span>riSync<sup>TM</sup></span>
+      <span class="footer-note">Smart Plant Probe · Investor Preview · 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- 顶栏滚动变实底 ---------- */
+const topbar = document.getElementById('topbar');
+addEventListener('scroll', () => {
+  topbar.classList.toggle('solid', scrollY > 60);
+}, { passive: true });
+
+/* ---------- reveal:IntersectionObserver 入场 ---------- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      /* 同组兄弟元素错开延迟 */
+      const sibs = e.target.parentElement.querySelectorAll('.reveal');
+      sibs.forEach((s, i) => {
+        if (s === e.target) s.style.transitionDelay = (i % 5 * 0.07) + 's';
+      });
+    }
+  });
+}, { threshold: 0.14 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ---------- 环形进度卡触发 ---------- */
+const ringIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.35 });
+document.querySelectorAll('.gc-ring').forEach(el => ringIO.observe(el));
+
+/* ---------- S8 Tide of Light:入场 + 节流 ---------- */
+/* #tide 入场复用全站 reveal io(添加 .in 触发一次性动画);
+   visIO 单独负责 .anim-run 节流门(循环动画开/停),与 reveal 是两码事 */
+const tide = document.getElementById('tide');
+if (tide) {
+  /* 入场:#tide 本身作为 reveal 目标,io 会加 .in */
+  io.observe(tide);
+
+  /* 光语演示态切换:绿(安好) <-> 红(缺水) */
+  const lightStateTxt = tide.querySelector('.light-state .ls-state');
+  const lightSubTxt   = tide.querySelector('.light-state .ls-sub');
+  const TIDE_STATES = [
+    {soft:'#58C97D',mid:'#3BA55D',deep:'#2C8049',glow:'rgba(59,165,93,.4)',led:'#69FA72',state:'一切安好',sub:'SIGNAL · STABLE'},
+    {soft:'#F08A89',mid:'#E24B4A',deep:'#A82F2E',glow:'rgba(226,75,74,.42)',led:'#FF6B6A',state:'需要补水',sub:'SIGNAL · THIRSTY'}
+  ];
+  let tideStateIdx = 0, tideTimer = null;
+  function applyTideState() {
+    const s = TIDE_STATES[tideStateIdx];
+    const r = document.documentElement.style;
+    r.setProperty('--green-soft', s.soft);
+    r.setProperty('--green',      s.mid);
+    r.setProperty('--green-deep', s.deep);
+    r.setProperty('--green-glow', s.glow);
+    r.setProperty('--green-led',  s.led);
+    if (lightStateTxt) lightStateTxt.textContent = s.state;
+    if (lightSubTxt)   lightSubTxt.textContent   = s.sub;
+  }
+
+  /* visIO:节流门 —— 入视口加 .anim-run 启动循环动画 + 定时器;离开则清除 */
+  const visIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        tide.classList.add('anim-run');
+        if (!tideTimer) tideTimer = setInterval(() => {
+          tideStateIdx = (tideStateIdx + 1) % TIDE_STATES.length;
+          applyTideState();
+        }, 4600);
+      } else {
+        tide.classList.remove('anim-run');
+        if (tideTimer) { clearInterval(tideTimer); tideTimer = null; }
+      }
+    });
+  }, { threshold: 0.1 });
+  visIO.observe(tide);
+}
+
+/* ---------- S3b 光语呼吸灯:点击切换 + 自动循环(3 色:绿/红/灰)----------*/
+const lampDisc   = document.getElementById('lampDisc');
+const lampStates = document.getElementById('lampStates');
+const STATES = ['thrive', 'remind', 'feed', 'offline'];  /* VIS 4 态:绿/琥珀/红/灰 */
+let lampIdx = 0, lampAuto = true, lampTimer = null;
+
+function setLamp(state) {
+  lampDisc.setAttribute('data-state', state);
+  lampStates.querySelectorAll('.lamp-state').forEach(s =>
+    s.classList.toggle('active', s.dataset.state === state)
+  );
+  lampIdx = STATES.indexOf(state);
+}
+function autoCycle() {
+  if (!lampAuto) return;
+  lampIdx = (lampIdx + 1) % STATES.length;
+  setLamp(STATES[lampIdx]);
+}
+function startAuto() {
+  clearInterval(lampTimer);
+  lampTimer = setInterval(autoCycle, 2800);
+}
+
+lampStates.querySelectorAll('.lamp-state').forEach(s => {
+  s.addEventListener('mouseenter', () => { lampAuto = false; setLamp(s.dataset.state); });
+  s.addEventListener('click',      () => { lampAuto = false; setLamp(s.dataset.state); });
+});
+lampStates.addEventListener('mouseleave', () => { lampAuto = true; });
+
+const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const lampIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !prefersReduced) startAuto();
+    else clearInterval(lampTimer);
+  });
+}, { threshold: 0.3 });
+lampIO.observe(document.getElementById('lamp'));
+</script>
+
+</body>
+</html>
