@@ -2506,99 +2506,12 @@ section h2,
 .datasec-copy h2 { color: rgba(255,255,255,0.92) !important; }
 .datasec-lede { color: rgba(255,255,255,0.52) !important; }
 
-/* ===== New ds-dash multi-card component ===== */
-
-/* Shared dark glass base */
+/* ===== gc-ring shared dark styles (for phone mockup) ===== */
 .gc-track { stroke: rgba(255,255,255,0.10) !important; }
 .gc-prog  { stroke: #4CD964 !important; filter: drop-shadow(0 0 5px rgba(76,217,100,0.75)); }
 .gc-pct   { color: rgba(255,255,255,0.92) !important; font-family: var(--font-mono); }
 .gc-pct small { color: rgba(255,255,255,0.38) !important; }
-.gc-name  { font-size: 17px !important; font-weight: 700 !important; color: rgba(255,255,255,0.92) !important; letter-spacing: -.02em !important; line-height: 1.2 !important; }
-.gc-status { color: #4CD964 !important; font-weight: 600 !important; font-size: 13px !important; margin: 6px 0 2px !important; }
 .gc-statusdot { background: #4CD964 !important; box-shadow: 0 0 8px rgba(76,217,100,0.70) !important; }
-.gc-loc   { font-size: 11px !important; color: rgba(255,255,255,0.38) !important; }
-
-/* Dashboard wrapper */
-.ds-dash {
-  width: 320px;
-  display: flex; flex-direction: column; gap: 10px;
-}
-
-/* Top row */
-.ds-top { display: flex; gap: 10px; }
-
-/* Ring tile — green-tinted glass */
-.ds-ring-tile {
-  flex: 0 0 128px; height: 142px;
-  background: linear-gradient(148deg, rgba(59,165,93,0.30) 0%, rgba(12,35,20,0.60) 100%);
-  border: 1px solid rgba(76,217,100,0.18);
-  border-radius: 20px;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 5px;
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
-}
-.ds-ring-tile .gc-ring { width: 90px; height: 90px; }
-.ds-health-label {
-  font-size: 8.5px; letter-spacing: 0.12em;
-  text-transform: uppercase; color: rgba(255,255,255,0.36);
-}
-
-/* Plant info tile */
-.ds-plant-tile {
-  flex: 1; min-width: 0;
-  background: rgba(255,255,255,0.055);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 20px;
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
-  padding: 16px 14px;
-  display: flex; flex-direction: column; justify-content: center;
-}
-.ds-sync-row {
-  display: flex; align-items: center; gap: 5px;
-  margin-top: 8px; font-size: 10px;
-  color: rgba(255,255,255,0.34);
-}
-
-/* Metric 2×2 grid */
-.ds-metrics-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-}
-.ds-mc-tile {
-  border-radius: 18px; border: 1px solid transparent;
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
-  padding: 14px 14px 12px;
-  display: flex; flex-direction: column; gap: 1px;
-}
-.mc-water { background: linear-gradient(148deg, rgba(77,166,255,0.22) 0%, rgba(15,45,80,0.30) 100%); border-color: rgba(77,166,255,0.16); }
-.mc-light { background: linear-gradient(148deg, rgba(255,204,60,0.22) 0%, rgba(80,55,10,0.30) 100%); border-color: rgba(255,204,60,0.16); }
-.mc-fert  { background: linear-gradient(148deg, rgba(76,217,100,0.22) 0%, rgba(10,50,22,0.30) 100%); border-color: rgba(76,217,100,0.16); }
-.mc-temp  { background: linear-gradient(148deg, rgba(255,85,60,0.22) 0%, rgba(80,18,8,0.30) 100%); border-color: rgba(255,85,60,0.16); }
-
-.ds-mc-ico  { font-size: 16px; margin-bottom: 5px; }
-.ds-mc-num  { font-family: var(--font-mono); font-size: 26px; font-weight: 800; color: rgba(255,255,255,0.92); letter-spacing: -0.02em; line-height: 1; }
-.ds-mc-num span { font-size: 11px; color: rgba(255,255,255,0.36); font-weight: 500; margin-left: 1px; }
-.ds-mc-num-sm { font-size: 19px; font-weight: 700; color: rgba(255,255,255,0.92); letter-spacing: -0.01em; line-height: 1; }
-.ds-mc-label { font-size: 9px; letter-spacing: 0.11em; text-transform: uppercase; color: rgba(255,255,255,0.36); margin-top: 5px; }
-.ds-mc-bar { height: 3px; background: rgba(255,255,255,0.10); border-radius: 2px; margin-top: 9px; overflow: hidden; }
-.ds-mc-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #4CD964, #8FF5A4); }
-.ds-mc-dots { display: flex; gap: 4px; margin-top: 9px; align-items: center; }
-.ds-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.13); flex-shrink: 0; }
-.ds-dot.on { background: #4CD964; box-shadow: 0 0 5px rgba(76,217,100,0.55); }
-
-/* CTA */
-.ds-cta {
-  display: flex; align-items: center; justify-content: center;
-  padding: 13px 20px; border-radius: 999px;
-  background: rgba(59,165,93,0.16);
-  border: 1px solid rgba(76,217,100,0.24);
-  color: #4CD964; font-size: 13px; font-weight: 600;
-  cursor: pointer; text-decoration: none;
-  transition: background 0.2s;
-}
-.ds-cta:hover { background: rgba(59,165,93,0.28); }
 
 /* Float chip — dark glass */
 .float-chip {
@@ -2608,6 +2521,258 @@ section h2,
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
   box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+}
+
+/* ===== Phone Mockup ===== */
+
+.datasec-visual {
+  display: flex; align-items: center; justify-content: center;
+  overflow: visible !important;  /* allow phone shadow/tilt to bleed */
+  align-items: center;
+}
+
+/* Outer wrapper: 3D tilt */
+.phone-mockup {
+  perspective: 900px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px 0 20px 20px;
+  filter: drop-shadow(0 40px 80px rgba(0,0,0,0.65)) drop-shadow(0 0 60px rgba(59,165,93,0.18));
+}
+
+/* iPhone frame */
+.phone-frame {
+  width: 260px;
+  background: linear-gradient(160deg, #2a2a2e 0%, #1a1a1c 40%, #111112 100%);
+  border-radius: 44px;
+  padding: 10px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    0 0 0 1px rgba(0,0,0,0.6),
+    0 2px 8px rgba(0,0,0,0.9),
+    0 20px 60px rgba(0,0,0,0.7);
+  transform: perspective(900px) rotateY(-10deg) rotateX(4deg);
+  transition: transform 0.6s var(--ease);
+}
+.phone-frame:hover {
+  transform: perspective(900px) rotateY(-4deg) rotateX(2deg);
+}
+
+/* Screen */
+.phone-screen {
+  position: relative;
+  border-radius: 36px;
+  overflow: hidden;
+  width: 100%;
+  height: 520px;
+  background: #0B1510;
+  display: flex; flex-direction: column;
+}
+
+/* Blurred plant bg */
+.phone-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(40,100,55,0.55) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 75%, rgba(20,65,35,0.45) 0%, transparent 50%),
+    radial-gradient(ellipse at 55% 50%, rgba(8,20,12,0.80) 0%, transparent 70%),
+    linear-gradient(175deg, #162A1A 0%, #0B1510 55%, #060E09 100%);
+  z-index: 0;
+}
+/* Subtle botanical texture overlay */
+.phone-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 65%, rgba(59,165,93,0.12) 0%, transparent 35%),
+    radial-gradient(circle at 75% 35%, rgba(76,217,100,0.07) 0%, transparent 30%);
+}
+
+/* Everything inside screen is above bg */
+.phone-screen > *:not(.phone-bg) { position: relative; z-index: 1; }
+
+/* Status bar */
+.phone-statusbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px 0;
+  height: 44px;
+}
+.psb-time {
+  font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.92);
+  letter-spacing: -0.01em;
+}
+.psb-right { display: flex; align-items: center; gap: 5px; }
+
+/* Dynamic Island */
+.phone-island {
+  position: absolute;
+  top: 10px; left: 50%; transform: translateX(-50%);
+  width: 80px; height: 26px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 10;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.04);
+}
+
+/* Solar chip */
+.phone-solar-chip {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px; margin: 10px auto 8px;
+  padding: 5px 13px; border-radius: 999px;
+  background: rgba(59,165,93,0.18);
+  border: 1px solid rgba(76,217,100,0.28);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  font-size: 10.5px; font-weight: 600; letter-spacing: 0.02em;
+  color: #4CD964; width: fit-content;
+  box-shadow: 0 0 14px rgba(76,217,100,0.15), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.psc-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #4CD964;
+  box-shadow: 0 0 6px rgba(76,217,100,0.85);
+  animation: pscPulse 2s ease-in-out infinite;
+}
+@keyframes pscPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
+
+/* Main glass card */
+.phone-card {
+  margin: 0 10px;
+  padding: 16px 16px 14px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 26px;
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.14),
+    inset 0 -1px 0 rgba(0,0,0,0.10),
+    0 8px 32px rgba(0,0,0,0.40);
+  flex: 1;
+  display: flex; flex-direction: column; gap: 13px;
+}
+
+/* Card header */
+.pc-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+}
+.pc-plant-name {
+  font-size: 14px; font-weight: 700;
+  color: rgba(255,255,255,0.92); letter-spacing: -0.02em; line-height: 1.2;
+}
+.pc-location {
+  font-size: 10px; color: rgba(255,255,255,0.38);
+  margin-top: 2px;
+}
+.pc-sync {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 9px; color: rgba(255,255,255,0.30);
+  flex-shrink: 0; margin-top: 2px;
+}
+
+/* Ring + labels row */
+.pc-ring-row {
+  display: flex; align-items: center; gap: 16px;
+}
+.pc-ring-row .gc-ring { width: 96px; height: 96px; flex-shrink: 0; }
+.pc-ring-labels { display: flex; flex-direction: column; gap: 8px; }
+.pc-health-label {
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.36);
+}
+.pc-status-badge {
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(76,217,100,0.14);
+  border: 1px solid rgba(76,217,100,0.26);
+  font-size: 11px; font-weight: 600;
+  color: #4CD964;
+  width: fit-content;
+  box-shadow: 0 0 10px rgba(76,217,100,0.12);
+}
+
+/* 4 metric chips */
+.pc-metrics {
+  display: flex; gap: 6px;
+}
+.pc-metric {
+  flex: 1; min-width: 0;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  padding: 9px 7px 8px;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+  transition: background 0.2s;
+}
+.pc-m-icon { font-size: 15px; line-height: 1; }
+.pc-m-val {
+  font-family: var(--font-mono);
+  font-size: 14px; font-weight: 800;
+  color: rgba(255,255,255,0.90);
+  letter-spacing: -0.02em; line-height: 1;
+  white-space: nowrap;
+}
+.pc-m-val-sm { font-size: 12px; font-weight: 700; }
+.pc-m-unit { font-size: 8px; color: rgba(255,255,255,0.36); font-weight: 500; }
+.pc-m-label {
+  font-size: 7.5px; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.32);
+  text-align: center; line-height: 1.3;
+}
+
+/* CTA button */
+.pc-cta {
+  display: flex; align-items: center; justify-content: center;
+  padding: 11px 16px; border-radius: 999px;
+  background: linear-gradient(135deg, rgba(59,165,93,0.28) 0%, rgba(40,120,65,0.22) 100%);
+  border: 1px solid rgba(76,217,100,0.32);
+  color: #4CD964; font-size: 12px; font-weight: 600;
+  cursor: pointer; letter-spacing: 0.01em;
+  box-shadow: 0 0 16px rgba(76,217,100,0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+  transition: background 0.2s;
+}
+.pc-cta:hover { background: rgba(59,165,93,0.38); }
+
+/* Bottom nav bar */
+.phone-nav {
+  display: flex; align-items: center; justify-content: space-around;
+  padding: 8px 8px 14px;
+  background: rgba(0,0,0,0.30);
+  backdrop-filter: blur(18px) saturate(1.5);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin-top: auto;
+}
+.pn-item {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  opacity: 0.42; flex: 1;
+}
+.pn-item span {
+  font-size: 8px; color: rgba(255,255,255,0.75); letter-spacing: 0.03em;
+}
+.pn-item svg { display: block; }
+.pn-active { opacity: 1; }
+.pn-active span { color: white; }
+
+.pn-scan { opacity: 1; }
+.pn-scan-btn {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(145deg, #3BA55D, #2C8049);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 18px rgba(59,165,93,0.55);
+  margin-top: -10px;
+}
+.pn-scan span { color: rgba(255,255,255,0.65) !important; }
+
+/* Responsive */
+@media(max-width:900px){
+  .phone-mockup { padding: 0; margin: 0 auto; }
+  .phone-frame { transform: none !important; }
 }
 
 /* —— 14. Perov vision 引用块 —— */
@@ -3300,62 +3465,138 @@ html[lang="en"] .nav-label {
       <p class="datasec-lede" data-i18n="data.lede">土壤湿度、光照强度、养分水平、环境温度，实时汇入档案。一眼便知，这株 Monstera 过得好不好。</p>
     </div>
     <div class="datasec-visual">
-      <div class="ds-dash reveal" id="statusCard">
+      <!-- ===== iPhone Mockup ===== -->
+      <div class="phone-mockup reveal" id="statusCard">
 
-        <!-- Row 1: ring tile + plant info tile -->
-        <div class="ds-top">
-          <div class="ds-ring-tile">
-            <div class="gc-ring" data-pct="92">
-              <svg viewBox="0 0 110 110">
-                <circle class="gc-track" cx="55" cy="55" r="46"/>
-                <circle class="gc-prog" cx="55" cy="55" r="46"/>
-              </svg>
-              <div class="gc-pct">92<small>%</small></div>
+        <!-- Phone frame -->
+        <div class="phone-frame">
+
+          <!-- Screen -->
+          <div class="phone-screen">
+
+            <!-- Blurred plant background -->
+            <div class="phone-bg"></div>
+
+            <!-- Status bar -->
+            <div class="phone-statusbar">
+              <span class="psb-time">9:41</span>
+              <div class="psb-right">
+                <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+                  <rect x="0" y="4" width="3" height="8" rx="1" fill="white" opacity=".4"/>
+                  <rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="white" opacity=".6"/>
+                  <rect x="9" y="0.5" width="3" height="11.5" rx="1" fill="white" opacity=".85"/>
+                  <rect x="13.5" y="0.5" width="3" height="11.5" rx="1" fill="white"/>
+                </svg>
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+                  <path d="M8 2.5C10.2 2.5 12.2 3.4 13.6 4.9L15 3.5C13.2 1.6 10.7 0.5 8 0.5C5.3 0.5 2.8 1.6 1 3.5L2.4 4.9C3.8 3.4 5.8 2.5 8 2.5Z" fill="white" opacity=".5"/>
+                  <path d="M8 5.5C9.5 5.5 10.9 6.1 11.9 7.1L13.3 5.7C11.9 4.4 10 3.5 8 3.5C6 3.5 4.1 4.4 2.7 5.7L4.1 7.1C5.1 6.1 6.5 5.5 8 5.5Z" fill="white" opacity=".75"/>
+                  <circle cx="8" cy="10" r="1.5" fill="white"/>
+                </svg>
+                <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+                  <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="white" stroke-opacity=".35"/>
+                  <rect x="2" y="2" width="17" height="8" rx="2" fill="white"/>
+                  <path d="M23 4.5V7.5C23.8 7.2 24.5 6.7 24.5 6C24.5 5.3 23.8 4.8 23 4.5Z" fill="white" opacity=".4"/>
+                </svg>
+              </div>
             </div>
-            <div class="ds-health-label" data-i18n="data.health">健康指数</div>
-          </div>
-          <div class="ds-plant-tile">
-            <div class="gc-name">Monstera Deliciosa</div>
-            <div class="gc-status"><span class="gc-statusdot"></span><span data-i18n="data.gc.status">茁壮</span></div>
-            <div class="gc-loc" data-i18n="data.gc.loc">客厅 · 窗边</div>
-            <div class="ds-sync-row"><span class="fcd green"></span><span data-i18n="data.synced">2分钟前同步</span></div>
-          </div>
-        </div>
 
-        <!-- Row 2: 2×2 metric cards -->
-        <div class="ds-metrics-grid">
-          <div class="ds-mc-tile mc-water">
-            <span class="ds-mc-ico">💧</span>
-            <div class="ds-mc-num">64<span>%</span></div>
-            <div class="ds-mc-label" data-i18n="data.m.moisture">土壤湿度</div>
-            <div class="ds-mc-bar"><div class="ds-mc-fill" style="width:64%"></div></div>
-          </div>
-          <div class="ds-mc-tile mc-light">
-            <span class="ds-mc-ico">☀</span>
-            <div class="ds-mc-num">820<span>lx</span></div>
-            <div class="ds-mc-label" data-i18n="data.m.light">光照强度</div>
-          </div>
-          <div class="ds-mc-tile mc-fert">
-            <span class="ds-mc-ico">🌱</span>
-            <div class="ds-mc-num-sm" data-i18n="data.m.fert.val">优良</div>
-            <div class="ds-mc-label" data-i18n="data.m.fert">土壤肥力</div>
-            <div class="ds-mc-dots">
-              <span class="ds-dot on"></span><span class="ds-dot on"></span>
-              <span class="ds-dot on"></span><span class="ds-dot"></span><span class="ds-dot"></span>
+            <!-- Dynamic Island -->
+            <div class="phone-island"></div>
+
+            <!-- Solar chip -->
+            <div class="phone-solar-chip">
+              <span class="psc-dot"></span>
+              <span data-i18n="data.solar">Solar Charging · Active</span>
             </div>
-          </div>
-          <div class="ds-mc-tile mc-temp">
-            <span class="ds-mc-ico">🌡</span>
-            <div class="ds-mc-num">23<span>°C</span></div>
-            <div class="ds-mc-label" data-i18n="data.m.temp">环境温度</div>
-          </div>
-        </div>
 
-        <!-- CTA -->
-        <div class="ds-cta" data-i18n="data.gc.cta">查看护理建议 →</div>
-      </div>
+            <!-- Main glass card -->
+            <div class="phone-card">
 
-      <div class="float-chip fc1 reveal"><span class="fcd green"></span><span data-i18n="data.solar">Solar Charging · Active</span></div>
+              <!-- Card header: plant name + sync -->
+              <div class="pc-header">
+                <div>
+                  <div class="pc-plant-name">Monstera Deliciosa</div>
+                  <div class="pc-location"><span data-i18n="data.gc.loc">客厅 · 窗边</span></div>
+                </div>
+                <div class="pc-sync">
+                  <span class="fcd green"></span>
+                  <span data-i18n="data.synced">2分钟前同步</span>
+                </div>
+              </div>
+
+              <!-- Ring + status -->
+              <div class="pc-ring-row">
+                <div class="gc-ring" data-pct="92">
+                  <svg viewBox="0 0 110 110">
+                    <circle class="gc-track" cx="55" cy="55" r="46"/>
+                    <circle class="gc-prog" cx="55" cy="55" r="46"/>
+                  </svg>
+                  <div class="gc-pct">92<small>%</small></div>
+                </div>
+                <div class="pc-ring-labels">
+                  <div class="pc-health-label" data-i18n="data.health">健康指数</div>
+                  <div class="pc-status-badge"><span class="gc-statusdot"></span><span data-i18n="data.gc.status">茁壮</span></div>
+                </div>
+              </div>
+
+              <!-- 4 metric chips in a row -->
+              <div class="pc-metrics">
+                <div class="pc-metric">
+                  <div class="pc-m-icon">💧</div>
+                  <div class="pc-m-val">64<span class="pc-m-unit">%</span></div>
+                  <div class="pc-m-label" data-i18n="data.m.moisture">土壤湿度</div>
+                </div>
+                <div class="pc-metric">
+                  <div class="pc-m-icon">☀️</div>
+                  <div class="pc-m-val">820<span class="pc-m-unit">lx</span></div>
+                  <div class="pc-m-label" data-i18n="data.m.light">光照强度</div>
+                </div>
+                <div class="pc-metric">
+                  <div class="pc-m-icon">🌱</div>
+                  <div class="pc-m-val pc-m-val-sm" data-i18n="data.m.fert.val">优良</div>
+                  <div class="pc-m-label" data-i18n="data.m.fert">土壤肥力</div>
+                </div>
+                <div class="pc-metric">
+                  <div class="pc-m-icon">🌡️</div>
+                  <div class="pc-m-val">23<span class="pc-m-unit">°C</span></div>
+                  <div class="pc-m-label" data-i18n="data.m.temp">环境温度</div>
+                </div>
+              </div>
+
+              <!-- CTA -->
+              <div class="pc-cta" data-i18n="data.gc.cta">查看护理建议 →</div>
+
+            </div><!-- /phone-card -->
+
+            <!-- Bottom nav bar -->
+            <div class="phone-nav">
+              <div class="pn-item pn-active">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3L21 9.5V20C21 20.55 20.55 21 20 21H15V15H9V21H4C3.45 21 3 20.55 3 20V9.5Z" fill="white"/></svg>
+                <span data-i18n="data.nav.home">首页</span>
+              </div>
+              <div class="pn-item">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M4 19C4 16.24 7.58 14 12 14C16.42 14 20 16.24 20 19" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span data-i18n="data.nav.plants">我的植物</span>
+              </div>
+              <div class="pn-item pn-scan">
+                <div class="pn-scan-btn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="5" height="5" rx="1" stroke="white" stroke-width="1.5"/><rect x="16" y="3" width="5" height="5" rx="1" stroke="white" stroke-width="1.5"/><rect x="3" y="16" width="5" height="5" rx="1" stroke="white" stroke-width="1.5"/><circle cx="18" cy="18" r="2" fill="white" opacity=".8"/><path d="M13 3H14M14 3H15M14 3V4M14 4V5" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M3 13V14M3 14V15M3 14H4M4 14H5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <span data-i18n="data.nav.scan">扫描</span>
+              </div>
+              <div class="pn-item">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12H5M5 12C5 8.13 8.13 5 12 5M5 12C5 15.87 8.13 19 12 19M19 12H21M21 12C21 15.87 17.87 19 14 19M21 12C21 8.13 17.87 5 14 5M12 3V5M12 19V21" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span data-i18n="data.nav.insights">洞察</span>
+              </div>
+              <div class="pn-item">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M12 2V4M12 20V22M4.22 4.22L5.64 5.64M18.36 18.36L19.78 19.78M2 12H4M20 12H22M4.22 19.78L5.64 18.36M18.36 5.64L19.78 4.22" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span data-i18n="data.nav.settings">设置</span>
+              </div>
+            </div>
+
+          </div><!-- /phone-screen -->
+        </div><!-- /phone-frame -->
+      </div><!-- /phone-mockup -->
     </div>
   </div>
 </section>
@@ -3898,6 +4139,11 @@ const TRANSLATIONS = {
     'data.m.fert.val': '优良',
     'data.m.temp': '环境温度',
     'data.solar': 'Solar Charging · Active',
+    'data.nav.home': '首页',
+    'data.nav.plants': '我的植物',
+    'data.nav.scan': '扫描',
+    'data.nav.insights': '洞察',
+    'data.nav.settings': '设置',
     'loop.eyebrow': 'Closed Loop · 软硬联动',
     'loop.h2': '硬件感知，软件思考，<span class="hl">光语作答</span>。',
     'loop.desc': '同一根探针，先在土里读数，再让数据与思考在云端涌动；最终所有累积涌成一道光，回到它头顶——绿是安好，红是告急。',
@@ -4112,6 +4358,11 @@ const TRANSLATIONS = {
     'data.m.fert.val': 'Good',
     'data.m.temp': 'Temperature',
     'data.solar': 'Solar Charging · Active',
+    'data.nav.home': 'Home',
+    'data.nav.plants': 'My Plants',
+    'data.nav.scan': 'Scan',
+    'data.nav.insights': 'Insights',
+    'data.nav.settings': 'Settings',
     'loop.eyebrow': 'Closed Loop',
     'loop.h2': 'Probe senses. AI thinks. <span class="hl">Light answers.</span>',
     'loop.desc': 'The same probe reads the soil, sends data to the cloud where AI processes it, and the result comes back as a single ring of light — green means fine, red means urgent.',
