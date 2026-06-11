@@ -2457,6 +2457,112 @@ section h2,
 }
 .lang-toggle:hover { background: rgba(0,0,0,.05); color: var(--black); border-color: rgba(0,0,0,.2); }
 
+/* ===== Nursery Dashboard UI Component ===== */
+.nursery-dashboard {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.38);
+}
+.nd-bg {
+  position: absolute; inset: 0;
+  background: url('assets/nursery-wall-v1.webp') center/cover no-repeat;
+  filter: brightness(0.40) saturate(1.1);
+  transform: scale(1.04);
+  z-index: 0;
+}
+.nd-inner {
+  position: relative; z-index: 1;
+  padding: 22px 22px 26px;
+}
+.nd-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.nd-tab {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 13px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.nd-tab.nd-active {
+  background: rgba(255,255,255,0.20);
+  border-color: rgba(255,255,255,0.28);
+}
+.nd-tab-ico {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  background: rgba(255,255,255,0.13);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.nd-tab-text { display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+.nd-tab-label {
+  font-size: 11.5px; font-weight: 600;
+  color: rgba(255,255,255,0.92); line-height: 1.3;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.nd-tab-sub {
+  font-size: 10.5px; color: rgba(255,255,255,0.58); line-height: 1.3;
+  white-space: nowrap;
+}
+.nd-section { margin-bottom: 14px; }
+.nd-section:last-child { margin-bottom: 0; }
+.nd-room-label {
+  font-size: 14px; font-weight: 700;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 4px;
+}
+.nd-room-arrow { font-size: 13px; opacity: 0.6; }
+.nd-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.nd-card {
+  display: flex; align-items: center; gap: 9px;
+  padding: 9px 11px;
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.11);
+  border-radius: 13px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.nd-ring {
+  width: 28px; height: 28px; flex-shrink: 0;
+  border-radius: 50%;
+  border: 2.5px solid transparent;
+}
+.nd-ring.green { border-color: #4CD964; box-shadow: 0 0 8px rgba(76,217,100,0.45); }
+.nd-ring.amber { border-color: #FFAD00; box-shadow: 0 0 8px rgba(255,173,0,0.40); }
+.nd-ci { overflow: hidden; min-width: 0; }
+.nd-plant-name {
+  font-size: 11.5px; font-weight: 600;
+  color: rgba(255,255,255,0.88); line-height: 1.3;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.nd-plant-status {
+  font-size: 10px; color: rgba(255,255,255,0.52); line-height: 1.3;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+@media (max-width: 900px) {
+  .nd-tabs { grid-template-columns: repeat(2,1fr); }
+  .nd-grid  { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 480px) {
+  .nd-tabs { grid-template-columns: 1fr; }
+  .nd-grid  { grid-template-columns: repeat(2,1fr); }
+  .nd-inner { padding: 14px 14px 18px; }
+}
+
 /* —— English 排版自适应：允许标题换行，防止文字溢出 —— */
 html[lang="en"] section h2,
 html[lang="en"] .s-title,
@@ -2568,15 +2674,15 @@ html[lang="en"] .nav-label {
     </p>
     <div class="pain-stats">
       <div class="pain-stat reveal d1">
-        <div class="big-num">7205<span class="unit" data-i18n="pain.stat4.unit">万</span></div>
+        <div class="big-num" data-i18n="pain.stat4.bignum">7205<span class="unit">万</span></div>
         <p class="label" data-i18n="pain.stat4.label">美国园艺家庭 · 潜在用户基数（全美 1.31 亿户 × 55% 园艺渗透）</p>
       </div>
       <div class="pain-stat reveal d2">
-        <div class="big-num accent">$18<span class="unit">亿</span></div>
+        <div class="big-num accent" data-i18n="pain.stat5.bignum">$18<span class="unit">亿</span></div>
         <p class="label" data-i18n="pain.stat5.label">室内植物探针的市场天花板（TAM 理论营收）</p>
       </div>
       <div class="pain-stat reveal d3">
-        <div class="big-num">$6.15<span class="unit">亿</span></div>
+        <div class="big-num" data-i18n="pain.stat6.bignum">$6.15<span class="unit">亿</span></div>
         <p class="label" data-i18n="pain.stat6.label">锁定千禧一代室内植物父母 · 可服务人群（SAM）</p>
       </div>
     </div>
@@ -3117,17 +3223,75 @@ html[lang="en"] .nav-label {
       <p class="nursery-lede" data-i18n="nursery.lede">接入 Apple Home、Google Home 与 Amazon Alexa，把家里每一株植物排成一面绿墙。谁渴了、谁该添养料，抬头一望便知。</p>
     </div>
 
-    <div class="nursery-shot reveal d1">
-      <!-- WebP 优先，PNG 兜底；现代浏览器命中 source，旧浏览器回落 img -->
-      <picture>
-        <source srcset="assets/nursery-wall-v1.webp" type="image/webp">
-        <img src="assets/nursery-wall-v1.png"
-             alt="MoriSync 植物幼儿园大屏：一面墙照看一屋子绿"
-             width="2048"
-             height="1376"
-             loading="lazy"
-             decoding="async">
-      </picture>
+    <div class="nursery-dashboard reveal d1">
+      <div class="nd-bg"></div>
+      <div class="nd-inner">
+
+        <!-- Status tabs -->
+        <div class="nd-tabs">
+          <div class="nd-tab">
+            <div class="nd-tab-ico">❄️</div>
+            <div class="nd-tab-text">
+              <span class="nd-tab-label" data-i18n="nursery.tab1">Climate Overview</span>
+              <span class="nd-tab-sub">22.0°C–24.0°C</span>
+            </div>
+          </div>
+          <div class="nd-tab nd-active">
+            <div class="nd-tab-ico">🌿</div>
+            <div class="nd-tab-text">
+              <span class="nd-tab-label" data-i18n="nursery.tab2">Plant Status Overview</span>
+              <span class="nd-tab-sub" data-i18n="nursery.tab2.sub">Healthy</span>
+            </div>
+          </div>
+          <div class="nd-tab">
+            <div class="nd-tab-ico">🔔</div>
+            <div class="nd-tab-text">
+              <span class="nd-tab-label" data-i18n="nursery.tab3">Care Alerts</span>
+              <span class="nd-tab-sub" data-i18n="nursery.tab3.sub">7 Need Watering</span>
+            </div>
+          </div>
+          <div class="nd-tab">
+            <div class="nd-tab-ico">💧</div>
+            <div class="nd-tab-text">
+              <span class="nd-tab-label" data-i18n="nursery.tab4">Misting Schedule</span>
+              <span class="nd-tab-sub" data-i18n="nursery.tab4.sub">Daily</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bedroom Plants -->
+        <div class="nd-section">
+          <div class="nd-room-label"><span data-i18n="nursery.room1">Bedroom Plants</span><span class="nd-room-arrow"> ›</span></div>
+          <div class="nd-grid">
+            <div class="nd-card"><div class="nd-ring green"></div><div class="nd-ci"><div class="nd-plant-name">Large Pothos</div><div class="nd-plant-status" data-i18n="nd.healthy">Healthy</div></div></div>
+            <div class="nd-card"><div class="nd-ring amber"></div><div class="nd-ci"><div class="nd-plant-name">Nightstand Succulent</div><div class="nd-plant-status" data-i18n="nd.water">Needs Watering</div></div></div>
+            <div class="nd-card"><div class="nd-ring green"></div><div class="nd-ci"><div class="nd-plant-name">Desk Fiddle Leaf</div><div class="nd-plant-status" data-i18n="nd.healthy">Healthy</div></div></div>
+            <div class="nd-card"><div class="nd-ring amber"></div><div class="nd-ci"><div class="nd-plant-name">Shelf Snake Plant</div><div class="nd-plant-status" data-i18n="nd.water">Needs Watering</div></div></div>
+            <div class="nd-card"><div class="nd-ring amber"></div><div class="nd-ci"><div class="nd-plant-name">Hanging Pothos</div><div class="nd-plant-status" data-i18n="nd.moist">Soil Moisture: 45%</div></div></div>
+            <div class="nd-card"><div class="nd-ring amber"></div><div class="nd-ci"><div class="nd-plant-name">Floor Snake Plant</div><div class="nd-plant-status" data-i18n="nd.water">Needs Watering</div></div></div>
+            <div class="nd-card"><div class="nd-ring green"></div><div class="nd-ci"><div class="nd-plant-name">Ceiling Spider Plant</div><div class="nd-plant-status" data-i18n="nd.healthy">Healthy</div></div></div>
+            <div class="nd-card"><div class="nd-ring amber"></div><div class="nd-ci"><div class="nd-plant-name">Large Calathea</div><div class="nd-plant-status" data-i18n="nd.water">Needs Watering</div></div></div>
+            <div class="nd-card"><div class="nd-ring green"></div><div class="nd-ci"><div class="nd-plant-name">Window Fern</div><div class="nd-plant-status" data-i18n="nd.healthy">Healthy</div></div></div>
+            <div class="nd-card"><div class="nd-ring green"></div><div class="nd-ci"><div class="nd-plant-name">Corner Fern</div><div class="nd-plant-status" data-i18n="nd.healthy">Healthy</div></div></div>
+          </div>
+        </div>
+
+        <!-- Living Room Plants -->
+        <div class="nd-section">
+          <div class="nd-room-label"><span data-i18n="nursery.room2">Living Room Plants</span><span class="nd-room-arrow"> ›</span></div>
+          <div class="nd-grid">
+            <div class="nd-card"><div class="nd-ring green"></div><div class="nd-ci"><div class="nd-plant-name">Dining Monstera</div><div class="nd-plant-status" data-i18n="nd.healthy">Healthy</div></div></div>
+            <div class="nd-card"><div class="nd-ring amber"></div><div class="nd-ci"><div class="nd-plant-name">Coffee Table Orchid</div><div class="nd-plant-status" data-i18n="nd.water">Needs Watering</div></div></div>
+            <div class="nd-card"><div class="nd-ring green"></div><div class="nd-ci"><div class="nd-plant-name">Large Money Tree</div><div class="nd-plant-status" data-i18n="nd.healthy">Healthy</div></div></div>
+            <div class="nd-card"><div class="nd-ring amber"></div><div class="nd-ci"><div class="nd-plant-name">Shelf Succulent Mix</div><div class="nd-plant-status" data-i18n="nd.water">Needs Watering</div></div></div>
+            <div class="nd-card"><div class="nd-ring green"></div><div class="nd-ci"><div class="nd-plant-name">Entry Monstera</div><div class="nd-plant-status" data-i18n="nd.healthy">Healthy</div></div></div>
+            <div class="nd-card"><div class="nd-ring amber"></div><div class="nd-ci"><div class="nd-plant-name">Humidity Sensor</div><div class="nd-plant-status" data-i18n="nd.water">Needs Watering</div></div></div>
+            <div class="nd-card"><div class="nd-ring amber"></div><div class="nd-ci"><div class="nd-plant-name">Smart Pot</div><div class="nd-plant-status" data-i18n="nd.level">Water Level: Low</div></div></div>
+            <div class="nd-card"><div class="nd-ring green"></div><div class="nd-ci"><div class="nd-plant-name">Bird of Paradise</div><div class="nd-plant-status" data-i18n="nd.healthy">Healthy</div></div></div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
@@ -3288,9 +3452,11 @@ const TRANSLATIONS = {
     'pain.source1': 'Source · Statista 全美园艺消费者调研',
     'pain.eyebrow2': 'The Opportunity · 市场机会',
     'pain.lede2': '养不好，从来不是小众烦恼 ——<span> 这是一个 7205 万家庭、$18 亿规模的市场。</span>',
-    'pain.stat4.unit': '万',
+    'pain.stat4.bignum': '7205<span class="unit">万</span>',
     'pain.stat4.label': '美国园艺家庭 · 潜在用户基数（全美 1.31 亿户 × 55% 园艺渗透）',
+    'pain.stat5.bignum': '$18<span class="unit">亿</span>',
     'pain.stat5.label': '室内植物探针的市场天花板（TAM 理论营收）',
+    'pain.stat6.bignum': '$6.15<span class="unit">亿</span>',
     'pain.stat6.label': '锁定千禧一代室内植物父母 · 可服务人群（SAM）',
     'pain.source2': 'Source · US Census Bureau、Statista，MoriSync 测算',
     'hw.eyebrow': 'The Hardware · 硬件',
@@ -3445,6 +3611,19 @@ const TRANSLATIONS = {
     'nursery.eyebrow': 'Plant Nursery · 植物幼儿园',
     'nursery.h2': '一面墙，照看一屋子绿。',
     'nursery.lede': '接入 Apple Home、Google Home 与 Amazon Alexa，把家里每一株植物排成一面绿墙。谁渴了、谁该添养料，抬头一望便知。',
+    'nursery.tab1': '气候概览',
+    'nursery.tab2': '植物状态概览',
+    'nursery.tab2.sub': '全部健康',
+    'nursery.tab3': '护理提醒',
+    'nursery.tab3.sub': '7株需浇水',
+    'nursery.tab4': '喷雾计划',
+    'nursery.tab4.sub': '每日',
+    'nursery.room1': '卧室植物',
+    'nursery.room2': '客厅植物',
+    'nd.healthy': '健康',
+    'nd.water': '需要浇水',
+    'nd.moist': '土壤湿度: 45%',
+    'nd.level': '水位: 低',
     'footer.big': '与自然<span class="footer-em">同频。</span>',
     'footer.sub': '照顾绿植不再需要费心牵挂。养一屋子绿，水到渠成。',
     'footer.cta1': '预约一场 Demo',
@@ -3476,9 +3655,11 @@ const TRANSLATIONS = {
     'pain.source1': 'Source · Statista U.S. Gardening Consumer Survey',
     'pain.eyebrow2': 'The Opportunity',
     'pain.lede2': 'This isn&#39;t a niche problem — <span>it&#39;s a 72M household, $1.8B market.</span>',
-    'pain.stat4.unit': 'M',
+    'pain.stat4.bignum': '72<span class="unit">M</span>',
     'pain.stat4.label': 'U.S. gardening households · Potential user base (131M households × 55% gardening penetration)',
+    'pain.stat5.bignum': '$1.8<span class="unit">B</span>',
     'pain.stat5.label': 'Total addressable market for indoor plant probes (TAM)',
+    'pain.stat6.bignum': '$615<span class="unit">M</span>',
     'pain.stat6.label': 'Targeting millennial indoor plant parents · Serviceable addressable market (SAM)',
     'pain.source2': 'Source · US Census Bureau, Statista, MoriSync estimates',
     'hw.eyebrow': 'The Hardware',
@@ -3633,6 +3814,19 @@ const TRANSLATIONS = {
     'nursery.eyebrow': 'Plant Nursery',
     'nursery.h2': 'One wall. Every plant at a glance.',
     'nursery.lede': 'Connect to Apple Home, Google Home, and Amazon Alexa. Line up every plant on a living green wall — see who\'s thirsty and who needs nutrients at a glance.',
+    'nursery.tab1': 'Climate Overview',
+    'nursery.tab2': 'Plant Status Overview',
+    'nursery.tab2.sub': 'Healthy',
+    'nursery.tab3': 'Care Alerts',
+    'nursery.tab3.sub': '7 Need Watering',
+    'nursery.tab4': 'Misting Schedule',
+    'nursery.tab4.sub': 'Daily',
+    'nursery.room1': 'Bedroom Plants',
+    'nursery.room2': 'Living Room Plants',
+    'nd.healthy': 'Healthy',
+    'nd.water': 'Needs Watering',
+    'nd.moist': 'Soil Moisture: 45%',
+    'nd.level': 'Water Level: Low',
     'footer.big': 'In Sync With <span class="footer-em">Nature.</span>',
     'footer.sub': 'Caring for plants no longer needs to be a worry. A houseful of green, effortlessly.',
     'footer.cta1': 'Book a Demo',
